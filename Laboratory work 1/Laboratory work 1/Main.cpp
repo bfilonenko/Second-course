@@ -4,7 +4,7 @@
 
 int main()
 {
-	List<int> *list = new ListOnDynamicArray<int>;
+	List<int> *list = new ListOnLibraryFunction<int>;
 	
 	checker(*list);
 
