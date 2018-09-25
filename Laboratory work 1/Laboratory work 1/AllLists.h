@@ -12,11 +12,11 @@ public:
 	virtual ~List() {}
 
 	virtual void showAll() {}
-	virtual void pushBack(T number) {}
+	virtual void pushBack(T value) {}
 	virtual void popBack() {}
-	virtual void pushFront(T number) {}
+	virtual void pushFront(T value) {}
 	virtual void popFront() {}
-	virtual void addElement(T number, int position) {}
+	virtual void addElement(T value, int position) {}
 	virtual void deleteElement(int position) {}
 	virtual T getElement(int position) { T *temp = new T; return *temp; }
 	virtual int getIndex(T value) { int temp = 0; return temp; }
@@ -41,9 +41,9 @@ public:
 	void showAll();
 	void pushBack(T value);
 	void popBack();
-	void pushFront(T number);
+	void pushFront(T value);
 	void popFront();
-	void addElement(T number, int position);
+	void addElement(T value, int position);
 	void deleteElement(int position);
 	T getElement(int position);
 	int getIndex(T value);
@@ -115,9 +115,9 @@ void ListOnLinkedList<T>::popBack()
 }
 
 template<typename T>
-void ListOnLinkedList<T>::pushFront(T number)
+void ListOnLinkedList<T>::pushFront(T value)
 {
-	Node<T> *newNode = new Node<T>(number);
+	Node<T> *newNode = new Node<T>(value);
 	if (length == 0)
 	{
 		head = newNode;
@@ -144,7 +144,7 @@ void ListOnLinkedList<T>::popFront()
 }
 
 template<typename T>
-void ListOnLinkedList<T>::addElement(T number, int position)
+void ListOnLinkedList<T>::addElement(T value, int position)
 {
 	if (position < 0 || position > length)
 	{
@@ -152,16 +152,16 @@ void ListOnLinkedList<T>::addElement(T number, int position)
 	}
 	else if (position == 0)
 	{
-		pushFront(number);
+		pushFront(value);
 	}
 	else if (position == length)
 	{
-		pushBack(number);
+		pushBack(value);
 	}
 	else
 	{
 		Node<T> *node = getNode(position - 1);
-		Node<T> *newNode = new Node<T>(number);
+		Node<T> *newNode = new Node<T>(value);
 		newNode->next = node->next;
 		node->next = newNode;
 		++length;
@@ -270,6 +270,263 @@ void ListOnLinkedList<T>::addRandomElements()
 
 template<typename T>
 int ListOnLinkedList<T>::getSize()
+{
+	return length;
+}
+
+
+template<typename T>
+class ListOnDynamicArray : public List<T>
+{
+	T *dymamicArray;
+	int length;
+
+public:
+	ListOnDynamicArray();
+
+	void showAll();
+	void pushBack(T value);
+	void popBack();
+	void pushFront(T value);
+	void popFront();
+	void addElement(T value, int position);
+	void deleteElement(int position);
+	T getElement(int position);
+	int getIndex(T value);
+	void reverse();
+	void clear();
+	void addRandomElements();
+	int getSize();
+};
+
+
+template<typename T>
+ListOnDynamicArray<T>::ListOnDynamicArray()
+{
+	dymamicArray = new T[0];
+	length = 0;
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::showAll()
+{
+	for (int i = 0; i < length; ++i)
+	{
+		cout << dymamicArray[i] << ' ';
+	}
+	cout << '\n';
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::pushBack(T value)
+{
+	T *newArray = new T[length + 1];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i] = dymamicArray[i];
+	}
+	newArray[length] = value;
+	
+	delete[] dymamicArray;
+
+	dymamicArray = newArray;
+	++length;
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::popBack()
+{
+	if (length != 0)
+	{
+		T *newArray = new T[length - 1];
+
+		for (int i = 0; i < length - 1; ++i)
+		{
+			newArray[i] = dymamicArray[i];
+		}
+
+		delete[] dymamicArray;
+
+		dymamicArray = newArray;
+		--length;
+	}
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::pushFront(T value)
+{
+	T *newArray = new T[length + 1];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i + 1] = dymamicArray[i];
+	}
+	newArray[0] = value;
+
+	delete[] dymamicArray;
+
+	dymamicArray = newArray;
+	++length;
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::popFront()
+{
+	if (length != 0)
+	{
+		T *newArray = new T[length - 1];
+
+		for (int i = 0; i < length - 1; ++i)
+		{
+			newArray[i] = dymamicArray[i + 1];
+		}
+
+		delete[] dymamicArray;
+
+		dymamicArray = newArray;
+		--length;
+	}
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::addElement(T value, int position)
+{
+	if (position < 0 || position > length)
+	{
+		return;
+	}
+	else if (position == 0)
+	{
+		pushFront(value);
+	}
+	else if (position == length)
+	{
+		pushBack(value);
+	}
+	else
+	{
+		T *newArray = new T[length + 1];
+
+		for (int i = 0; i < position; ++i)
+		{
+			newArray[i] = dymamicArray[i];
+		}
+		newArray[position] = value;
+		for (int i = position; i < length; ++i)
+		{
+			newArray[i + 1] = dymamicArray[i];
+		}
+		delete[] dymamicArray;
+
+		dymamicArray = newArray;
+		++length;
+	}
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::deleteElement(int position)
+{
+	if (position < 0 || position >= length)
+	{
+		return;
+	}
+	else if (position == 0)
+	{
+		popFront();
+	}
+	else if (position == length - 1)
+	{
+		popBack();
+	}
+	else
+	{
+		T *newArray = new T[length - 1];
+
+		for (int i = 0; i < position; ++i)
+		{
+			newArray[i] = dymamicArray[i];
+		}
+		for (int i = position; i < length - 1; ++i)
+		{
+			newArray[i] = dymamicArray[i + 1];
+		}
+		delete[] dymamicArray;
+
+		dymamicArray = newArray;
+		--length;
+	}
+}
+
+template<typename T>
+T ListOnDynamicArray<T>::getElement(int position)
+{
+	if (position < 0 || position >= length)
+	{
+		return -1;
+	}
+	else
+	{
+		return dymamicArray[position];
+	}
+}
+
+template<typename T>
+int ListOnDynamicArray<T>::getIndex(T value)
+{
+	for (int i = 0; i < length; ++i)
+	{
+		if (dymamicArray[i] == value)
+		{
+			return i;
+		}
+	}
+
+	return -1;
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::reverse()
+{
+	for (int i = 0; i < length / 2; ++i)
+	{
+		swap(dymamicArray[i], dymamicArray[length - 1 - i]);
+	}
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::clear()
+{
+	delete[] dymamicArray;
+	dymamicArray = new T[0];
+	length = 0;
+}
+
+template<typename T>
+void ListOnDynamicArray<T>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	T *newArray = new T[length + count];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i] = dymamicArray[i];
+	}
+
+	for (int i = length; i < length + count; ++i)
+	{
+		newArray[i] = (T)(rand() % 100);
+	}
+
+	delete[] dymamicArray;
+
+	dymamicArray = newArray;
+	length += count;
+}
+
+template<typename T>
+int ListOnDynamicArray<T>::getSize()
 {
 	return length;
 }

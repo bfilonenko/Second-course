@@ -4,7 +4,7 @@
 
 int main()
 {
-	List<int> *list = new ListOnLinkedList<int>;
+	List<int> *list = new ListOnDynamicArray<int>;
 	
 	checker(*list);
 
