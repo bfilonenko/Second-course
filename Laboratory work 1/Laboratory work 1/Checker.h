@@ -1,7 +1,9 @@
 #pragma once
 
 
-#include "AllLists.h"
+#include "ListOnLinkedList.h"
+#include "ListOnDynamicArray.h"
+#include "ListOnLibraryFunction.h"
 
 
 template<typename T>
