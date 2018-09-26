@@ -23,11 +23,11 @@ public:
 	virtual void popFront() {}
 	virtual void addElement(T value, int position) {}
 	virtual void deleteElement(int position) {}
-	virtual T getElement(int position) { T *temp = new T; return *temp; }
-	virtual int getIndex(T value) { int temp = 0; return temp; }
+	virtual T getElement(int position) = 0;
+	virtual int getIndex(T value) = 0;
 	virtual void reverse() {}
 	virtual void clear() {}
 	virtual void addRandomElements() {}
-	virtual int getSize() { int temp = 0; return temp; }
+	virtual int getSize() = 0;
 };
 
