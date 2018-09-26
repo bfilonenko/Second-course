@@ -16,9 +16,11 @@ struct Node
 template<typename T>
 class ListOnLinkedList : public List<T>
 {
+protected:
 	Node<T> *head = nullptr;
 	Node<T> *tail = nullptr;
 	int length;
+
 	Node<T> *getNode(int position);
 
 public:
@@ -91,7 +93,7 @@ void ListOnLinkedList<T>::popBack()
 {
 	if (length != 0)
 	{
-		Node<T> *node = getNode(length - 1);
+		Node<T> *node = getNode(length - 2);
 		tail = node;
 		node = node->next;
 		tail->next = nullptr;

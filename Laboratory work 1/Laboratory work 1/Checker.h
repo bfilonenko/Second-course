@@ -2,6 +2,7 @@
 
 
 #include "ListOnLinkedList.h"
+#include "CyclicListOnLinkedList.h"
 #include "ListOnDynamicArray.h"
 #include "ListOnLibraryFunction.h"
 

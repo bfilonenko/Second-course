@@ -4,7 +4,7 @@
 
 int main()
 {
-	List<int> *list = new ListOnLibraryFunction<int>;
+	List<int> *list = new CyclicListOnLinckedList<int>;
 	
 	checker(*list);
 

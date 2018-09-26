@@ -35,5 +35,8 @@
     <ClInclude Include="ListOnLibraryFunction.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CyclicListOnLinkedList.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
