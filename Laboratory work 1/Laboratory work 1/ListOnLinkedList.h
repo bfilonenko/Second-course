@@ -39,6 +39,7 @@ public:
 	void clear();
 	void addRandomElements();
 	int getSize();
+	T getElememtMetchingCriterion(bool(*criterion)(T));
 };
 
 
@@ -260,4 +261,26 @@ template<typename T>
 int ListOnLinkedList<T>::getSize()
 {
 	return length;
+}
+
+template<typename T>
+T ListOnLinkedList<T>::getElememtMetchingCriterion(bool(*criterion)(T))
+{
+	if (length > 0)
+	{
+		Node<T> *node = head;
+		while (node->next != nullptr)
+		{
+			if (criterion(node->value))
+			{
+				return node->value;
+			}
+			node = node->next;
+		}
+		if (criterion(node->value))
+		{
+			return node->value;
+		}
+	}
+	return -1;
 }

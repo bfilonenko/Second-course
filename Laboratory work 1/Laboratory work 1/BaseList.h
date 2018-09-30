@@ -29,5 +29,6 @@ public:
 	virtual void clear() = 0;
 	virtual void addRandomElements() = 0;
 	virtual int getSize() = 0;
+	virtual T getElememtMetchingCriterion(bool(*criterion)(T)) = 0;
 };
 

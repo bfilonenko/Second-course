@@ -26,6 +26,7 @@ public:
 	void clear();
 	void addRandomElements();
 	int getSize();
+	T getElememtMetchingCriterion(bool(*criterion)(T));
 };
 
 
@@ -180,4 +181,23 @@ template<typename T>
 int ListOnLibraryFunction<T>::getSize()
 {
 	return list.size();
+}
+
+template<typename T>
+T ListOnLibraryFunction<T>::getElememtMetchingCriterion(bool(*criterion)(T))
+{
+	if (list.size() > 0)
+	{
+		auto i = list.begin();
+
+		while (i != list.end())
+		{
+			if (criterion(*i))
+			{
+				return *i;
+			}
+			++i;
+		}
+	}
+	return -1;
 }

@@ -16,6 +16,7 @@ public:
 	void pushFront(T value);
 	void popFront();
 	void reverse();
+	T getElememtMetchingCriterion(bool(*criterion)(T));
 };
 
 
@@ -105,4 +106,26 @@ void CyclicListOnLinckedList<T>::reverse()
 	nodeNow->next = nodeLast;
 	head = nodeNow;
 	tail->next = head;
+}
+
+template<typename T>
+T CyclicListOnLinckedList<T>::getElememtMetchingCriterion(bool(*criterion)(T))
+{
+	if (length > 0)
+	{
+		Node<T> *node = head;
+		while (node->next != head)
+		{
+			if (criterion(node->value))
+			{
+				return node->value;
+			}
+			node = node->next;
+		}
+		if (criterion(node->value))
+		{
+			return node->value;
+		}
+	}
+	return -1;
 }

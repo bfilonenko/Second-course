@@ -8,7 +8,7 @@ template<typename T>
 class ListOnDynamicArray : public List<T>
 {
 protected:
-	T *dymamicArray;
+	T *dynamicArray;
 	int length;
 
 public:
@@ -27,13 +27,14 @@ public:
 	void clear();
 	void addRandomElements();
 	int getSize();
+	T getElememtMetchingCriterion(bool(*criterion)(T));
 };
 
 
 template<typename T>
 ListOnDynamicArray<T>::ListOnDynamicArray()
 {
-	dymamicArray = new T[0];
+	dynamicArray = new T[0];
 	length = 0;
 }
 
@@ -42,7 +43,7 @@ void ListOnDynamicArray<T>::showAll()
 {
 	for (int i = 0; i < length; ++i)
 	{
-		cout << dymamicArray[i] << ' ';
+		cout << dynamicArray[i] << ' ';
 	}
 	cout << '\n';
 }
@@ -54,13 +55,13 @@ void ListOnDynamicArray<T>::pushBack(T value)
 
 	for (int i = 0; i < length; ++i)
 	{
-		newArray[i] = dymamicArray[i];
+		newArray[i] = dynamicArray[i];
 	}
 	newArray[length] = value;
 
-	delete[] dymamicArray;
+	delete[] dynamicArray;
 
-	dymamicArray = newArray;
+	dynamicArray = newArray;
 	++length;
 }
 
@@ -73,12 +74,12 @@ void ListOnDynamicArray<T>::popBack()
 
 		for (int i = 0; i < length - 1; ++i)
 		{
-			newArray[i] = dymamicArray[i];
+			newArray[i] = dynamicArray[i];
 		}
 
-		delete[] dymamicArray;
+		delete[] dynamicArray;
 
-		dymamicArray = newArray;
+		dynamicArray = newArray;
 		--length;
 	}
 }
@@ -90,13 +91,13 @@ void ListOnDynamicArray<T>::pushFront(T value)
 
 	for (int i = 0; i < length; ++i)
 	{
-		newArray[i + 1] = dymamicArray[i];
+		newArray[i + 1] = dynamicArray[i];
 	}
 	newArray[0] = value;
 
-	delete[] dymamicArray;
+	delete[] dynamicArray;
 
-	dymamicArray = newArray;
+	dynamicArray = newArray;
 	++length;
 }
 
@@ -109,12 +110,12 @@ void ListOnDynamicArray<T>::popFront()
 
 		for (int i = 0; i < length - 1; ++i)
 		{
-			newArray[i] = dymamicArray[i + 1];
+			newArray[i] = dynamicArray[i + 1];
 		}
 
-		delete[] dymamicArray;
+		delete[] dynamicArray;
 
-		dymamicArray = newArray;
+		dynamicArray = newArray;
 		--length;
 	}
 }
@@ -140,16 +141,16 @@ void ListOnDynamicArray<T>::addElement(T value, int position)
 
 		for (int i = 0; i < position; ++i)
 		{
-			newArray[i] = dymamicArray[i];
+			newArray[i] = dynamicArray[i];
 		}
 		newArray[position] = value;
 		for (int i = position; i < length; ++i)
 		{
-			newArray[i + 1] = dymamicArray[i];
+			newArray[i + 1] = dynamicArray[i];
 		}
-		delete[] dymamicArray;
+		delete[] dynamicArray;
 
-		dymamicArray = newArray;
+		dynamicArray = newArray;
 		++length;
 	}
 }
@@ -175,15 +176,15 @@ void ListOnDynamicArray<T>::deleteElement(int position)
 
 		for (int i = 0; i < position; ++i)
 		{
-			newArray[i] = dymamicArray[i];
+			newArray[i] = dynamicArray[i];
 		}
 		for (int i = position; i < length - 1; ++i)
 		{
-			newArray[i] = dymamicArray[i + 1];
+			newArray[i] = dynamicArray[i + 1];
 		}
-		delete[] dymamicArray;
+		delete[] dynamicArray;
 
-		dymamicArray = newArray;
+		dynamicArray = newArray;
 		--length;
 	}
 }
@@ -197,7 +198,7 @@ T ListOnDynamicArray<T>::getElement(int position)
 	}
 	else
 	{
-		return dymamicArray[position];
+		return dynamicArray[position];
 	}
 }
 
@@ -206,7 +207,7 @@ int ListOnDynamicArray<T>::getIndex(T value)
 {
 	for (int i = 0; i < length; ++i)
 	{
-		if (dymamicArray[i] == value)
+		if (dynamicArray[i] == value)
 		{
 			return i;
 		}
@@ -220,15 +221,15 @@ void ListOnDynamicArray<T>::reverse()
 {
 	for (int i = 0; i < length / 2; ++i)
 	{
-		swap(dymamicArray[i], dymamicArray[length - 1 - i]);
+		swap(dynamicArray[i], dynamicArray[length - 1 - i]);
 	}
 }
 
 template<typename T>
 void ListOnDynamicArray<T>::clear()
 {
-	delete[] dymamicArray;
-	dymamicArray = new T[0];
+	delete[] dynamicArray;
+	dynamicArray = new T[0];
 	length = 0;
 }
 
@@ -241,7 +242,7 @@ void ListOnDynamicArray<T>::addRandomElements()
 
 	for (int i = 0; i < length; ++i)
 	{
-		newArray[i] = dymamicArray[i];
+		newArray[i] = dynamicArray[i];
 	}
 
 	for (int i = length; i < length + count; ++i)
@@ -249,9 +250,9 @@ void ListOnDynamicArray<T>::addRandomElements()
 		newArray[i] = (T)(rand() % 100);
 	}
 
-	delete[] dymamicArray;
+	delete[] dynamicArray;
 
-	dymamicArray = newArray;
+	dynamicArray = newArray;
 	length += count;
 }
 
@@ -261,3 +262,15 @@ int ListOnDynamicArray<T>::getSize()
 	return length;
 }
 
+template<typename T>
+T ListOnDynamicArray<T>::getElememtMetchingCriterion(bool(*criterion)(T))
+{
+	for (int i = 0; i < length; ++i)
+	{
+		if (criterion(dynamicArray[i]))
+		{
+			return dynamicArray[i];
+		}
+	}
+	return -1;
+}
