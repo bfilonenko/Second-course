@@ -4,7 +4,7 @@
 
 int main()
 {
-	List<int> *list = new CyclicListOnLinckedList<int>;
+	List<int> *list = new CyclicListOnDynamicArray<int>;
 	
 	checker(*list);
 

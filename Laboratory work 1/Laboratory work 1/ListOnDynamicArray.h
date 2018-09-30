@@ -7,6 +7,7 @@
 template<typename T>
 class ListOnDynamicArray : public List<T>
 {
+protected:
 	T *dymamicArray;
 	int length;
 

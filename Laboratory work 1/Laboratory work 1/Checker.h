@@ -4,6 +4,7 @@
 #include "ListOnLinkedList.h"
 #include "CyclicListOnLinkedList.h"
 #include "ListOnDynamicArray.h"
+#include "CyclicListOnDynamicArray.h"
 #include "ListOnLibraryFunction.h"
 
 
