@@ -41,5 +41,8 @@
     <ClInclude Include="CyclicListOnDynamicArray.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CyclicListOnLibraryFunction.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

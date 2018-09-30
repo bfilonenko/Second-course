@@ -1,2 +1,14 @@
 ﻿  Main.cpp
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\listonlibraryfunction.h(182): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\listonlibraryfunction.h(181): note: while compiling class template member function 'int ListOnLibraryFunction<T>::getSize(void)'
+          with
+          [
+              T=int
+          ]
+  e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\cycliclistonlibraryfunction.h(9): note: see reference to class template instantiation 'ListOnLibraryFunction<T>' being compiled
+          with
+          [
+              T=int
+          ]
+  e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\main.cpp(7): note: see reference to class template instantiation 'CyclicListOnLibraryFunction<int>' being compiled
   Laboratory work 1.vcxproj -> E:\VSC2017P\Second-course\Laboratory work 1\x64\Debug\Laboratory work 1.exe

@@ -121,6 +121,7 @@
     <ClInclude Include="BaseList.h" />
     <ClInclude Include="Checker.h" />
     <ClInclude Include="CyclicListOnDynamicArray.h" />
+    <ClInclude Include="CyclicListOnLibraryFunction.h" />
     <ClInclude Include="CyclicListOnLinkedList.h" />
     <ClInclude Include="ListOnDynamicArray.h" />
     <ClInclude Include="ListOnLibraryFunction.h" />

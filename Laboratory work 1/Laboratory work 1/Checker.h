@@ -6,6 +6,7 @@
 #include "ListOnDynamicArray.h"
 #include "CyclicListOnDynamicArray.h"
 #include "ListOnLibraryFunction.h"
+#include "CyclicListOnLibraryFunction.h"
 
 
 template<typename T>
