@@ -1,5 +1,6 @@
 #include <list>
 #include "Checker.h"
+#include "CheckerForFigure.h"
 
 
 template<typename T>
@@ -11,9 +12,11 @@ bool criterion(T value)
 
 int main()
 {
-	List<int> *list = new CyclicListOnDynamicArray<int>;
+	checerForFigure();
+
+	//List<int> *list = new CyclicListOnDynamicArray<int>;
 	
-	checker(*list, criterion);
+	//checker(*list, criterion);
 
 	return 0;
 }

@@ -115,14 +115,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Circle.cpp" />
+    <ClCompile Include="Line.cpp" />
     <ClCompile Include="Main.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BaseList.h" />
     <ClInclude Include="Checker.h" />
+    <ClInclude Include="CheckerForFigure.h" />
+    <ClInclude Include="Circle.h" />
     <ClInclude Include="CyclicListOnDynamicArray.h" />
     <ClInclude Include="CyclicListOnLibraryFunction.h" />
     <ClInclude Include="CyclicListOnLinkedList.h" />
+    <ClInclude Include="Figure.h" />
+    <ClInclude Include="Line.h" />
     <ClInclude Include="ListOnDynamicArray.h" />
     <ClInclude Include="ListOnLibraryFunction.h" />
     <ClInclude Include="ListOnLinkedList.h" />
