@@ -12,7 +12,7 @@ bool criterion(T value)
 
 int main()
 {
-	checerForFigure();
+	checkerForFigure();
 
 	//List<int> *list = new CyclicListOnDynamicArray<int>;
 	

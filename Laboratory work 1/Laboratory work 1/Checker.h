@@ -27,7 +27,7 @@ void checker(List<T> &list, bool(*criterion)(T))
 		{
 			cout << help;
 		}
-		if (massage == 1)
+		else if (massage == 1)
 		{
 			list.showAll();
 		}
