@@ -127,5 +127,5 @@ T CyclicListOnLinckedList<T>::getElememtMetchingCriterion(bool(*criterion)(T))
 			return node->value;
 		}
 	}
-	return -1;
+	return T();
 }

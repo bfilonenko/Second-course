@@ -124,7 +124,7 @@ T ListOnLibraryFunction<T>::getElement(int position)
 {
 	if (position < 0 || position >= list.size())
 	{
-		return -1;
+		return T();
 	}
 	else
 	{
@@ -199,5 +199,5 @@ T ListOnLibraryFunction<T>::getElememtMetchingCriterion(bool(*criterion)(T))
 			++i;
 		}
 	}
-	return -1;
+	return T();
 }

@@ -14,9 +14,9 @@ int main()
 {
 	checkerForFigure();
 
-	//List<int> *list = new CyclicListOnDynamicArray<int>;
+	List<int> *list = new ListOnLinkedList<int>;
 	
-	//checker(*list, criterion);
+	checker(*list, criterion);
 
 	return 0;
 }

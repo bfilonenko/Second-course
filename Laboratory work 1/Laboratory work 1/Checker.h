@@ -12,7 +12,9 @@
 template<typename T>
 void checker(List<T> &list, bool(*criterion)(T))
 {
-	string help = "Available commands: \n-1 - exit\n0 - showMenu\n1 - showAll\n2 - pushBack(number)\n3 - popBack\n4 - pushFront(number)\n5 - popFront\n6 - addElement(number, position)\n7 - deleteElement(position)\n8 - getElement(position)\n9 - getIndex(value)\n10 - reverse\n11 - clear\n12 - addRandomElements\n13 - getSize\n14 - getElememtMetchingCriterion\n";
+	string help = "Available commands: \n-1 - exit\n0 - showMenu\n1 - showAll\n2 - pushBack(number)\n3 - popBack\n4 - pushFront(number)\n5 - popFront\n\
+6 - addElement(number, position)\n7 - deleteElement(position)\n8 - getElement(position)\n9 - getIndex(value)\n10 - reverse\n11 - clear\n12 - addRandomElements\n\
+13 - getSize\n14 - getElememtMetchingCriterion\n";
 	cout << help;
 	while (true)
 	{
@@ -65,13 +67,19 @@ void checker(List<T> &list, bool(*criterion)(T))
 		{
 			int position;
 			cin >> position;
-			cout << list.getElement(position) << '\n';
+			if (list.getElement(position) == T())
+			{
+				cout << "Error: element not found\n";
+			}
+			else
+			{
+				cout << list.getElement(position) << '\n';
+			}
 		}
 		else if (massage == 9)
 		{
-			int value;
-			cin >> value;
-			cout << list.getIndex(value) << '\n';
+			cin >> number;
+			cout << list.getIndex(number) << '\n';
 		}
 		else if (massage == 10)
 		{
@@ -91,7 +99,14 @@ void checker(List<T> &list, bool(*criterion)(T))
 		}
 		else if (massage == 14)
 		{
-			cout << list.getElememtMetchingCriterion(criterion) << '\n';
+			if (list.getElememtMetchingCriterion(criterion) == T())
+			{
+				cout << "Error: element not found\n";
+			}
+			else
+			{
+				cout << list.getElememtMetchingCriterion(criterion) << '\n';
+			}
 		}
 
 		cout << "**********************************\n";

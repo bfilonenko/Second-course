@@ -194,7 +194,7 @@ T ListOnDynamicArray<T>::getElement(int position)
 {
 	if (position < 0 || position >= length)
 	{
-		return -1;
+		return T();
 	}
 	else
 	{
@@ -272,5 +272,5 @@ T ListOnDynamicArray<T>::getElememtMetchingCriterion(bool(*criterion)(T))
 			return dynamicArray[i];
 		}
 	}
-	return -1;
+	return T();
 }

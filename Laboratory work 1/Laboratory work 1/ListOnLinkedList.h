@@ -188,7 +188,7 @@ T ListOnLinkedList<T>::getElement(int position)
 {
 	if (position < 0 || position >= length)
 	{
-		return -1;
+		return T();
 	}
 	else
 	{
@@ -282,5 +282,5 @@ T ListOnLinkedList<T>::getElememtMetchingCriterion(bool(*criterion)(T))
 			return node->value;
 		}
 	}
-	return -1;
+	return T();
 }
