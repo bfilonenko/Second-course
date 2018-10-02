@@ -1,2 +1,38 @@
-﻿  Main.cpp
-  Laboratory work 1.vcxproj -> E:\VSC2017P\Second-course\Laboratory work 1\x64\Debug\Laboratory work 1.exe
+﻿  Circle.cpp
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\figure.h(22): error C2804: binary 'operator <<' has too many parameters
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\figure.h(22): error C2253: 'Figure::operator <<': pure specifier or abstract override specifier only allowed on virtual function
+  Line.cpp
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\figure.h(22): error C2804: binary 'operator <<' has too many parameters
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\figure.h(22): error C2253: 'Figure::operator <<': pure specifier or abstract override specifier only allowed on virtual function
+  Main.cpp
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\figure.h(22): error C2804: binary 'operator <<' has too many parameters
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\figure.h(22): error C2253: 'Figure::operator <<': pure specifier or abstract override specifier only allowed on virtual function
+e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\main.cpp(17): error C2679: binary '<<': no operator found which takes a right-hand operand of type 'Figure' (or there is no acceptable conversion)
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(508): note: could be 'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_streambuf<char,std::char_traits<char>> *)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(480): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(const void *)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(460): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(long double)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(440): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(double)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(420): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(float)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(400): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned __int64)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(380): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(__int64)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(360): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned long)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(340): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(long)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(320): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned int)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(295): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(int)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(275): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(unsigned short)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(241): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(short)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(221): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(bool)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(215): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::ios_base &(__cdecl *)(std::ios_base &))'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(209): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_ios<char,std::char_traits<char>> &(__cdecl *)(std::basic_ios<char,std::char_traits<char>> &))'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(204): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::basic_ostream<char,std::char_traits<char>>::operator <<(std::basic_ostream<char,std::char_traits<char>> &(__cdecl *)(std::basic_ostream<char,std::char_traits<char>> &))'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(1047): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<char,std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const std::error_code &)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(981): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,unsigned char)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(974): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const unsigned char *)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(967): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,signed char)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(960): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const signed char *)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(834): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,char)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(787): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const char *)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(749): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<char,std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,char)'
+  e:\programms\vsc2017\vc\tools\msvc\14.15.26726\include\ostream(702): note: or       'std::basic_ostream<char,std::char_traits<char>> &std::operator <<<char,std::char_traits<char>>(std::basic_ostream<char,std::char_traits<char>> &,const char *)'
+  e:\vsc2017p\second-course\laboratory work 1\laboratory work 1\main.cpp(17): note: while trying to match the argument list '(std::ostream, Figure)'
+  Generating Code...

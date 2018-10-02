@@ -163,3 +163,11 @@ Figure *Circle::getInversion(Figure &figure)
 
 	return newFigure;
 }
+
+
+ostream &operator<<(ostream& os, const Circle &figure)
+{
+	os << "Circle: (x - (" << figure.x0 << ")) ^ 2 + (y - (" << figure.y0 << ")) ^ 2 = (" << figure.r << ") ^ 2\n";
+	return os;
+}
+

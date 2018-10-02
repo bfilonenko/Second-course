@@ -20,3 +20,4 @@ public:
 	virtual Figure *symmetricalMapping(Figure &figure) = 0;
 	virtual Figure *getInversion(Figure &figure) = 0;
 };
+

@@ -180,3 +180,10 @@ Figure *Line::getInversion(Figure &figure)
 {
 	return nullptr;
 }
+
+
+ostream &operator<<(ostream& os, const Line &figure)
+{
+	os << "Line: (" << figure.a << ") * x + (" << figure.b << ") * y + (" << figure.c << ") = 0\n";
+	return os;
+}

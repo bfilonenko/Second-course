@@ -22,4 +22,5 @@ public:
 	vector<pair<float, float> > getTheIntersection(Figure &figure);
 	Figure *symmetricalMapping(Figure &figure);
 	Figure *getInversion(Figure &figure);
+	friend ostream &operator<<(ostream& os, const Line &figure);
 };
