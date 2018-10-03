@@ -14,6 +14,12 @@ Circle::Circle()
 	y0 = 0.f;
 }
 
+Circle::Circle(int value)
+{
+	r = float(value);
+	x0 = 0.f;
+	y0 = 0.f;
+}
 
 void Circle::coutFigure()
 {
@@ -164,10 +170,24 @@ Figure *Circle::getInversion(Figure &figure)
 	return newFigure;
 }
 
+const bool operator != (const Circle &left, const Circle &right)
+{
+	return !(left.r == right.r && left.x0 == right.x0 &&left.y0 == right.y0);
+}
 
-ostream &operator<<(ostream& os, const Circle &figure)
+const bool operator == (const Circle &left, const Circle &right)
+{
+	return (left.r == right.r && left.x0 == right.x0 &&left.y0 == right.y0);
+}
+
+ostream &operator << (ostream& os, const Circle &figure)
 {
 	os << "Circle: (x - (" << figure.x0 << ")) ^ 2 + (y - (" << figure.y0 << ")) ^ 2 = (" << figure.r << ") ^ 2\n";
 	return os;
 }
 
+istream &operator >> (istream& is, Circle &figure)
+{
+	is >> figure.r >> figure.x0 >> figure.y0;
+	return is;
+}

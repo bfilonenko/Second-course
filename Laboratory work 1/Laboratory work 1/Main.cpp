@@ -6,7 +6,7 @@
 template<typename T>
 bool criterion(T value)
 {
-	return value < 0;
+	return true;
 }
 
 
@@ -14,7 +14,7 @@ int main()
 {
 	checkerForFigure();
 
-	List<int> *list = new ListOnLinkedList<int>;
+	List<Circle> *list = new ListOnLinkedList<Circle>;
 	
 	checker(*list, criterion);
 

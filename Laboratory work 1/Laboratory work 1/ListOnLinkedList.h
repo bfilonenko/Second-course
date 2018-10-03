@@ -252,7 +252,7 @@ void ListOnLinkedList<T>::addRandomElements()
 
 	for (int i = 0; i < count; ++i)
 	{
-		T temp = (T)(rand() % 100);
+		T temp = T((rand() % 100));
 		pushBack(temp);
 	}
 }

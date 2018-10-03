@@ -5,6 +5,7 @@
 #include <vector>
 #include <string>
 
+#include "Line.h"
 
 using namespace std;
 

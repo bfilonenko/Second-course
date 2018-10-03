@@ -16,6 +16,12 @@ Line::Line(float x1, float y1, float x2, float y2)
 	c = x1 * (y1 - y2) + y1 * (x2 - x1);
 }
 
+Line::Line(int value)
+{
+	a = 1.f;
+	b = 1.f;
+	c = float(value);
+}
 
 void Line::coutFigure()
 {
@@ -181,9 +187,24 @@ Figure *Line::getInversion(Figure &figure)
 	return nullptr;
 }
 
+const bool operator != (const Line &left, const Line &right)
+{
+	return !(left.a == right.a && left.b == right.b &&left.c == right.c);
+}
 
-ostream &operator<<(ostream& os, const Line &figure)
+const bool operator == (const Line &left, const Line &right)
+{
+	return (left.a == right.a && left.b == right.b &&left.c == right.c);
+}
+
+ostream &operator << (ostream& os, const Line &figure)
 {
 	os << "Line: (" << figure.a << ") * x + (" << figure.b << ") * y + (" << figure.c << ") = 0\n";
 	return os;
+}
+
+istream &operator >> (istream& is, Line &figure)
+{
+	is >> figure.a >> figure.b >> figure.c ;
+	return is;
 }

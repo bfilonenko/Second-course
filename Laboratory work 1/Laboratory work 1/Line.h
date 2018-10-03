@@ -15,6 +15,7 @@ public:
 	Line();
 	Line(float a, float b, float c) : a(a), b(b), c(c) {}
 	Line(float x1, float y1, float x2, float y2);
+	Line(int value);
 
 	void coutFigure();
 	vector<float> getParameters();
@@ -22,5 +23,10 @@ public:
 	vector<pair<float, float> > getTheIntersection(Figure &figure);
 	Figure *symmetricalMapping(Figure &figure);
 	Figure *getInversion(Figure &figure);
-	friend ostream &operator<<(ostream& os, const Line &figure);
+
+	friend const bool operator != (const Line &left, const Line &right);
+	friend const bool operator == (const Line &left, const Line &right);
+	
+	friend ostream &operator << (ostream& os, const Line &figure);
+	friend istream &operator >> (istream& is, Line &figure);
 };

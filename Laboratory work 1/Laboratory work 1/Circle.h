@@ -16,11 +16,17 @@ class Circle : public Figure			//Circle: (x - x0) ^ 2 + (y - y0) ^ 2 = r ^ 2
 public:
 	Circle();
 	Circle(float r, float x0, float y0) : r(r), x0(x0), y0(y0) {}
+	Circle(int value);
 
 	void coutFigure();
 	vector<float> getParameters();
 	vector<pair<float, float> > getTheIntersection(Figure &figure);
 	Figure *symmetricalMapping(Figure &figure);
 	Figure *getInversion(Figure &figure);
-	friend ostream &operator<<(ostream& os, const Circle &figure);
+
+	friend const bool operator != (const Circle &left, const Circle &right);
+	friend const bool operator == (const Circle &left, const Circle &right);
+
+	friend ostream &operator << (ostream& os, const Circle &figure);
+	friend istream &operator >> (istream& is, Circle &figure);
 };
