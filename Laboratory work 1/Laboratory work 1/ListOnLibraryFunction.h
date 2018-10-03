@@ -33,12 +33,61 @@ public:
 template<typename T>
 ListOnLibraryFunction<T>::ListOnLibraryFunction() {}
 
+template<>
+void ListOnLibraryFunction<int>::showAll()
+{
+	for (auto i = list.begin(); i != list.end(); ++i)
+	{
+		cout << *i << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLibraryFunction<double>::showAll()
+{
+	for (auto i = list.begin(); i != list.end(); ++i)
+	{
+		cout << *i << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLibraryFunction<Line>::showAll()
+{
+	for (auto i = list.begin(); i != list.end(); ++i)
+	{
+		cout << *i << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLibraryFunction<Circle>::showAll()
+{
+	for (auto i = list.begin(); i != list.end(); ++i)
+	{
+		cout << *i << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLibraryFunction<string>::showAll()
+{
+	for (auto i = list.begin(); i != list.end(); ++i)
+	{
+		cout << *i << ' ';
+	}
+	cout << '\n';
+}
 template<typename T>
 void ListOnLibraryFunction<T>::showAll()
 {
 	for (auto i = list.begin(); i != list.end(); ++i)
 	{
-		cout << *i << ' ';
+		for (int j = 0; j < *i.size(); ++j)
+		{
+			cout << *i << ' ';
+		}
+		cout << '\n';
 	}
 	cout << '\n';
 }
@@ -165,6 +214,67 @@ void ListOnLibraryFunction<T>::clear()
 	list.clear();
 }
 
+template<>
+void ListOnLibraryFunction<int>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		int temp = rand() % 100;
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLibraryFunction<double>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		double temp = double(rand() % 100);
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLibraryFunction<Line>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		Line temp((float)(rand() % 100 - 50), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLibraryFunction<Circle>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		Circle temp((float)(rand() % 100 + 1), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLibraryFunction<string>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		string temp;
+		int countOfSymbol = rand() % 100 + 1;
+		for (int j = 0; j < countOfSymbol; ++j)
+		{
+			temp.push_back((char)(rand() % 256));
+		}
+		pushBack(temp);
+	}
+}
+
 template<typename T>
 void ListOnLibraryFunction<T>::addRandomElements()
 {
@@ -172,7 +282,12 @@ void ListOnLibraryFunction<T>::addRandomElements()
 
 	for (int i = 0; i < count; ++i)
 	{
-		T temp = (T)(rand() % 100);
+		T temp;
+		int countOfElement = rand() % 100 + 1;
+		for (int j = 0; j < countOfElement; ++j)
+		{
+			temp.push_back((rand() % 100 - 50));
+		}
 		pushBack(temp);
 	}
 }

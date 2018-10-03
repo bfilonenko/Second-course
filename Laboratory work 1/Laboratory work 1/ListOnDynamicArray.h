@@ -38,12 +38,61 @@ ListOnDynamicArray<T>::ListOnDynamicArray()
 	length = 0;
 }
 
+template<>
+void ListOnDynamicArray<int>::showAll()
+{
+	for (int i = 0; i < length; ++i)
+	{
+		cout << dynamicArray[i] << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnDynamicArray<double>::showAll()
+{
+	for (int i = 0; i < length; ++i)
+	{
+		cout << dynamicArray[i] << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnDynamicArray<Line>::showAll()
+{
+	for (int i = 0; i < length; ++i)
+	{
+		cout << dynamicArray[i] << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnDynamicArray<Circle>::showAll()
+{
+	for (int i = 0; i < length; ++i)
+	{
+		cout << dynamicArray[i] << ' ';
+	}
+	cout << '\n';
+}
+template<>
+void ListOnDynamicArray<string>::showAll()
+{
+	for (int i = 0; i < length; ++i)
+	{
+		cout << dynamicArray[i] << ' ';
+	}
+	cout << '\n';
+}
 template<typename T>
 void ListOnDynamicArray<T>::showAll()
 {
 	for (int i = 0; i < length; ++i)
 	{
-		cout << dynamicArray[i] << ' ';
+		for (int j = 0; j < dynamicArray[i].size(); ++j)
+		{
+			cout << dynamicArray[i][j] << ' ';
+		}
+		cout << '\n';
 	}
 	cout << '\n';
 }
@@ -233,6 +282,121 @@ void ListOnDynamicArray<T>::clear()
 	length = 0;
 }
 
+template<>
+void ListOnDynamicArray<int>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	int *newArray = new int[length + count];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i] = dynamicArray[i];
+	}
+
+	for (int i = length; i < length + count; ++i)
+	{
+		newArray[i] = rand() % 100;
+	}
+
+	delete[] dynamicArray;
+
+	dynamicArray = newArray;
+	length += count;
+}
+template<>
+void ListOnDynamicArray<double>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	double *newArray = new double[length + count];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i] = dynamicArray[i];
+	}
+
+	for (int i = length; i < length + count; ++i)
+	{
+		newArray[i] = double(rand() % 100);
+	}
+
+	delete[] dynamicArray;
+
+	dynamicArray = newArray;
+	length += count;
+}
+template<>
+void ListOnDynamicArray<Line>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	Line *newArray = new Line[length + count];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i] = dynamicArray[i];
+	}
+
+	for (int i = length; i < length + count; ++i)
+	{
+		newArray[i] = Line((float)(rand() % 100 - 50), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+	}
+
+	delete[] dynamicArray;
+
+	dynamicArray = newArray;
+	length += count;
+}
+template<>
+void ListOnDynamicArray<Circle>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	Circle *newArray = new Circle[length + count];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i] = dynamicArray[i];
+	}
+
+	for (int i = length; i < length + count; ++i)
+	{
+		newArray[i] = Circle((float)(rand() % 100 + 1), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+	}
+
+	delete[] dynamicArray;
+
+	dynamicArray = newArray;
+	length += count;
+}
+template<>
+void ListOnDynamicArray<string>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	string *newArray = new string[length + count];
+
+	for (int i = 0; i < length; ++i)
+	{
+		newArray[i] = dynamicArray[i];
+	}
+
+	for (int i = length; i < length + count; ++i)
+	{
+		int countOfSymbol = rand() % 100 + 1;
+		for (int j = 0; j < countOfSymbol; ++j)
+		{
+			newArray[i].push_back((char)(rand() % 256));
+		}
+	}
+
+	delete[] dynamicArray;
+
+	dynamicArray = newArray;
+	length += count;
+}
+
 template<typename T>
 void ListOnDynamicArray<T>::addRandomElements()
 {
@@ -247,7 +411,11 @@ void ListOnDynamicArray<T>::addRandomElements()
 
 	for (int i = length; i < length + count; ++i)
 	{
-		newArray[i] = (T)(rand() % 100);
+		int countOfElement = rand() % 100 + 1;
+		for (int j = 0; j < countOfElement; ++j)
+		{
+			newArray[i].push_back((rand() % 100 - 50));
+		}
 	}
 
 	delete[] dynamicArray;

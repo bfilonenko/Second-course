@@ -60,13 +60,72 @@ ListOnLinkedList<T>::ListOnLinkedList()
 	length = 0;
 }
 
+template<>
+void ListOnLinkedList<int>::showAll()
+{
+	Node<int> *node = head;
+	for (int i = 0; i < length; ++i)
+	{
+		cout << node->value << ' ';
+		node = node->next;
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLinkedList<double>::showAll()
+{
+	Node<double> *node = head;
+	for (int i = 0; i < length; ++i)
+	{
+		cout << node->value << ' ';
+		node = node->next;
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLinkedList<Line>::showAll()
+{
+	Node<Line> *node = head;
+	for (int i = 0; i < length; ++i)
+	{
+		cout << node->value << ' ';
+		node = node->next;
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLinkedList<Circle>::showAll()
+{
+	Node<Circle> *node = head;
+	for (int i = 0; i < length; ++i)
+	{
+		cout << node->value << ' ';
+		node = node->next;
+	}
+	cout << '\n';
+}
+template<>
+void ListOnLinkedList<string>::showAll()
+{
+	Node<string> *node = head;
+	for (int i = 0; i < length; ++i)
+	{
+		cout << node->value << ' ';
+		node = node->next;
+	}
+	cout << '\n';
+}
 template<typename T>
 void ListOnLinkedList<T>::showAll()
 {
 	Node<T> *node = head;
 	for (int i = 0; i < length; ++i)
 	{
-		cout << node->value << ' ';
+		for (int j = 0; j < node->value.size(); ++j)
+		{
+			cout << node->value[i] << ' ';
+		}
+		cout << '\n';
 		node = node->next;
 	}
 	cout << '\n';
@@ -245,6 +304,70 @@ void ListOnLinkedList<T>::clear()
 	}
 }
 
+template<>
+void ListOnLinkedList<int>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		int temp  = (rand() % 100);
+				
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLinkedList<double>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		double temp = double((rand() % 100));
+
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLinkedList<Line>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		Line temp((float)(rand() % 100 - 50), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLinkedList<Circle>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		Circle temp((float)(rand() % 100 + 1), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+
+		pushBack(temp);
+	}
+}
+template<>
+void ListOnLinkedList<string>::addRandomElements()
+{
+	int count = rand() % 100 + 1;
+
+	for (int i = 0; i < count; ++i)
+	{
+		string temp;
+		int countOfSymbol = rand() % 100 + 1;
+		for (int j = 0; j < countOfSymbol; ++j)
+		{
+			temp.push_back((char)(rand() % 256));
+		}
+		pushBack(temp);
+	}
+}
 template<typename T>
 void ListOnLinkedList<T>::addRandomElements()
 {
@@ -252,7 +375,12 @@ void ListOnLinkedList<T>::addRandomElements()
 
 	for (int i = 0; i < count; ++i)
 	{
-		T temp = T((rand() % 100));
+		T temp;
+		int countOfElement = rand() % 100 + 1;
+		for (int j = 0; j < countOfElement; ++j)
+		{
+			temp.push_back((rand() % 100 - 50));
+		}
 		pushBack(temp);
 	}
 }

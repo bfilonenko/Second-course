@@ -14,7 +14,7 @@ int main()
 {
 	checkerForFigure();
 
-	List<Circle> *list = new ListOnLinkedList<Circle>;
+	List<Circle> *list = new ListOnLibraryFunction<Circle>;
 	
 	checker(*list, criterion);
 
