@@ -38,61 +38,12 @@ ListOnDynamicArray<T>::ListOnDynamicArray()
 	length = 0;
 }
 
-template<>
-void ListOnDynamicArray<int>::showAll()
-{
-	for (int i = 0; i < length; ++i)
-	{
-		cout << dynamicArray[i] << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnDynamicArray<double>::showAll()
-{
-	for (int i = 0; i < length; ++i)
-	{
-		cout << dynamicArray[i] << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnDynamicArray<Line>::showAll()
-{
-	for (int i = 0; i < length; ++i)
-	{
-		cout << dynamicArray[i] << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnDynamicArray<Circle>::showAll()
-{
-	for (int i = 0; i < length; ++i)
-	{
-		cout << dynamicArray[i] << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnDynamicArray<string>::showAll()
-{
-	for (int i = 0; i < length; ++i)
-	{
-		cout << dynamicArray[i] << ' ';
-	}
-	cout << '\n';
-}
 template<typename T>
 void ListOnDynamicArray<T>::showAll()
 {
 	for (int i = 0; i < length; ++i)
 	{
-		for (int j = 0; j < dynamicArray[i].size(); ++j)
-		{
-			cout << dynamicArray[i][j] << ' ';
-		}
-		cout << '\n';
+		cout << dynamicArray[i] << ' ';
 	}
 	cout << '\n';
 }

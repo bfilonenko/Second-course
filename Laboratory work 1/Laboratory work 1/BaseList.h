@@ -11,6 +11,37 @@ using namespace std;
 
 
 template<typename T>
+ostream &operator << (ostream &os, const vector<T> &vector)
+{
+	os << "Vector{ ";
+	for (int i = 0; i < vector.size() - 1; ++i)
+	{
+		os << vector[i] << ", ";
+	}
+	if (vector.size() > 1)
+	{
+		os << vector[vector.size() - 1] << ' ';
+	}
+	os << '}';
+	return os;
+}
+
+template<typename T>
+istream &operator >> (istream &is, vector<T> &vec)
+{
+	vec.clear();
+	int length;
+	is >> length;
+	vec = vector<T>(length, T());
+	for (int i = 0; i < length; ++i)
+	{
+		is >> vec[i];
+	}
+	return is;
+}
+
+
+template<typename T>
 class List
 {
 public:

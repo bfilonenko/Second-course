@@ -60,72 +60,13 @@ ListOnLinkedList<T>::ListOnLinkedList()
 	length = 0;
 }
 
-template<>
-void ListOnLinkedList<int>::showAll()
-{
-	Node<int> *node = head;
-	for (int i = 0; i < length; ++i)
-	{
-		cout << node->value << ' ';
-		node = node->next;
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLinkedList<double>::showAll()
-{
-	Node<double> *node = head;
-	for (int i = 0; i < length; ++i)
-	{
-		cout << node->value << ' ';
-		node = node->next;
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLinkedList<Line>::showAll()
-{
-	Node<Line> *node = head;
-	for (int i = 0; i < length; ++i)
-	{
-		cout << node->value << ' ';
-		node = node->next;
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLinkedList<Circle>::showAll()
-{
-	Node<Circle> *node = head;
-	for (int i = 0; i < length; ++i)
-	{
-		cout << node->value << ' ';
-		node = node->next;
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLinkedList<string>::showAll()
-{
-	Node<string> *node = head;
-	for (int i = 0; i < length; ++i)
-	{
-		cout << node->value << ' ';
-		node = node->next;
-	}
-	cout << '\n';
-}
 template<typename T>
 void ListOnLinkedList<T>::showAll()
 {
 	Node<T> *node = head;
 	for (int i = 0; i < length; ++i)
 	{
-		for (int j = 0; j < node->value.size(); ++j)
-		{
-			cout << node->value[i] << ' ';
-		}
-		cout << '\n';
+		cout << node->value << ' ';
 		node = node->next;
 	}
 	cout << '\n';

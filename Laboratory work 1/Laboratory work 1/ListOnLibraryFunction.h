@@ -33,61 +33,12 @@ public:
 template<typename T>
 ListOnLibraryFunction<T>::ListOnLibraryFunction() {}
 
-template<>
-void ListOnLibraryFunction<int>::showAll()
-{
-	for (auto i = list.begin(); i != list.end(); ++i)
-	{
-		cout << *i << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLibraryFunction<double>::showAll()
-{
-	for (auto i = list.begin(); i != list.end(); ++i)
-	{
-		cout << *i << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLibraryFunction<Line>::showAll()
-{
-	for (auto i = list.begin(); i != list.end(); ++i)
-	{
-		cout << *i << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLibraryFunction<Circle>::showAll()
-{
-	for (auto i = list.begin(); i != list.end(); ++i)
-	{
-		cout << *i << ' ';
-	}
-	cout << '\n';
-}
-template<>
-void ListOnLibraryFunction<string>::showAll()
-{
-	for (auto i = list.begin(); i != list.end(); ++i)
-	{
-		cout << *i << ' ';
-	}
-	cout << '\n';
-}
 template<typename T>
 void ListOnLibraryFunction<T>::showAll()
 {
 	for (auto i = list.begin(); i != list.end(); ++i)
 	{
-		for (int j = 0; j < *i.size(); ++j)
-		{
-			cout << *i << ' ';
-		}
-		cout << '\n';
+		cout << *i << ' ';
 	}
 	cout << '\n';
 }
@@ -295,7 +246,7 @@ void ListOnLibraryFunction<T>::addRandomElements()
 template<typename T>
 int ListOnLibraryFunction<T>::getSize()
 {
-	return list.size();
+	return int(list.size());
 }
 
 template<typename T>
