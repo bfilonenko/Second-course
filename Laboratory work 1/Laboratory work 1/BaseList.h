@@ -107,9 +107,8 @@ T getRandomElement(T value)
 	int countOfElement = rand() % 100 + 1;
 	for (int j = 0; j < countOfElement; ++j)
 	{
-		//typename T::value_type newTemp;
-		//newTemp = getRandomElement();
-		//temp.push_back(newTemp);
+		typename T::value_type *newTemp = new typename T::value_type;
+		temp.push_back(getRandomElement(*newTemp));
 	}
 	return temp;
 }
