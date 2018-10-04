@@ -14,7 +14,7 @@ int main()
 {
 	checkerForFigure();
 
-	List<vector<int> > *list = new ListOnLinkedList<vector<int> >;
+	List<Line> *list = new ListOnLinkedList<Line>;
 	
 	checker(*list, criterion);
 

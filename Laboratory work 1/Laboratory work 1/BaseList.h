@@ -42,6 +42,11 @@ istream &operator >> (istream &is, vector<T> &vec)
 
 
 template<typename T>
+T getRandomElement(T value);
+
+
+
+template<typename T>
 class List
 {
 public:
@@ -64,3 +69,47 @@ public:
 	virtual T getElememtMetchingCriterion(bool(*criterion)(T)) = 0;
 };
 
+template<>
+int getRandomElement(int value)
+{
+	return rand() % 100;
+}
+template<>
+double getRandomElement(double value)
+{
+	return double((rand() % 100));
+}
+template<>
+Line getRandomElement(Line value)
+{
+	return Line((float)(rand() % 100 - 50), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+}
+template<>
+Circle getRandomElement(Circle value)
+{
+	return Circle((float)(rand() % 100 + 1), (float)(rand() % 100 - 50), (float)(rand() % 100 - 50));
+}
+template<>
+string getRandomElement(string value)
+{
+	string temp;
+	int countOfSymbol = rand() % 100 + 1;
+	for (int j = 0; j < countOfSymbol; ++j)
+	{
+		temp.push_back((char)(rand() % 256));
+	}
+	return temp;
+}
+template<typename T>
+T getRandomElement(T value)
+{
+	T temp;
+	int countOfElement = rand() % 100 + 1;
+	for (int j = 0; j < countOfElement; ++j)
+	{
+		//typename T::value_type newTemp;
+		//newTemp = getRandomElement();
+		//temp.push_back(newTemp);
+	}
+	return temp;
+}
