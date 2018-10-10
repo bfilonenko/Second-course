@@ -101,14 +101,28 @@ string getRandomElement(string value)
 	return temp;
 }
 template<typename T>
-T getRandomElement(T value)
+vector<T> getRandomElement(vector<T> value)
 {
-	T temp;
+	vector<T> temp;
 	int countOfElement = rand() % 100 + 1;
 	for (int j = 0; j < countOfElement; ++j)
 	{
-		typename T::value_type *newTemp = new typename T::value_type;
+		T *newTemp = new T;
 		temp.push_back(getRandomElement(*newTemp));
 	}
 	return temp;
 }
+
+
+//template<typename T>
+//T getRandomElement(T value)
+//{
+//	T temp;
+//	int countOfElement = rand() % 100 + 1;
+//	for (int j = 0; j < countOfElement; ++j)
+//	{
+//		typename T::value_type *newTemp = new typename T::value_type;
+//		temp.push_back(getRandomElement(*newTemp));
+//	}
+//	return temp;
+//}
