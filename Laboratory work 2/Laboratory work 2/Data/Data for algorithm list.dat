@@ -2,7 +2,7 @@ Algorithm list
 1
 20 40
 400 200
-3
+4
 390 10 20 20 0
 
 
@@ -11,8 +11,12 @@ Data/Pictures/Cross.png
 
 
 Data/Pictures/Minimize.png
-200 40 100 50 20
-Test
+200 30 400 20 20
+Data for algorithm list
+Data/Font/Dewberry regular.ttf
+
+200 50 400 20 20
+Algorithm sort
 Data/Font/Dewberry regular.ttf
 
 16

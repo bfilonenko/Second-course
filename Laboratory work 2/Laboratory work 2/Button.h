@@ -39,5 +39,7 @@ public:
 
 	bool action();
 
+	void finishAction();
+
 	ButtonParameter *setStruct();
 };

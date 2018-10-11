@@ -52,11 +52,11 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 
 	if (needOffset && numberOfButton != 0)
 	{
-		graphic = new DrawingAllWindowElements(screanWidth, screanHeight, xCoordinate, yCoordinate, windowName, numberOfButton, button);
+		graphic = new Graphic(screanWidth, screanHeight, xCoordinate, yCoordinate, windowName, numberOfButton, button);
 	}
 	else
 	{
-		graphic = new DrawingAllWindowElements(screanWidth, screanHeight, windowName);
+		graphic = new Graphic(screanWidth, screanHeight, windowName);
 	}
 }
 
@@ -79,11 +79,36 @@ void WorkWithWindow::work()
 			}
 		}
 
-		for (int i = 0; i < numberOfButton; ++i)
+		for (int i = 0; i < numberOfButton && graphic->hasFocus(); ++i)
 		{
 			button[i].work(graphic->getMousePosition(), Mouse::isButtonPressed(Mouse::Left));
 		}
 
+		
+		for (int i = 0; i < numberOfButton && graphic->hasFocus(); ++i)
+		{
+			if (i == 0 && button[i].action())
+			{
+				graphic->close();
+			}
+			else if (i == 1 && button[i].action())
+			{
+				graphic->minimize();
+			}
+
+			if (i != 0 && i != 1 && button[i].action())
+			{
+				string name = "Data/" + button[i].setStruct()->name + ".dat";
+				newWindowName.push_back(name);
+				button[i].finishAction();
+			}
+		}
+
 		graphic->draw(button);
 	}
+}
+
+vector<string> WorkWithWindow::getNewWindowName()
+{
+	return newWindowName;
 }

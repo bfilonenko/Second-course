@@ -74,6 +74,11 @@ bool Button::action()
 	return button.needDoAction;
 }
 
+void Button::finishAction()
+{
+	button.needDoAction = false;
+}
+
 ButtonParameter *Button::setStruct()
 {
 	return &button;

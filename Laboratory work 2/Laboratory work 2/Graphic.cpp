@@ -1,18 +1,18 @@
-#include "DrawingAllWindowElements.h"
+#include "Graphic.h"
 
 
-void DrawingAllWindowElements::createNewWindow(int width, int height, string &name)
+void Graphic::createNewWindow(int width, int height, string &name)
 {
 	window = new RenderWindow(VideoMode(width, height), name, Style::None);
 }
 
-void DrawingAllWindowElements::draw()
+void Graphic::draw()
 {
 	window->display();
 	window->clear();
 }
 
-void DrawingAllWindowElements::draw(Button *buttonParameter)
+void Graphic::draw(Button *buttonParameter)
 {
 	for (int i = 0; i < numberOfButton; ++i)
 	{
@@ -21,32 +21,42 @@ void DrawingAllWindowElements::draw(Button *buttonParameter)
 	draw();
 }
 
-bool DrawingAllWindowElements::pollEvent()
+bool Graphic::pollEvent()
 {
 	return window->pollEvent(event);
 }
 
-Event DrawingAllWindowElements::getEvent()
+Event Graphic::getEvent()
 {
 	return event;
 }
 
-bool DrawingAllWindowElements::isOpen()
+bool Graphic::isOpen()
 {
 	return window->isOpen();
 }
 
-void DrawingAllWindowElements::close()
+void Graphic::close()
 {
 	window->close();
 }
 
-long DrawingAllWindowElements::getTime()
+void Graphic::minimize()
+{
+	
+}
+
+long Graphic::getTime()
 {
 	return timer.getElapsedTime().asMilliseconds();
 }
 
-Vector2int DrawingAllWindowElements::getMousePosition()
+Vector2int Graphic::getMousePosition()
 {
 	return Vector2int(Mouse::getPosition(*window).x, Mouse::getPosition(*window).y);
+}
+
+bool Graphic::hasFocus()
+{
+	return window->hasFocus();
 }

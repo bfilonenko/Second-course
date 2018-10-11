@@ -28,11 +28,24 @@ void demonstration()
 
 	while (windows.size() != 0)
 	{
-		for (int i = 0; i < windows.size(); ++i)
+		size_t length = windows.size();
+		for (int i = 0; i < length; ++i)
 		{
 			windows[i].work();
+			
+			for (int j = 0; j < windows[i].getNewWindowName().size(); ++j)
+			{
+				WorkWithWindow window(windows[i].getNewWindowName()[j]);
+				windows.push_back(window);
+			}
+			windows[i].cleanNewWindowName();
 		}
 
 		windows.erase(remove_if(windows.begin(), windows.end(), [](WorkWithWindow window) { return !window.isOpen(); }), windows.end());
 	}
+}
+
+void WorkWithWindow::cleanNewWindowName()
+{
+	newWindowName.clear();
 }

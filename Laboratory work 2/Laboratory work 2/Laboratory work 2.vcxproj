@@ -123,7 +123,7 @@
     <ClCompile Include="BaseElement.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonDraw.cpp" />
-    <ClCompile Include="DrawingAllWindowElements.cpp" />
+    <ClCompile Include="Graphic.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="WindowController.cpp" />
     <ClCompile Include="WorkWithWindow.cpp" />
@@ -132,7 +132,7 @@
     <ClInclude Include="BaseElement.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonDraw.h" />
-    <ClInclude Include="DrawingAllWindowElements.h" />
+    <ClInclude Include="Graphic.h" />
     <ClInclude Include="WindowController.h" />
     <ClInclude Include="WorkWithWindow.h" />
   </ItemGroup>

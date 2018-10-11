@@ -2,7 +2,7 @@
 
 
 #include "Button.h"
-#include "DrawingAllWindowElements.h"
+#include "Graphic.h"
 
 
 class WorkWithWindow
@@ -19,7 +19,9 @@ class WorkWithWindow
 	long timeForWork;
 	long timer;
 
-	DrawingAllWindowElements *graphic;
+	Graphic *graphic;
+
+	vector<string> newWindowName;
 	
 public:
 	WorkWithWindow(string &fileName);		//Parameter for window in "name.dat"
@@ -27,4 +29,8 @@ public:
 	bool isOpen();
 
 	void work();
+
+	vector<string> getNewWindowName();
+
+	void cleanNewWindowName();
 };
