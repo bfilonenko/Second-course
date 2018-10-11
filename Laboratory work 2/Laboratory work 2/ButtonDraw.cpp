@@ -26,8 +26,8 @@ void ButtonDraw::setInformation(ButtonParameter &button)
 
 		pictureSprite = new Sprite;
 		pictureSprite->setTexture(*pictureTexture);
-		pictureSprite->setOrigin(button.width / 2, button.height / 2);
-		pictureSprite->setPosition(button.xCoordinate, button.yCoordinate);
+		pictureSprite->setOrigin(float(button.width / 2), float(button.height / 2));
+		pictureSprite->setPosition(float(button.xCoordinate), float(button.yCoordinate));
 	}
 
 	if (button.name == "")
@@ -42,11 +42,11 @@ void ButtonDraw::setInformation(ButtonParameter &button)
 		font->loadFromFile(button.fontName);
 
 		text = new Text;
-		text->setCharacterSize = button.characterSize;
-		text->setColor(Color::White);
+		text->setCharacterSize(button.characterSize);
+		text->setFillColor(Color::White);
 		text->setFont(*font);
-		text->setOrigin(button.width / 2, button.height / 2);
-		text->setPosition(button.xCoordinate, button.yCoordinate);
+		text->setOrigin(float(button.width / 2), float(button.height / 2));
+		text->setPosition(float(button.xCoordinate), float(button.yCoordinate));
 		text->setString(button.name);
 	}
 }

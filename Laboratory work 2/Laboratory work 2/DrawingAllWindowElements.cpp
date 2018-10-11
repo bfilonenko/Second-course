@@ -12,6 +12,15 @@ void DrawingAllWindowElements::draw()
 	window->clear();
 }
 
+void DrawingAllWindowElements::draw(Button *buttonParameter)
+{
+	for (int i = 0; i < numberOfButton; ++i)
+	{
+		button->draw(*window, *buttonParameter->setStruct());
+	}
+	draw();
+}
+
 bool DrawingAllWindowElements::pollEvent()
 {
 	return window->pollEvent(event);
@@ -35,4 +44,9 @@ void DrawingAllWindowElements::close()
 long DrawingAllWindowElements::getTime()
 {
 	return timer.getElapsedTime().asMilliseconds();
+}
+
+Vector2int DrawingAllWindowElements::getMousePosition()
+{
+	return Vector2int(Mouse::getPosition(*window).x, Mouse::getPosition(*window).y);
 }

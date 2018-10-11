@@ -5,6 +5,8 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 {
 	ifstream fileIn(fileName);
 
+	getline(fileIn, windowName);
+
 	bool needOffset;
 	fileIn >> needOffset;
 	
@@ -31,26 +33,26 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 		{
 			for (int j = 0; j < 5; ++j)
 			{
-				fileIn >> firstParameters[i];
+				fileIn >> firstParameters[j];
 			}
+			getline(fileIn, secondParameters[0]);
 			for (int j = 0; j < 3; ++j)
 			{
-				fileIn >> secondParameters[i];
+				getline(fileIn, secondParameters[j]);
 			}
-			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], secondParameters[0], secondParameters[1]);
+			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], secondParameters[0], secondParameters[1], secondParameters[2]);
 		}
 	}
 
-	getline(fileIn, windowName);
-	getline(fileIn, windowName);
+	
 
 	fileIn >> timeForWork;
 
 	fileIn.close();
 
-	if (needOffset)
+	if (needOffset && numberOfButton != 0)
 	{
-		graphic = new DrawingAllWindowElements(screanWidth, screanHeight, xCoordinate, yCoordinate, windowName);
+		graphic = new DrawingAllWindowElements(screanWidth, screanHeight, xCoordinate, yCoordinate, windowName, numberOfButton, button);
 	}
 	else
 	{
@@ -77,6 +79,11 @@ void WorkWithWindow::work()
 			}
 		}
 
-		graphic->draw();
+		for (int i = 0; i < numberOfButton; ++i)
+		{
+			button->work(graphic->getMousePosition(), Mouse::isButtonPressed(Mouse::Left));
+		}
+
+		graphic->draw(button);
 	}
 }

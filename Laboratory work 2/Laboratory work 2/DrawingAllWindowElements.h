@@ -33,7 +33,7 @@ public:
 		window->setPosition(Vector2i(xCoordinate, yCoordinate));
 		numberOfButton = 0;
 	}
-	DrawingAllWindowElements(int screanWidth, int screanHeight, int xCoordinate, int yCoordinate, string &windowName, int numberOfButton, ButtonParameter *buttonParameter) : screanWidth(screanWidth), screanHeight(screanHeight), xCoordinate(xCoordinate), yCoordinate(yCoordinate), windowName(windowName), numberOfButton(numberOfButton)
+	DrawingAllWindowElements(int screanWidth, int screanHeight, int xCoordinate, int yCoordinate, string &windowName, int numberOfButton, Button *buttonParameter) : screanWidth(screanWidth), screanHeight(screanHeight), xCoordinate(xCoordinate), yCoordinate(yCoordinate), windowName(windowName), numberOfButton(numberOfButton)
 	{
 		createNewWindow(screanWidth, screanHeight, windowName);
 		window->setPosition(Vector2i(xCoordinate, yCoordinate));
@@ -41,12 +41,14 @@ public:
 		button = new ButtonDraw[numberOfButton];
 		for (int i = 0; i < numberOfButton; ++i)
 		{
-			button[i].setInformation(buttonParameter[i]);
+			button[i].setInformation(*buttonParameter[i].setStruct());
 		}
 	}
 
 
 	void draw();
+
+	void draw(Button *buttonParameter);
 
 	bool pollEvent();
 
@@ -58,4 +60,7 @@ public:
 
 	long getTime();
 
+	Vector2int getMousePosition();
+
+	
 };
