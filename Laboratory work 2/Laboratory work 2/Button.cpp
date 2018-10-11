@@ -12,8 +12,8 @@ Button::Button()
 	button.fontName = "";
 	button.pictureName = "";
 	button.buttonIsPressed = false;
-	button.needHighlight = false;
 	button.mouseButtonIsPressed = false;
+	button.needHighlight = false;
 	button.needDoAction = false;
 }
 
@@ -33,8 +33,8 @@ void Button::setInformation(int xCoordinate, int yCoordinate, int width, int hei
 	button.fontName = fontName;
 	button.pictureName = pictureName;
 	button.buttonIsPressed = false;
-	button.needHighlight = false;
 	button.mouseButtonIsPressed = false;
+	button.needHighlight = false;
 	button.needDoAction = false;
 }
 
@@ -43,12 +43,35 @@ void Button::work(Vector2int mousePosition, bool isPressed)
 	if (inArea(button.width, button.height, button.xCoordinate, button.yCoordinate, mousePosition))
 	{
 		button.needHighlight = true;
-
+		if (isPressed)
+		{
+			button.buttonIsPressed = true;
+			button.mouseButtonIsPressed = true;
+		}
+		else if (button.mouseButtonIsPressed)
+		{
+			button.needDoAction = true;
+		}
 	}
 	else
 	{
 		button.needHighlight = false;
+		button.buttonIsPressed = false;
+
+		if (!isPressed)
+		{
+			button.mouseButtonIsPressed = false;
+		}
+		else if (button.mouseButtonIsPressed)
+		{
+			button.needHighlight = true;
+		}
 	}
+}
+
+bool Button::action()
+{
+	return button.needDoAction;
 }
 
 ButtonParameter *Button::setStruct()

@@ -43,7 +43,6 @@ void ButtonDraw::setInformation(ButtonParameter &button)
 
 		text = new Text;
 		text->setCharacterSize(button.characterSize);
-		text->setFillColor(Color::White);
 		text->setFont(*font);
 		text->setOrigin(float(button.width / 2), float(button.height / 2));
 		text->setPosition(float(button.xCoordinate), float(button.yCoordinate));
@@ -55,11 +54,35 @@ void ButtonDraw::draw(RenderWindow &window, ButtonParameter &button)
 {
 	if (needPicture)
 	{
+		if (button.buttonIsPressed)
+		{
+			pictureSprite->setColor(Color(255, 255, 0));
+		}
+		else if (button.needHighlight)
+		{
+			pictureSprite->setColor(Color::White);
+		}
+		else
+		{
+			pictureSprite->setColor(Color(128, 128, 128));
+		}
 		window.draw(*pictureSprite);
 	}
 
 	if (needText)
 	{
+		if (button.buttonIsPressed)
+		{
+			text->setFillColor(Color(255, 255, 0));
+		}
+		else if (button.needHighlight)
+		{
+			text->setFillColor(Color::White);
+		}
+		else
+		{
+			text->setFillColor(Color(128, 128, 128));
+		}
 		window.draw(*text);
 	}
 }

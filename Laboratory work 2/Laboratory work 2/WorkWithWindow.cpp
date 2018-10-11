@@ -81,7 +81,7 @@ void WorkWithWindow::work()
 
 		for (int i = 0; i < numberOfButton; ++i)
 		{
-			button->work(graphic->getMousePosition(), Mouse::isButtonPressed(Mouse::Left));
+			button[i].work(graphic->getMousePosition(), Mouse::isButtonPressed(Mouse::Left));
 		}
 
 		graphic->draw(button);

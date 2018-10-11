@@ -3,7 +3,7 @@
 
 void DrawingAllWindowElements::createNewWindow(int width, int height, string &name)
 {
-	window = new RenderWindow(VideoMode(width, height), name);// , Style::None);
+	window = new RenderWindow(VideoMode(width, height), name, Style::None);
 }
 
 void DrawingAllWindowElements::draw()
@@ -16,7 +16,7 @@ void DrawingAllWindowElements::draw(Button *buttonParameter)
 {
 	for (int i = 0; i < numberOfButton; ++i)
 	{
-		button->draw(*window, *buttonParameter->setStruct());
+		button[i].draw(*window, *buttonParameter[i].setStruct());
 	}
 	draw();
 }

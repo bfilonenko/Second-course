@@ -19,8 +19,8 @@ struct ButtonParameter
 	string pictureName;
 
 	bool buttonIsPressed;
-	bool needHighlight;
 	bool mouseButtonIsPressed;
+	bool needHighlight;
 	bool needDoAction;
 };
 
@@ -36,6 +36,8 @@ public:
 	void setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, string &name, string &fontName, string &pictureName);
 
 	void work(Vector2int mousePosition, bool isPressed);
+
+	bool action();
 
 	ButtonParameter *setStruct();
 };
