@@ -4,7 +4,6 @@
 void DrawingAllWindowElements::createNewWindow(int width, int height, string &name)
 {
 	window = new RenderWindow(VideoMode(width, height), name);// , Style::None);
-	window->clear(Color::Black);
 }
 
 void DrawingAllWindowElements::draw()

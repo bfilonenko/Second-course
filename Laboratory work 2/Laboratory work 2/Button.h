@@ -1,12 +1,7 @@
 #pragma once
 
 
-#include <fstream>
-#include <string>
-#include <iostream>
-
-
-using namespace std;
+#include "BaseElement.h"
 
 
 struct ButtonParameter
@@ -14,14 +9,19 @@ struct ButtonParameter
 	int xCoordinate;
 	int yCoordinate;
 
-	int buttonWidth;
-	int buttonHeight;
+	int width;
+	int height;
 
-	string buttonName;
+	int characterSize;
+
+	string name;
 	string fontName;
 	string pictureName;
 
 	bool buttonIsPressed;
+	bool needHighlight;
+	bool mouseButtonIsPressed;
+	bool needDoAction;
 };
 
 
@@ -31,5 +31,11 @@ class Button
 
 public:
 	Button();
-	Button(int xCoordinate, int yCoordinate, int buttonWidth, int buttonHeight, string &buttonName, string &fontName, string &pictureName);
+	Button(int xCoordinate, int yCoordinate, int width, int height, int characterSize, string &name, string &fontName, string &pictureName);
+
+	void setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, string &name, string &fontName, string &pictureName);
+
+	void work(Vector2int mousePosition, bool isPressed);
+
+	ButtonParameter *setStruct();
 };

@@ -33,9 +33,16 @@ public:
 		window->setPosition(Vector2i(xCoordinate, yCoordinate));
 		numberOfButton = 0;
 	}
-	DrawingAllWindowElements(int screanWidth, int screanHeight, int numberOfButton, ButtonParameter *buttonParameter) : screanWidth(screanWidth), screanHeight(screanHeight), numberOfButton(numberOfButton)
+	DrawingAllWindowElements(int screanWidth, int screanHeight, int xCoordinate, int yCoordinate, string &windowName, int numberOfButton, ButtonParameter *buttonParameter) : screanWidth(screanWidth), screanHeight(screanHeight), xCoordinate(xCoordinate), yCoordinate(yCoordinate), windowName(windowName), numberOfButton(numberOfButton)
 	{
 		createNewWindow(screanWidth, screanHeight, windowName);
+		window->setPosition(Vector2i(xCoordinate, yCoordinate));
+
+		button = new ButtonDraw[numberOfButton];
+		for (int i = 0; i < numberOfButton; ++i)
+		{
+			button[i].setInformation(buttonParameter[i]);
+		}
 	}
 
 
