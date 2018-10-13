@@ -45,6 +45,7 @@ public:
 		}
 	}
 
+	void setCoordinate(int xCoordinate, int yCoordinate);
 
 	void draw();
 
@@ -63,6 +64,8 @@ public:
 	long getTime();
 
 	Vector2int getMousePosition();
+
+	Vector2int getGlobalMousePosition();
 
 	bool hasFocus();
 };

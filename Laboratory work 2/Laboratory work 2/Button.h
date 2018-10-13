@@ -39,6 +39,10 @@ public:
 
 	bool action();
 
+	bool isPressed();
+
+	bool mouseButtonIsPressed();
+
 	void finishAction();
 
 	ButtonParameter *setStruct();

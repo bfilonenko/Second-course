@@ -9,6 +9,10 @@ class WorkWithWindow
 {
 	int xCoordinate;
 	int yCoordinate;
+	bool needOffsetWindow;
+	int xOffset;
+	int yOffset;
+
 	int screanWidth;
 	int screanHeight;
 	string windowName;

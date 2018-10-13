@@ -6,6 +6,13 @@ void Graphic::createNewWindow(int width, int height, string &name)
 	window = new RenderWindow(VideoMode(width, height), name, Style::None);
 }
 
+void Graphic::setCoordinate(int xNewCoordinate, int yNewCoordinate)
+{
+	xCoordinate = xNewCoordinate;
+	yCoordinate = yNewCoordinate;
+	window->setPosition(Vector2i(xCoordinate, yCoordinate));
+}
+
 void Graphic::draw()
 {
 	window->display();
@@ -54,6 +61,11 @@ long Graphic::getTime()
 Vector2int Graphic::getMousePosition()
 {
 	return Vector2int(Mouse::getPosition(*window).x, Mouse::getPosition(*window).y);
+}
+
+Vector2int Graphic::getGlobalMousePosition()
+{
+	return Vector2int(Mouse::getPosition().x, Mouse::getPosition().y);
 }
 
 bool Graphic::hasFocus()

@@ -51,6 +51,7 @@ void Button::work(Vector2int mousePosition, bool isPressed)
 		else if (button.mouseButtonIsPressed)
 		{
 			button.needDoAction = true;
+			button.mouseButtonIsPressed = false;
 		}
 	}
 	else
@@ -72,6 +73,16 @@ void Button::work(Vector2int mousePosition, bool isPressed)
 bool Button::action()
 {
 	return button.needDoAction;
+}
+
+bool Button::isPressed()
+{
+	return button.buttonIsPressed;
+}
+
+bool Button::mouseButtonIsPressed()
+{
+	return button.mouseButtonIsPressed;
 }
 
 void Button::finishAction()

@@ -19,6 +19,9 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 		xCoordinate = -1;
 		yCoordinate = -1;
 	}
+	needOffsetWindow = false;
+	xOffset = -1;
+	yOffset = -1;
 
 	fileIn >> screanWidth >> screanHeight >> numberOfButton;
 	
@@ -79,11 +82,38 @@ void WorkWithWindow::work()
 			}
 		}
 
-		for (int i = 0; i < numberOfButton && graphic->hasFocus(); ++i)
+		for (int i = 0; i < numberOfButton && graphic->hasFocus() && !needOffsetWindow; ++i)
 		{
 			button[i].work(graphic->getMousePosition(), Mouse::isButtonPressed(Mouse::Left));
 		}
 
+		//Button 0 for closing window
+		//Button 1 for minimizing window
+		//Button 2 for moving window
+		if (needOffsetWindow)
+		{
+			button[2].work(graphic->getMousePosition(), Mouse::isButtonPressed(Mouse::Left));
+		}
+		if (button[2].mouseButtonIsPressed())
+		{
+			if (!needOffsetWindow)
+			{
+				needOffsetWindow = true;
+				xOffset = graphic->getGlobalMousePosition().x - xCoordinate;
+				yOffset = graphic->getGlobalMousePosition().y - yCoordinate;
+			}
+			else
+			{
+				xCoordinate = graphic->getGlobalMousePosition().x - xOffset;
+				yCoordinate = graphic->getGlobalMousePosition().y - yOffset;
+
+				graphic->setCoordinate(xCoordinate, yCoordinate);
+			}
+		}
+		else if (!button[2].mouseButtonIsPressed() && needOffsetWindow)
+		{
+			needOffsetWindow = false;
+		}
 		
 		for (int i = 0; i < numberOfButton && graphic->hasFocus(); ++i)
 		{
@@ -95,8 +125,7 @@ void WorkWithWindow::work()
 			{
 				graphic->minimize();
 			}
-
-			if (i != 0 && i != 1 && button[i].action())
+			else if (i > 2 && button[i].action())
 			{
 				string name = "Data/" + button[i].setStruct()->name + ".dat";
 				newWindowName.push_back(name);
