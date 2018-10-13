@@ -18,6 +18,8 @@ struct ButtonParameter
 	string fontName;
 	string pictureName;
 
+	bool needChangeColor;
+
 	bool buttonIsPressed;
 	bool mouseButtonIsPressed;
 	bool needHighlight;
@@ -31,9 +33,9 @@ class Button
 
 public:
 	Button();
-	Button(int xCoordinate, int yCoordinate, int width, int height, int characterSize, string &name, string &fontName, string &pictureName);
+	Button(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, string &name, string &fontName, string &pictureName);
 
-	void setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, string &name, string &fontName, string &pictureName);
+	void setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, string &name, string &fontName, string &pictureName);
 
 	void work(Vector2int mousePosition, bool isPressed);
 

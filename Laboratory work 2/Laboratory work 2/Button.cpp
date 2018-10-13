@@ -11,18 +11,19 @@ Button::Button()
 	button.name = "";
 	button.fontName = "";
 	button.pictureName = "";
+	button.needChangeColor = true;
 	button.buttonIsPressed = false;
 	button.mouseButtonIsPressed = false;
 	button.needHighlight = false;
 	button.needDoAction = false;
 }
 
-Button::Button(int xCoordinate, int yCoordinate, int width, int height, int characterSize, string &name, string &fontName, string &pictureName)
+Button::Button(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, string &name, string &fontName, string &pictureName)
 {
-	setInformation(xCoordinate, yCoordinate, width, height, characterSize, name, fontName, pictureName);
+	setInformation(xCoordinate, yCoordinate, width, height, characterSize, needChangeColor, name, fontName, pictureName);
 }
 
-void Button::setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, string &name, string &fontName, string &pictureName)
+void Button::setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, string &name, string &fontName, string &pictureName)
 {
 	button.xCoordinate = xCoordinate;
 	button.yCoordinate = yCoordinate;
@@ -32,6 +33,7 @@ void Button::setInformation(int xCoordinate, int yCoordinate, int width, int hei
 	button.name = name;
 	button.fontName = fontName;
 	button.pictureName = pictureName;
+	button.needChangeColor = needChangeColor;
 	button.buttonIsPressed = false;
 	button.mouseButtonIsPressed = false;
 	button.needHighlight = false;

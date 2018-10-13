@@ -54,34 +54,48 @@ void ButtonDraw::draw(RenderWindow &window, ButtonParameter &button)
 {
 	if (needPicture)
 	{
-		if (button.buttonIsPressed)
+		if (button.needChangeColor)
 		{
-			pictureSprite->setColor(Color(255, 255, 0));
-		}
-		else if (button.needHighlight)
-		{
-			pictureSprite->setColor(Color::White);
+			if (button.buttonIsPressed && button.needChangeColor)
+			{
+				pictureSprite->setColor(Color(255, 255, 0));
+			}
+			else if (button.needHighlight && button.needChangeColor)
+			{
+				pictureSprite->setColor(Color::White);
+			}
+			else
+			{
+				pictureSprite->setColor(Color(128, 128, 128));
+			}
 		}
 		else
 		{
-			pictureSprite->setColor(Color(128, 128, 128));
+			pictureSprite->setColor(Color::White);
 		}
 		window.draw(*pictureSprite);
 	}
 
 	if (needText)
 	{
-		if (button.buttonIsPressed)
+		if (button.needChangeColor)
 		{
-			text->setFillColor(Color(255, 255, 0));
-		}
-		else if (button.needHighlight)
-		{
-			text->setFillColor(Color::White);
+			if (button.buttonIsPressed)
+			{
+				text->setFillColor(Color(255, 255, 0));
+			}
+			else if (button.needHighlight)
+			{
+				text->setFillColor(Color::White);
+			}
+			else
+			{
+				text->setFillColor(Color(128, 128, 128));
+			}
 		}
 		else
 		{
-			text->setFillColor(Color(128, 128, 128));
+			text->setFillColor(Color::White);
 		}
 		window.draw(*text);
 	}

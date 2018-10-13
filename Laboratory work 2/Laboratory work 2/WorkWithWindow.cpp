@@ -29,12 +29,12 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 	{
 		button = new Button[numberOfButton];
 
-		int firstParameters[5];
+		int firstParameters[6];
 		string secondParameters[3];
  
 		for (int i = 0; i < numberOfButton; ++i)
 		{
-			for (int j = 0; j < 5; ++j)
+			for (int j = 0; j < 6; ++j)
 			{
 				fileIn >> firstParameters[j];
 			}
@@ -43,7 +43,7 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 			{
 				getline(fileIn, secondParameters[j]);
 			}
-			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], secondParameters[0], secondParameters[1], secondParameters[2]);
+			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], secondParameters[0], secondParameters[1], secondParameters[2]);
 		}
 	}
 
@@ -127,7 +127,7 @@ void WorkWithWindow::work()
 			}
 			else if (i > 2 && button[i].action())
 			{
-				string name = "Data/" + button[i].setStruct()->name + ".dat";
+				string name = "Data/Data for " + button[i].setStruct()->name + ".dat";
 				newWindowName.push_back(name);
 				button[i].finishAction();
 			}
@@ -140,4 +140,9 @@ void WorkWithWindow::work()
 vector<string> WorkWithWindow::getNewWindowName()
 {
 	return newWindowName;
+}
+
+void WorkWithWindow::cleanNewWindowName()
+{
+	newWindowName.clear();
 }

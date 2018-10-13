@@ -9,18 +9,6 @@ void demonstration()
 	string mainWindowName;
 	getline(fileIn, mainWindowName);
 
-	int numberOfAlgorithm;
-	fileIn >> numberOfAlgorithm;
-
-	string *windowName = new string[numberOfAlgorithm];
-	if (numberOfAlgorithm != 0)
-	{
-		getline(fileIn, windowName[0]);
-		for (int i = 0; i < numberOfAlgorithm; ++i)
-		{
-			getline(fileIn, windowName[i]);
-		}
-	}
 	fileIn.close();
 
 	WorkWithWindow mainWindow(mainWindowName);
@@ -43,9 +31,4 @@ void demonstration()
 
 		windows.erase(remove_if(windows.begin(), windows.end(), [](WorkWithWindow window) { return !window.isOpen(); }), windows.end());
 	}
-}
-
-void WorkWithWindow::cleanNewWindowName()
-{
-	newWindowName.clear();
 }
