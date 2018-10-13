@@ -120,6 +120,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="BaseElement.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonDraw.cpp" />
@@ -129,6 +130,7 @@
     <ClCompile Include="WorkWithWindow.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Algorithm.h" />
     <ClInclude Include="BaseElement.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonDraw.h" />

@@ -50,7 +50,7 @@ void Graphic::close()
 
 void Graphic::minimize()
 {
-	
+	ShowWindowAsync(window->getSystemHandle(), SW_MINIMIZE);
 }
 
 long Graphic::getTime()

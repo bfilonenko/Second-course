@@ -2,6 +2,7 @@
 
 
 #include "ButtonDraw.h"
+#include <Windows.h>
 
 
 class Graphic
