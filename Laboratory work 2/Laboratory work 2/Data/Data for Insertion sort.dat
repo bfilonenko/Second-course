@@ -2,7 +2,7 @@ Insertion sort
 1
 33 24
 1280 720
-3
+6
 1270 12 20 20 0 1
 
 
@@ -15,5 +15,17 @@ Data/Pictures/Minimize.png
 Insertion sort
 Data/Fonts/Azonix.otf
 
-0
+640 500 40 40 0 1
+
+
+Data/Pictures/Play.png
+600 500 40 40 0 1
+
+
+Data/Pictures/Back.png
+680 500 40 40 0 1
+
+
+Data/Pictures/Next.png
+1
 16

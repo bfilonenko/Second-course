@@ -3,7 +3,7 @@
 
 InsertionSort::InsertionSort()
 {
-	forConstructor(10);
+	forConstructor(20);
 }
 
 void InsertionSort::forConstructor(int number)
@@ -19,7 +19,7 @@ void InsertionSort::forConstructor(int number)
 
 	algorithm.indexes.push_back(1);
 
-	++algorithm.length;
+	algorithm.length = number;
 
 	vector<int> temp;
 
@@ -29,7 +29,7 @@ void InsertionSort::forConstructor(int number)
 	}
 
 	vector<int> temp2(temp);
-	random_shuffle(temp2.begin(), temp2.end());
+	sort(temp2.begin(), temp2.end());
 
 	for (int i = 0; i < number; ++i)
 	{

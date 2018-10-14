@@ -2,6 +2,7 @@
 
 
 #include "ButtonDraw.h"
+#include "AlgorithmDraw.h"
 #include <Windows.h>
 
 
@@ -19,6 +20,9 @@ class Graphic
 
 	int numberOfButton;
 	ButtonDraw *button;
+
+	bool needAlgorithm;
+	AlgorithmDraw *algorithm;
 
 	void createNewWindow(int width, int height, string &name);
 
@@ -45,12 +49,30 @@ public:
 			button[i].setInformation(*buttonParameter[i].setStruct());
 		}
 	}
+	Graphic(int screanWidth, int screanHeight, int xCoordinate, int yCoordinate, string &windowName, int numberOfButton, Button *buttonParameter, AlgorithmParameter &algorithmParameter) : screanWidth(screanWidth), screanHeight(screanHeight), xCoordinate(xCoordinate), yCoordinate(yCoordinate), windowName(windowName), numberOfButton(numberOfButton)
+	{
+		createNewWindow(screanWidth, screanHeight, windowName);
+		window->setPosition(Vector2i(xCoordinate, yCoordinate));
+
+		button = new ButtonDraw[numberOfButton];
+		for (int i = 0; i < numberOfButton; ++i)
+		{
+			button[i].setInformation(*buttonParameter[i].setStruct());
+		}
+
+		algorithm = new AlgorithmDraw(algorithmParameter);
+	}
+
 
 	void setCoordinate(int xCoordinate, int yCoordinate);
+
 
 	void draw();
 
 	void draw(Button *buttonParameter);
+
+	void draw(Button *buttonParameter, AlgorithmParameter &algorithmParameter);
+
 
 	bool pollEvent();
 

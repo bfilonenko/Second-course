@@ -6,12 +6,14 @@ void Graphic::createNewWindow(int width, int height, string &name)
 	window = new RenderWindow(VideoMode(width, height), name, Style::None);
 }
 
+
 void Graphic::setCoordinate(int xNewCoordinate, int yNewCoordinate)
 {
 	xCoordinate = xNewCoordinate;
 	yCoordinate = yNewCoordinate;
 	window->setPosition(Vector2i(xCoordinate, yCoordinate));
 }
+
 
 void Graphic::draw()
 {
@@ -27,6 +29,13 @@ void Graphic::draw(Button *buttonParameter)
 	}
 	draw();
 }
+
+void Graphic::draw(Button *buttonParameter, AlgorithmParameter &algorithmParameter)
+{
+	algorithm->draw(*window, algorithmParameter);
+	draw(buttonParameter);
+}
+
 
 bool Graphic::pollEvent()
 {

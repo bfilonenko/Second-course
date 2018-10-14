@@ -2,14 +2,17 @@
 
 AlgorithmParameter::AlgorithmParameter()
 {
-	int operations = 0;
-	int length = 0;
+	operations = 0;
+	length = 0;
 }
 
 
 void Algorithm::goToBack()
 {
-	story.pop_back();
+	if (story.size() > 1)
+	{
+		story.pop_back();
+	}
 }
 
 void Algorithm::save(string &name)

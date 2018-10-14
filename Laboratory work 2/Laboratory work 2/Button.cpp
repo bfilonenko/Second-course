@@ -54,6 +54,7 @@ void Button::work(Vector2int mousePosition, bool isPressed)
 		{
 			button.needDoAction = true;
 			button.mouseButtonIsPressed = false;
+			button.buttonIsPressed = false;
 		}
 	}
 	else

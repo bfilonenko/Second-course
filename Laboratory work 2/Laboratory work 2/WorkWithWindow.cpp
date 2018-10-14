@@ -61,7 +61,11 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 
 	fileIn.close();
 
-	if (needOffset && numberOfButton != 0)
+	if (needOffset && numberOfButton != 0 && needAlgorithm)
+	{
+		graphic = new Graphic(screanWidth, screanHeight, xCoordinate, yCoordinate, windowName, numberOfButton, button, *algorithm->getStruct());
+	}
+	else if (needOffset && numberOfButton != 0)
 	{
 		graphic = new Graphic(screanWidth, screanHeight, xCoordinate, yCoordinate, windowName, numberOfButton, button);
 	}
@@ -133,15 +137,31 @@ void WorkWithWindow::work()
 			{
 				graphic->minimize();
 			}
-			else if (i > 2 && button[i].action())
+			else if (i == 4 && button[i].action() && needAlgorithm)
+			{
+				algorithm->goToBack();
+			}
+			else if (i == 5 && button[i].action() && needAlgorithm)
+			{
+				algorithm->goToNext();
+			}
+			else if (i > 2 && button[i].action() && button[i].setStruct()->name != "")
 			{
 				string name = "Data/Data for " + button[i].setStruct()->name + ".dat";
 				newWindowName.push_back(name);
-				button[i].finishAction();
 			}
+			button[i].finishAction();
 		}
 
-		graphic->draw(button);
+
+		if (needAlgorithm)
+		{
+			graphic->draw(button, *algorithm->getStruct());
+		}
+		else
+		{
+			graphic->draw(button);
+		}
 	}
 }
 
