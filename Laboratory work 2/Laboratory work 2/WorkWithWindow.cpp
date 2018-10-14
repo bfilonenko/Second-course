@@ -47,7 +47,15 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 		}
 	}
 
-	
+	fileIn >> needAlgorithm;
+
+	if (needAlgorithm)
+	{
+		if (windowName == "Insertion sort")
+		{
+			algorithm = new InsertionSort;
+		}
+	}
 
 	fileIn >> timeForWork;
 

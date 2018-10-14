@@ -3,6 +3,7 @@
 
 #include "Button.h"
 #include "Graphic.h"
+#include "InsertionSort.h"
 
 
 class WorkWithWindow
@@ -19,6 +20,10 @@ class WorkWithWindow
 
 	int numberOfButton;
 	Button *button;
+
+	bool needAlgorithm;
+
+	Algorithm *algorithm;
 
 	long timeForWork;
 	long timer;

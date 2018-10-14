@@ -2,9 +2,15 @@
 
 AlgorithmParameter::AlgorithmParameter()
 {
+	int operations = 0;
 	int length = 0;
 }
 
+
+void Algorithm::goToBack()
+{
+	story.pop_back();
+}
 
 void Algorithm::save(string &name)
 {
@@ -14,10 +20,24 @@ void Algorithm::save(string &name)
 
 	for (int i = 0; i < story.size(); ++i)
 	{
+		fileOut << story[i].oldPositionOfMainIndex.size() << ' ';
+		for (int j = 0; j < story[i].oldPositionOfMainIndex.size(); ++i)
+		{
+			fileOut << story[i].oldPositionOfMainIndex[i] << ' ';
+		}
+		fileOut << '\n';
+
 		fileOut << story[i].mainIndexes.size() << ' ';
 		for (int j = 0; j < story[i].mainIndexes.size(); ++i)
 		{
 			fileOut << story[i].mainIndexes[i] << ' ';
+		}
+		fileOut << '\n';
+
+		fileOut << story[i].indexForHighlight.size() << ' ';
+		for (int j = 0; j < story[i].indexForHighlight.size(); ++i)
+		{
+			fileOut << story[i].indexForHighlight[i] << ' ';
 		}
 		fileOut << '\n';
 
@@ -28,7 +48,7 @@ void Algorithm::save(string &name)
 		}
 		fileOut << '\n';
 
-		fileOut << story[i].length << '\n';
+		fileOut << story[i].operations << ' ' << story[i].length << '\n';
 
 		fileOut << story[i].arrayOfValues.size() << ' ';
 		for (int j = 0; j < story[i].arrayOfValues.size(); ++i)
@@ -55,7 +75,21 @@ void Algorithm::download(string &name)
 		for (int j = 0; j < tempLength; ++i)
 		{
 			fileIn >> tempValue;
+			temp.oldPositionOfMainIndex.push_back(tempValue);
+		}
+
+		fileIn >> tempLength;
+		for (int j = 0; j < tempLength; ++i)
+		{
+			fileIn >> tempValue;
 			temp.mainIndexes.push_back(tempValue);
+		}
+
+		fileIn >> tempLength;
+		for (int j = 0; j < tempLength; ++i)
+		{
+			fileIn >> tempValue;
+			temp.indexForHighlight.push_back(tempValue);
 		}
 
 		fileIn >> tempLength;
@@ -65,7 +99,7 @@ void Algorithm::download(string &name)
 			temp.indexes.push_back(tempValue);
 		}
 
-		fileIn >> temp.length;
+		fileIn >> temp.operations >> temp.length;
 
 		fileIn >> tempLength;
 		for (int j = 0; j < tempLength; ++i)
