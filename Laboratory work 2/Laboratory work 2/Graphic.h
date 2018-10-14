@@ -24,6 +24,8 @@ class Graphic
 	bool needAlgorithm;
 	AlgorithmDraw *algorithm;
 
+	bool animationIsPlaying;
+
 	void createNewWindow(int width, int height, string &name);
 
 public:
@@ -31,12 +33,16 @@ public:
 	{
 		createNewWindow(screanWidth, screanHeight, windowName);
 		numberOfButton = 0;
+
+		animationIsPlaying = false;
 	}
 	Graphic(int screanWidth, int screanHeight, int xCoordinate, int yCoordinate, string &windowName) : screanWidth(screanWidth), screanHeight(screanHeight), xCoordinate(xCoordinate), yCoordinate(yCoordinate), windowName(windowName)
 	{
 		createNewWindow(screanWidth, screanHeight, windowName);
 		window->setPosition(Vector2i(xCoordinate, yCoordinate));
 		numberOfButton = 0;
+
+		animationIsPlaying = false;
 	}
 	Graphic(int screanWidth, int screanHeight, int xCoordinate, int yCoordinate, string &windowName, int numberOfButton, Button *buttonParameter) : screanWidth(screanWidth), screanHeight(screanHeight), xCoordinate(xCoordinate), yCoordinate(yCoordinate), windowName(windowName), numberOfButton(numberOfButton)
 	{
@@ -48,6 +54,8 @@ public:
 		{
 			button[i].setInformation(*buttonParameter[i].setStruct());
 		}
+
+		animationIsPlaying = false;
 	}
 	Graphic(int screanWidth, int screanHeight, int xCoordinate, int yCoordinate, string &windowName, int numberOfButton, Button *buttonParameter, AlgorithmParameter &algorithmParameter) : screanWidth(screanWidth), screanHeight(screanHeight), xCoordinate(xCoordinate), yCoordinate(yCoordinate), windowName(windowName), numberOfButton(numberOfButton)
 	{
@@ -61,6 +69,8 @@ public:
 		}
 
 		algorithm = new AlgorithmDraw(algorithmParameter);
+
+		animationIsPlaying = false;
 	}
 
 

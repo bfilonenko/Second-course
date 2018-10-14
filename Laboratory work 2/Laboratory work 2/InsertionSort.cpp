@@ -54,6 +54,8 @@ void InsertionSort::goToNext()
 
 	if (algorithm.indexes[0] < algorithm.length)
 	{
+		algorithm.oldPositionOfMainIndex.clear();
+	
 		if (algorithm.indexForHighlight.size() == 0)
 		{
 			if (algorithm.arrayOfValues[algorithm.mainIndexes[1]].first > algorithm.arrayOfValues[algorithm.mainIndexes[0]].first)
@@ -65,9 +67,10 @@ void InsertionSort::goToNext()
 			}
 			else
 			{
+				algorithm.indexForHighlight.clear();
+
 				++algorithm.indexes[0];
 
-				algorithm.oldPositionOfMainIndex.clear();
 				algorithm.oldPositionOfMainIndex.push_back(algorithm.mainIndexes[0]);
 				algorithm.oldPositionOfMainIndex.push_back(algorithm.mainIndexes[1]);
 
@@ -79,7 +82,6 @@ void InsertionSort::goToNext()
 		{
 			algorithm.indexForHighlight.clear();
 
-			algorithm.oldPositionOfMainIndex.clear();
 			algorithm.oldPositionOfMainIndex.push_back(algorithm.mainIndexes[0]);
 			algorithm.oldPositionOfMainIndex.push_back(algorithm.mainIndexes[1]);
 
@@ -95,6 +97,14 @@ void InsertionSort::goToNext()
 				algorithm.mainIndexes[0] = algorithm.indexes[0];
 				algorithm.mainIndexes[1] = algorithm.indexes[0] - 1;
 			}
+		}
+		
+		++algorithm.operations;
+
+		if (algorithm.next != nullptr)
+		{
+			delete algorithm.next;
+			algorithm.next = nullptr;
 		}
 
 		story.push_back(algorithm);

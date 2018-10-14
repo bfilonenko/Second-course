@@ -4,6 +4,7 @@
 AlgorithmDraw::AlgorithmDraw()
 {
 	count = 0;
+	oldOperations = 0;
 }
 
 AlgorithmDraw::AlgorithmDraw(AlgorithmParameter &algorithm)
@@ -58,18 +59,103 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 	pointerSprite.setOrigin(6.f, 11.f);
 }
 
-void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm)
+void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bool &animationIsPlaying, Clock &timer)
 {
-	for (int i = 0; i < count; ++i)
+	if (algorithm.indexForHighlight.size() == 0 || true)
 	{
-		window.draw(circle[i]);
-		window.draw(value[i]);
-		window.draw(index[i]);
+		for (int i = 0; i < count; ++i)
+		{
+			window.draw(circle[i]);
+			window.draw(value[i]);
+			window.draw(index[i]);
+		}
 	}
 
-	for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
+	if (oldOperations < algorithm.operations)
 	{
-		pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * algorithm.mainIndexes[i]), 220.f);
-		window.draw(pointerSprite);
+		oldOperations = algorithm.operations;
+
+		animationIsPlaying = true;
+		toNext = true;
+
+		startTimeOfAnimation = timer.getElapsedTime().asMilliseconds();
+
+		if (algorithm.oldPositionOfMainIndex.size() > 0)
+		{
+			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
+			{
+				pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * algorithm.oldPositionOfMainIndex[i]), 220.f);
+				window.draw(pointerSprite);
+			}
+		}
+	}
+	else if (oldOperations == algorithm.operations)
+	{
+		if (animationIsPlaying && toNext)
+		{
+			if (algorithm.oldPositionOfMainIndex.size() > 0)
+			{
+				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
+				{
+					pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * (algorithm.oldPositionOfMainIndex[i] + (1.f * (algorithm.mainIndexes[i] - algorithm.oldPositionOfMainIndex[i]) * (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation)) / 500.f)), 220.f);
+					window.draw(pointerSprite);
+				}
+
+				if (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation > 500)
+				{
+					animationIsPlaying = false;
+				}
+			}
+			else
+			{
+				animationIsPlaying = false;
+			}
+		}
+		else if (animationIsPlaying)
+		{
+			if (algorithm.next->oldPositionOfMainIndex.size() > 0)
+			{
+				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
+				{
+					pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * (algorithm.next->mainIndexes[i] - (1.f * (algorithm.next->mainIndexes[i] - algorithm.mainIndexes[i]) * (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation)) / 500.f)), 220.f);
+					window.draw(pointerSprite);
+				}
+
+				if (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation > 500)
+				{
+					animationIsPlaying = false;
+				}
+			}
+			else
+			{
+				animationIsPlaying = false;
+			}
+		}
+		else
+		{
+			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
+			{
+				pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * algorithm.mainIndexes[i]), 220.f);
+				window.draw(pointerSprite);
+			}
+		}
+	}
+	else
+	{
+		oldOperations = algorithm.operations;
+
+		animationIsPlaying = true;
+		toNext = false;
+
+		startTimeOfAnimation = timer.getElapsedTime().asMilliseconds();
+
+		if (algorithm.next->oldPositionOfMainIndex.size() > 0)
+		{
+			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
+			{
+				pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * algorithm.next->mainIndexes[i]), 220.f);
+				window.draw(pointerSprite);
+			}
+		}
 	}
 }

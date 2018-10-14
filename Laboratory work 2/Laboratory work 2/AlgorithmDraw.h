@@ -11,6 +11,10 @@ using namespace sf;
 class AlgorithmDraw
 {
 	int count;
+	int oldOperations;
+
+	long startTimeOfAnimation;
+	bool toNext;
 
 	CircleShape *circle;
 	CircleShape *selectedCircle;
@@ -21,12 +25,12 @@ class AlgorithmDraw
 
 	Texture pointerTexture;
 	Sprite pointerSprite;
-
+	
 public:
 	AlgorithmDraw();
 	AlgorithmDraw(AlgorithmParameter &algorithm);
 
 	void setInformation(AlgorithmParameter &algorithm);
 
-	void draw(RenderWindow &window, AlgorithmParameter &algorithm);
+	void draw(RenderWindow &window, AlgorithmParameter &algorithm, bool &animationIsPlaying, Clock &timer);
 };

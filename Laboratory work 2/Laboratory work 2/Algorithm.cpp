@@ -4,6 +4,8 @@ AlgorithmParameter::AlgorithmParameter()
 {
 	operations = 0;
 	length = 0;
+
+	next = nullptr;
 }
 
 
@@ -11,6 +13,7 @@ void Algorithm::goToBack()
 {
 	if (story.size() > 1)
 	{
+		story[story.size() - 2].next = new AlgorithmParameter(story[story.size() - 1]);
 		story.pop_back();
 	}
 }

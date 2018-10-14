@@ -32,7 +32,7 @@ void Graphic::draw(Button *buttonParameter)
 
 void Graphic::draw(Button *buttonParameter, AlgorithmParameter &algorithmParameter)
 {
-	algorithm->draw(*window, algorithmParameter);
+	algorithm->draw(*window, algorithmParameter, animationIsPlaying, timer);
 	draw(buttonParameter);
 }
 

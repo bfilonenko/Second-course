@@ -16,6 +16,8 @@ struct AlgorithmParameter
 	int length;
 	vector<pair<int, int> > arrayOfValues;
 
+	AlgorithmParameter *next;
+
 	AlgorithmParameter();
 };
 
