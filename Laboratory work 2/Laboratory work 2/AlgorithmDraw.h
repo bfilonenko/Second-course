@@ -25,6 +25,8 @@ class AlgorithmDraw
 
 	Texture pointerTexture;
 	Sprite pointerSprite;
+
+	Text countOperation;
 	
 public:
 	AlgorithmDraw();

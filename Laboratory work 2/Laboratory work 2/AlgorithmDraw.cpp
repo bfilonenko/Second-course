@@ -36,27 +36,32 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 		circle[i].setFillColor(Color(109, 209 - (100 * (algorithm.arrayOfValues[i].first + 1)) / maxSize, 255));
 		circle[i].setOutlineThickness(1.f);
 		circle[i].setOutlineColor(Color(109, 219 - (100 * (algorithm.arrayOfValues[i].first + 1)) / maxSize, 255));
-		circle[i].setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * i), 230.f);
+		circle[i].setPosition(float(35.f + 25.f + i * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 230.f);
 
 		value[i].setCharacterSize(20);
 		value[i].setFillColor(Color::White);
 		value[i].setFont(font);
 		value[i].setString(to_string(algorithm.arrayOfValues[i].first));
 		value[i].setOrigin(value[i].getLocalBounds().width * 0.5f, value[i].getLocalBounds().height * 0.5f);
-		value[i].setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * i), 180.f);
+		value[i].setPosition(float(35.f + 25.f + i * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 180.f);
 
 		index[i].setCharacterSize(20);
 		index[i].setFillColor(Color::White);
 		index[i].setFont(font);
 		index[i].setString(to_string(algorithm.arrayOfValues[i].second));
 		index[i].setOrigin(index[i].getLocalBounds().width * 0.5f, index[i].getLocalBounds().height * 0.5f);
-		index[i].setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * i), 270.f);
+		index[i].setPosition(float(35.f + 25.f + i * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 270.f);
 	}
 
 	pointerTexture.loadFromFile("Data/Pictures/Pointer.png");
 	
 	pointerSprite.setTexture(pointerTexture);
 	pointerSprite.setOrigin(6.f, 11.f);
+
+	countOperation.setFont(font);
+	countOperation.setCharacterSize(20);
+	countOperation.setFillColor(Color::White);
+	countOperation.setPosition(637.f, 400.f);
 }
 
 void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bool &animationIsPlaying, Clock &timer)
@@ -84,7 +89,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 		{
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
-				pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * algorithm.oldPositionOfMainIndex[i]), 220.f);
+				pointerSprite.setPosition(float(35.f + 25.f + algorithm.oldPositionOfMainIndex[i] * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 220.f);
 				window.draw(pointerSprite);
 			}
 		}
@@ -97,7 +102,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			{
 				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 				{
-					pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * (algorithm.oldPositionOfMainIndex[i] + (1.f * (algorithm.mainIndexes[i] - algorithm.oldPositionOfMainIndex[i]) * (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation)) / 500.f)), 220.f);
+					pointerSprite.setPosition(float(35.f + 25.f + (algorithm.oldPositionOfMainIndex[i] + (1.f * (algorithm.mainIndexes[i] - algorithm.oldPositionOfMainIndex[i]) * (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation)) / 500.f) * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 220.f);
 					window.draw(pointerSprite);
 				}
 
@@ -117,7 +122,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			{
 				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 				{
-					pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * (algorithm.next->mainIndexes[i] - (1.f * (algorithm.next->mainIndexes[i] - algorithm.mainIndexes[i]) * (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation)) / 500.f)), 220.f);
+					pointerSprite.setPosition(float(35.f + 25.f + (algorithm.next->mainIndexes[i] - (1.f * (algorithm.next->mainIndexes[i] - algorithm.mainIndexes[i]) * (timer.getElapsedTime().asMilliseconds() - startTimeOfAnimation)) / 500.f) * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 220.f);
 					window.draw(pointerSprite);
 				}
 
@@ -135,7 +140,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 		{
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
-				pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * algorithm.mainIndexes[i]), 220.f);
+				pointerSprite.setPosition(float(35.f + 25.f + algorithm.mainIndexes[i] * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 220.f);
 				window.draw(pointerSprite);
 			}
 		}
@@ -153,9 +158,13 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 		{
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
-				pointerSprite.setPosition(float(35.f + 25.f + (50.f + 210.f / (count + 1.f)) * algorithm.next->mainIndexes[i]), 220.f);
+				pointerSprite.setPosition(float(35.f + 25.f + algorithm.next->mainIndexes[i] * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 220.f);
 				window.draw(pointerSprite);
 			}
 		}
 	}
+
+	countOperation.setString(to_string(oldOperations));
+	countOperation.setOrigin(countOperation.getLocalBounds().width * 0.5f, countOperation.getLocalBounds().height * 0.5f);
+	window.draw(countOperation);
 }

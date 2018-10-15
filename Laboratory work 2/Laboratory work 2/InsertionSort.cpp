@@ -3,7 +3,7 @@
 
 InsertionSort::InsertionSort()
 {
-	forConstructor(20);
+	forConstructor(10);
 }
 
 void InsertionSort::forConstructor(int number)
@@ -105,6 +105,12 @@ void InsertionSort::goToNext()
 		{
 			delete algorithm.next;
 			algorithm.next = nullptr;
+		}
+
+		if (algorithm.indexes[0] == algorithm.length)
+		{
+			algorithm.mainIndexes.clear();
+			algorithm.oldPositionOfMainIndex.clear();
 		}
 
 		story.push_back(algorithm);
