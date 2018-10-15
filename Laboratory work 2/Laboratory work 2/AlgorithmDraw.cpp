@@ -61,12 +61,12 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 	countOperation.setFont(font);
 	countOperation.setCharacterSize(20);
 	countOperation.setFillColor(Color::White);
-	countOperation.setPosition(637.f, 400.f);
+	countOperation.setPosition(637.f, 400.f); 
 }
 
 void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bool &animationIsPlaying, Clock &timer)
 {
-	if (algorithm.indexForHighlight.size() == 0 || true)
+	if (algorithm.indexForHighlight.size() == 0 || !animationIsPlaying || (algorithm.next != nullptr && algorithm.next->indexForHighlight.size() == 0))
 	{
 		for (int i = 0; i < count; ++i)
 		{
@@ -74,6 +74,23 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			window.draw(value[i]);
 			window.draw(index[i]);
 		}
+	}
+	else if (algorithm.indexForHighlight.size() > 0 && animationIsPlaying)
+	{
+		for (int i = 0; i < count; ++i)
+		{
+			if (i != algorithm.indexForHighlight[0] && i != algorithm.indexForHighlight[1])
+			{
+				window.draw(circle[i]);
+				window.draw(value[i]);
+				window.draw(index[i]);
+			}
+		}
+	}
+
+	for (int i = 0; i < arcs.size(); ++i)
+	{
+		window.draw(arcs[i]);
 	}
 
 	if (oldOperations < algorithm.operations)
@@ -92,6 +109,14 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				pointerSprite.setPosition(float(35.f + 25.f + algorithm.oldPositionOfMainIndex[i] * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 220.f);
 				window.draw(pointerSprite);
 			}
+		}
+		else if (algorithm.indexForHighlight.size() > 0)
+		{
+			specialSwap(circle[algorithm.indexForHighlight[0]], circle[algorithm.indexForHighlight[1]]);
+			specialSwap(value[algorithm.indexForHighlight[0]], value[algorithm.indexForHighlight[1]]);
+			specialSwap(index[algorithm.indexForHighlight[0]], index[algorithm.indexForHighlight[1]]);
+			
+
 		}
 	}
 	else if (oldOperations == algorithm.operations)
@@ -161,6 +186,12 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				pointerSprite.setPosition(float(35.f + 25.f + algorithm.next->mainIndexes[i] * (50.f + (1210.f - 50.f * count) / (count + 1.f)) + (1210.f - 50.f * count) / (count + 1.f)), 220.f);
 				window.draw(pointerSprite);
 			}
+		}
+		else if (algorithm.next->indexForHighlight.size() > 0)
+		{
+			specialSwap(circle[algorithm.next->indexForHighlight[0]], circle[algorithm.next->indexForHighlight[1]]);
+			specialSwap(value[algorithm.next->indexForHighlight[0]], value[algorithm.next->indexForHighlight[1]]);
+			specialSwap(index[algorithm.next->indexForHighlight[0]], index[algorithm.next->indexForHighlight[1]]);
 		}
 	}
 

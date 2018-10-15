@@ -17,7 +17,7 @@ class AlgorithmDraw
 	bool toNext;
 
 	CircleShape *circle;
-	CircleShape *selectedCircle;
+	vector<CircleShape> selectedCircle;
 
 	Font font;
 	Text *value;
@@ -27,7 +27,19 @@ class AlgorithmDraw
 	Sprite pointerSprite;
 
 	Text countOperation;
+
+	vector<Sprite> arcs;
 	
+	template<typename T>
+	void specialSwap(T &left, T &right)
+	{
+		Vector2f temp(left.getPosition());
+		left.setPosition(right.getPosition());
+		right.setPosition(temp);
+
+		swap(left, right);
+	}
+
 public:
 	AlgorithmDraw();
 	AlgorithmDraw(AlgorithmParameter &algorithm);
