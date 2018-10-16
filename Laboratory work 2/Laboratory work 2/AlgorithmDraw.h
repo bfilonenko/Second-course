@@ -17,11 +17,15 @@ class AlgorithmDraw
 	bool toNext;
 
 	CircleShape *circle;
-	vector<CircleShape> selectedCircle;
 
 	Font font;
 	Text *value;
 	Text *index;
+
+	vector<CircleShape> selectedCircle;
+	vector<Text> selectedValue;
+	vector<Text> selectedIndex;
+
 
 	Texture pointerTexture;
 	Sprite pointerSprite;
@@ -39,6 +43,14 @@ class AlgorithmDraw
 
 		swap(left, right);
 	}
+
+	float xFromI(float i);
+
+	float xFromI(int i);
+
+	float iFromTime(int iLeft, int iRight, Clock &timer);
+
+	float yFromX(float xLeft, float xRight, float x);
 
 public:
 	AlgorithmDraw();

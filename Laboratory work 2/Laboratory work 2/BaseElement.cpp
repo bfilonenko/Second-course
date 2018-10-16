@@ -10,3 +10,8 @@ bool inArea(int width, int height, int xCoordinate, int yCoordinate, Vector2int 
 {
 	return inArea(width, height, xCoordinate, yCoordinate, position.x, position.y);
 }
+
+float getLength(float x1, float y1, float x2, float y2)
+{
+	return sqrt((x1 - x2) * (x1 - x2) + (y1 - y2) * (y1 - y2));
+}
