@@ -47,5 +47,9 @@ public:
 
 	void finishAction();
 
-	ButtonParameter *setStruct();
+	void addSymbol(char symbol);
+
+	void popSymbol();
+
+	ButtonParameter *getStruct();
 };

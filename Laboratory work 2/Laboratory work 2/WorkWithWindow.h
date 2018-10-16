@@ -22,8 +22,11 @@ class WorkWithWindow
 	Button *button;
 
 	bool needAlgorithm;
+	bool algorithmIsPlaying;
 
 	Algorithm *algorithm;
+
+	int buttonIndexForText;
 
 	long timeForWork;
 	long timer;

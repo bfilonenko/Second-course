@@ -31,9 +31,7 @@ class AlgorithmDraw
 	Sprite pointerSprite;
 
 	Text countOperation;
-
-	vector<Sprite> arcs;
-	
+		
 	template<typename T>
 	void specialSwap(T &left, T &right)
 	{
@@ -57,6 +55,8 @@ public:
 	AlgorithmDraw(AlgorithmParameter &algorithm);
 
 	void setInformation(AlgorithmParameter &algorithm);
+
+	void upgradeOperations(AlgorithmParameter &algorithmParameter);
 
 	void draw(RenderWindow &window, AlgorithmParameter &algorithm, bool &animationIsPlaying, Clock &timer);
 };

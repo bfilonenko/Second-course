@@ -52,7 +52,7 @@ public:
 		button = new ButtonDraw[numberOfButton];
 		for (int i = 0; i < numberOfButton; ++i)
 		{
-			button[i].setInformation(*buttonParameter[i].setStruct());
+			button[i].setInformation(*buttonParameter[i].getStruct());
 		}
 
 		animationIsPlaying = false;
@@ -65,7 +65,7 @@ public:
 		button = new ButtonDraw[numberOfButton];
 		for (int i = 0; i < numberOfButton; ++i)
 		{
-			button[i].setInformation(*buttonParameter[i].setStruct());
+			button[i].setInformation(*buttonParameter[i].getStruct());
 		}
 
 		algorithm = new AlgorithmDraw(algorithmParameter);
@@ -101,4 +101,8 @@ public:
 	Vector2int getGlobalMousePosition();
 
 	bool hasFocus();
+
+	bool animationIsPlay();
+
+	void upgradeAlgorithm(AlgorithmParameter &algorithmParameter);
 };

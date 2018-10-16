@@ -93,7 +93,27 @@ void Button::finishAction()
 	button.needDoAction = false;
 }
 
-ButtonParameter *Button::setStruct()
+void Button::addSymbol(char symbol)
+{
+	if (button.name == " ")
+	{
+		button.name = symbol;
+	}
+	else if (button.name.size() < 25)
+	{
+		button.name += symbol;
+	}
+}
+
+void Button::popSymbol()
+{
+	if (button.name != "")
+	{
+		button.name.erase(button.name.end() - 1);
+	}
+}
+
+ButtonParameter *Button::getStruct()
 {
 	return &button;
 }

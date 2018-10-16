@@ -25,7 +25,7 @@ void Graphic::draw(Button *buttonParameter)
 {
 	for (int i = 0; i < numberOfButton; ++i)
 	{
-		button[i].draw(*window, *buttonParameter[i].setStruct());
+		button[i].draw(*window, *buttonParameter[i].getStruct());
 	}
 	draw();
 }
@@ -80,4 +80,15 @@ Vector2int Graphic::getGlobalMousePosition()
 bool Graphic::hasFocus()
 {
 	return window->hasFocus();
+}
+
+bool Graphic::animationIsPlay()
+{
+	return animationIsPlaying;
+}
+
+void Graphic::upgradeAlgorithm(AlgorithmParameter &algorithmParameter)
+{
+	algorithm->setInformation(algorithmParameter);
+	algorithm->upgradeOperations(algorithmParameter);
 }

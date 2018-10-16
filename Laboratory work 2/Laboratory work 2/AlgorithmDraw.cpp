@@ -28,6 +28,10 @@ AlgorithmDraw::AlgorithmDraw()
 {
 	count = 0;
 	oldOperations = 0;
+
+	circle = nullptr;
+	value = nullptr;
+	index = nullptr;
 }
 
 AlgorithmDraw::AlgorithmDraw(AlgorithmParameter &algorithm)
@@ -39,9 +43,22 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 {
 	count = algorithm.length;
 
-	circle = new CircleShape[count];
-	value = new Text[count];
-	index = new Text[count];
+	if (circle == nullptr)
+	{
+		circle = new CircleShape[count];
+		value = new Text[count];
+		index = new Text[count];
+	}
+	else
+	{
+		delete[] circle;
+		delete[] value;
+		delete[] index;
+
+		circle = new CircleShape[count];
+		value = new Text[count];
+		index = new Text[count];
+	}
 
 	font.loadFromFile("Data/Fonts/Azonix.otf");
 
@@ -85,6 +102,11 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 	countOperation.setCharacterSize(20);
 	countOperation.setFillColor(Color::White);
 	countOperation.setPosition(637.f, 400.f);
+}
+
+void AlgorithmDraw::upgradeOperations(AlgorithmParameter &algorithmParameter)
+{
+	oldOperations = algorithmParameter.operations;
 }
 
 void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bool &animationIsPlaying, Clock &timer)
@@ -368,11 +390,6 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				window.draw(pointerSprite);
 			}
 		}
-	}
-
-	for (int i = 0; i < arcs.size(); ++i)
-	{
-		window.draw(arcs[i]);
 	}
 
 	countOperation.setString(to_string(oldOperations));

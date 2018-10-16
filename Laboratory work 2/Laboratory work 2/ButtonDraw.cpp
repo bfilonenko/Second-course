@@ -78,6 +78,11 @@ void ButtonDraw::draw(RenderWindow &window, ButtonParameter &button)
 
 	if (needText)
 	{
+		if (button.name != text->getString())
+		{
+			text->setString(button.name);
+		}
+
 		if (button.needChangeColor)
 		{
 			if (button.buttonIsPressed)

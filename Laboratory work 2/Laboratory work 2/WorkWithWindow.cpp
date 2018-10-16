@@ -49,6 +49,9 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 
 	fileIn >> needAlgorithm;
 
+	algorithmIsPlaying = false;
+	buttonIndexForText = -1;
+
 	if (needAlgorithm)
 	{
 		if (windowName == "Insertion sort")
@@ -91,6 +94,25 @@ void WorkWithWindow::work()
 			if (graphic->getEvent().type == Event::Closed || (graphic->getEvent().type == Event::KeyPressed && Keyboard::isKeyPressed(Keyboard::Escape)))
 			{
 				graphic->close();
+			}
+
+			if (graphic->getEvent().type == Event::TextEntered && buttonIndexForText != -1)
+			{
+				if (graphic->getEvent().text.unicode == 8)
+				{
+					button[buttonIndexForText].popSymbol();
+				}
+				else if ((graphic->getEvent().text.unicode >= 48 && graphic->getEvent().text.unicode <= 57) || (graphic->getEvent().text.unicode >= 65 && graphic->getEvent().text.unicode <= 90) || (graphic->getEvent().text.unicode >= 97 && graphic->getEvent().text.unicode <= 122))
+				{
+					if (graphic->getEvent().text.unicode >= 65 && graphic->getEvent().text.unicode <= 90)
+					{
+						button[buttonIndexForText].addSymbol(char(graphic->getEvent().text.unicode + 32));
+					}
+					else
+					{
+						button[buttonIndexForText].addSymbol(char(graphic->getEvent().text.unicode));
+					}
+				}
 			}
 		}
 
@@ -136,23 +158,50 @@ void WorkWithWindow::work()
 			else if (i == 1 && button[i].action())
 			{
 				graphic->minimize();
+				buttonIndexForText = -1;
 			}
-			else if (i == 4 && button[i].action() && needAlgorithm)
+			else if (i == 3 && button[i].action() && needAlgorithm)
+			{
+				algorithmIsPlaying = !algorithmIsPlaying;
+				buttonIndexForText = -1;
+			}
+			else if (i == 4 && button[i].action() && needAlgorithm && !graphic->animationIsPlay())
 			{
 				algorithm->goToBack();
+				buttonIndexForText = -1;
 			}
-			else if (i == 5 && button[i].action() && needAlgorithm)
+			else if (i == 5 && button[i].action() && needAlgorithm && !graphic->animationIsPlay())
 			{
 				algorithm->goToNext();
+				buttonIndexForText = -1;
 			}
-			else if (i > 2 && button[i].action() && button[i].setStruct()->name != "")
+			else if (i == 6 && button[i].action() && needAlgorithm)
 			{
-				string name = "Data/Data for " + button[i].setStruct()->name + ".dat";
+				buttonIndexForText = i;
+			}
+			else if (i == 7 && button[i].action() && needAlgorithm && button[6].getStruct()->name.size() > 0)
+			{
+				algorithm->download(button[6].getStruct()->name);
+				graphic->upgradeAlgorithm(*algorithm->getStruct());
+				buttonIndexForText = -1;
+			}
+			else if (i == 8 && button[i].action() && needAlgorithm && button[6].getStruct()->name.size() > 0)
+			{
+				algorithm->save(button[6].getStruct()->name);
+				buttonIndexForText = -1;
+			}
+			else if (i > 2 && button[i].action() && button[i].getStruct()->name != "" && button[i].getStruct()->needChangeColor)
+			{
+				string name = "Data/Data for " + button[i].getStruct()->name + ".dat";
 				newWindowName.push_back(name);
 			}
 			button[i].finishAction();
 		}
 
+		if (needAlgorithm && algorithmIsPlaying && !graphic->animationIsPlay())
+		{
+			algorithm->goToNext();
+		}
 
 		if (needAlgorithm)
 		{

@@ -2,7 +2,7 @@ Insertion sort
 1
 33 24
 1280 720
-6
+9
 1270 12 20 20 0 1
 
 
@@ -27,5 +27,17 @@ Data/Pictures/Back.png
 
 
 Data/Pictures/Next.png
+950 510 502 22 20 0
+ 
+Data/Fonts/Azonix.otf
+Data/Pictures/Input field.png
+930 540 20 20 0 1
+
+
+Data/Pictures/Open.png
+970 540 20 20 0 1
+
+
+Data/Pictures/Save.png
 1
 16
