@@ -82,6 +82,10 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 		{
 			algorithm = new BubbleSort;
 		}
+		else if (windowName == "Selection sort")
+		{
+			algorithm = new SelectionSort;
+		}
 	}
 
 	fileIn >> timeForWork;
@@ -280,6 +284,10 @@ void WorkWithWindow::work()
 					{
 						algorithm = new BubbleSort(newData);
 					}
+					else if (windowName == "Selection sort")
+					{
+						algorithm = new SelectionSort(newData);
+					}
 					graphic->upgradeAlgorithm(*algorithm->getStruct());
 				}
 			}
@@ -293,6 +301,10 @@ void WorkWithWindow::work()
 				else if (windowName == "Bubble sort")
 				{
 					algorithm = new BubbleSort;
+				}
+				else if (windowName == "Selection sort")
+				{
+					algorithm = new SelectionSort;
 				}
 				graphic->upgradeAlgorithm(*algorithm->getStruct());
 			}

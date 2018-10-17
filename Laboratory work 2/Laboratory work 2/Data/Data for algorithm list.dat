@@ -2,7 +2,7 @@ Algorithm list
 1
 20 40
 400 200
-5
+6
 390 10 20 20 0 1 0
 
 
@@ -21,6 +21,10 @@ Data/Fonts/Dewberry regular.ttf
 
 200 50 400 20 20 1 1
 Bubble sort
+Data/Fonts/Dewberry regular.ttf
+
+200 70 400 20 20 1 1
+Selection sort
 Data/Fonts/Dewberry regular.ttf
 
 0

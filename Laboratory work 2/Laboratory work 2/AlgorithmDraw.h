@@ -3,6 +3,7 @@
 
 #include "InsertionSort.h"
 #include "BubbleSort.h"
+#include "SelectionSort.h"
 #include <SFML/Graphics.hpp>
 
 
