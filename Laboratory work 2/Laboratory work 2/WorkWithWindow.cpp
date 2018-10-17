@@ -27,7 +27,7 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 	
 	if (numberOfButton != 0)
 	{
-		if (numberOfButton == 13)
+		if (numberOfButton == 16)
 		{
 			button = new Button[numberOfButton + 19];
 		}
@@ -53,7 +53,7 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 			}
 			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
 		}
-		if (numberOfButton == 13)
+		if (numberOfButton == 16)
 		{
 			for (int i = 1; i < 10; ++i)
 			{

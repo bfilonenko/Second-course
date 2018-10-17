@@ -1,5 +1,9 @@
 #include "AlgorithmDraw.h"
 
+Color AlgorithmDraw::getColorForPointer(int i)
+{
+	return (i == 0 ? Color::Green : (i == 1 ? Color::White : Color::Red));
+}
 
 float AlgorithmDraw::xFromI(float i)
 {
@@ -193,6 +197,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
 				pointerSprite.setPosition(xFromI(algorithm.oldPositionOfMainIndex[i]), 220.f);
+				pointerSprite.setColor(getColorForPointer(i));
 				window.draw(pointerSprite);
 			}
 		}
@@ -201,6 +206,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
 				pointerSprite.setPosition(xFromI(algorithm.mainIndexes[i]), 220.f);
+				pointerSprite.setColor(getColorForPointer(i));
 				window.draw(pointerSprite);
 			}
 		}
@@ -245,6 +251,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 				{
 					pointerSprite.setPosition(xFromI(iFromTime(algorithm.oldPositionOfMainIndex[i], algorithm.mainIndexes[i], timer)), 220.f);
+					pointerSprite.setColor(getColorForPointer(i));
 					window.draw(pointerSprite);
 				}
 
@@ -258,6 +265,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 				{
 					pointerSprite.setPosition(xFromI(algorithm.mainIndexes[i]), 220.f);
+					pointerSprite.setColor(getColorForPointer(i));
 					window.draw(pointerSprite);
 				}
 			}
@@ -300,6 +308,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 				{
 					pointerSprite.setPosition(xFromI(iFromTime(algorithm.next->mainIndexes[i], algorithm.mainIndexes[i], timer)), 220.f);
+					pointerSprite.setColor(getColorForPointer(i));
 					window.draw(pointerSprite);
 				}
 
@@ -313,6 +322,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 				{
 					pointerSprite.setPosition(xFromI(algorithm.mainIndexes[i]), 220.f);
+					pointerSprite.setColor(getColorForPointer(i));
 					window.draw(pointerSprite);
 				}
 			}
@@ -322,6 +332,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
 				pointerSprite.setPosition(xFromI(algorithm.mainIndexes[i]), 220.f);
+				pointerSprite.setColor(getColorForPointer(i));
 				window.draw(pointerSprite);
 			}
 		}
@@ -376,6 +387,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
 				pointerSprite.setPosition(xFromI(algorithm.next->mainIndexes[i]), 220.f);
+				pointerSprite.setColor(getColorForPointer(i));
 				window.draw(pointerSprite);
 			}
 		}
@@ -384,6 +396,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			for (int i = 0; i < algorithm.mainIndexes.size(); ++i)
 			{
 				pointerSprite.setPosition(xFromI(algorithm.mainIndexes[i]), 220.f);
+				pointerSprite.setColor(getColorForPointer(i));
 				window.draw(pointerSprite);
 			}
 		}

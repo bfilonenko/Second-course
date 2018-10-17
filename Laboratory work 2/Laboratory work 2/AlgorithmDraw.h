@@ -45,6 +45,8 @@ class AlgorithmDraw
 		swap(left, right);
 	}
 
+	Color getColorForPointer(int i);
+
 	float xFromI(float i);
 
 	float xFromI(int i);

@@ -2,7 +2,7 @@ Selection sort
 1
 33 24
 1280 720
-13
+16
 1270 12 20 20 0 1 0
 
 
@@ -46,6 +46,18 @@ Data/Fonts/Dewberry regular.ttf
 450 530 100 20 20 1 0
 Random
 Data/Fonts/Dewberry regular.ttf
+
+50 350 100 20 20 0 0
+Green - step
+Data/Fonts/Azonix.otf
+
+50 370 100 20 20 0 0
+White - i
+Data/Fonts/Azonix.otf
+
+50 390 100 20 20 0 0
+Red - j
+Data/Fonts/Azonix.otf
 
 340 510 47 22 20 0 0
 10
