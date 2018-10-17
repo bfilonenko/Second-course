@@ -2,6 +2,7 @@
 
 
 #include "InsertionSort.h"
+#include "BubbleSort.h"
 #include <SFML/Graphics.hpp>
 
 

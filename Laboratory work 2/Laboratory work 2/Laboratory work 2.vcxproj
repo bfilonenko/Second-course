@@ -125,6 +125,7 @@
     <ClCompile Include="Algorithm.cpp" />
     <ClCompile Include="AlgorithmDraw.cpp" />
     <ClCompile Include="BaseElement.cpp" />
+    <ClCompile Include="BubbleSort.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="ButtonDraw.cpp" />
     <ClCompile Include="Graphic.cpp" />
@@ -137,6 +138,7 @@
     <ClInclude Include="Algorithm.h" />
     <ClInclude Include="AlgorithmDraw.h" />
     <ClInclude Include="BaseElement.h" />
+    <ClInclude Include="BubbleSort.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="ButtonDraw.h" />
     <ClInclude Include="Graphic.h" />

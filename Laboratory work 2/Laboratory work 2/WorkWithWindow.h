@@ -4,6 +4,7 @@
 #include "Button.h"
 #include "Graphic.h"
 #include "InsertionSort.h"
+#include "BubbleSort.h"
 
 
 class WorkWithWindow
