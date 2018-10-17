@@ -27,14 +27,22 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 	
 	if (numberOfButton != 0)
 	{
-		button = new Button[numberOfButton];
+		if (numberOfButton == 13)
+		{
+			button = new Button[numberOfButton + 19];
+		}
+		else
+		{
+			button = new Button[numberOfButton];
+		}
 
-		int firstParameters[6];
+
+		int firstParameters[7];
 		string secondParameters[3];
  
 		for (int i = 0; i < numberOfButton; ++i)
 		{
-			for (int j = 0; j < 6; ++j)
+			for (int j = 0; j < 7; ++j)
 			{
 				fileIn >> firstParameters[j];
 			}
@@ -43,7 +51,19 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 			{
 				getline(fileIn, secondParameters[j]);
 			}
-			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], secondParameters[0], secondParameters[1], secondParameters[2]);
+			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
+		}
+		if (numberOfButton == 13)
+		{
+			for (int i = 1; i < 10; ++i)
+			{
+				button[numberOfButton - 1 + i].setInformation(firstParameters[0] + 49 * i, firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
+			}
+			for (int i = 0; i < 10; ++i)
+			{
+				button[numberOfButton + 9 + i].setInformation(firstParameters[0] + 49 * i, firstParameters[1] + 25, firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
+			}
+			numberOfButton += 19;
 		}
 	}
 
@@ -102,18 +122,36 @@ void WorkWithWindow::work()
 				{
 					button[buttonIndexForText].popSymbol();
 				}
-				else if ((graphic->getEvent().text.unicode >= 48 && graphic->getEvent().text.unicode <= 57) || (graphic->getEvent().text.unicode >= 65 && graphic->getEvent().text.unicode <= 90) || (graphic->getEvent().text.unicode >= 97 && graphic->getEvent().text.unicode <= 122))
+				else if (buttonIndexForText == 6)
 				{
-					if (graphic->getEvent().text.unicode >= 65 && graphic->getEvent().text.unicode <= 90)
+					if ((graphic->getEvent().text.unicode >= 48 && graphic->getEvent().text.unicode <= 57) || (graphic->getEvent().text.unicode >= 65 && graphic->getEvent().text.unicode <= 90) || (graphic->getEvent().text.unicode >= 97 && graphic->getEvent().text.unicode <= 122))
 					{
-						button[buttonIndexForText].addSymbol(char(graphic->getEvent().text.unicode + 32));
-					}
-					else
-					{
-						button[buttonIndexForText].addSymbol(char(graphic->getEvent().text.unicode));
+						if (graphic->getEvent().text.unicode >= 65 && graphic->getEvent().text.unicode <= 90)
+						{
+							button[buttonIndexForText].addSymbol(char(graphic->getEvent().text.unicode + 32));
+						}
+						else
+						{
+							button[buttonIndexForText].addSymbol(char(graphic->getEvent().text.unicode));
+						}
 					}
 				}
+				else if (graphic->getEvent().text.unicode >= 48 && graphic->getEvent().text.unicode <= 57 && button[buttonIndexForText].getStruct()->name.size() < 2)
+				{
+					button[buttonIndexForText].addSymbol(char(graphic->getEvent().text.unicode));
+				}
+
+				if (button[11].getStruct()->name.size() == 2 && !(button[11].getStruct()->name[0] == '0' || button[11].getStruct()->name[0] == '1' || button[11].getStruct()->name[0] == '2'))
+				{
+					button[11].getStruct()->name = "20";
+				}
 			}
+
+			if (graphic->getEvent().type == Event::KeyPressed && Keyboard::isKeyPressed(Keyboard::Tab) && buttonIndexForText > 10 && buttonIndexForText < 31)
+			{
+				++buttonIndexForText;
+			}
+
 		}
 
 		for (int i = 0; i < numberOfButton && graphic->hasFocus() && !needOffsetWindow; ++i)
@@ -190,7 +228,67 @@ void WorkWithWindow::work()
 				algorithm->save(button[6].getStruct()->name);
 				buttonIndexForText = -1;
 			}
-			else if (i > 2 && button[i].action() && button[i].getStruct()->name != "" && button[i].getStruct()->needChangeColor)
+			else if (i == 9 && button[i].action() && needAlgorithm)
+			{
+				int length;
+				if (button[11].getStruct()->name.size() == 2)
+				{
+					length = (button[11].getStruct()->name[0] - '0') * 10 + button[11].getStruct()->name[1] - '0';
+				}
+				else if (button[11].getStruct()->name.size() == 1)
+				{
+					length = button[11].getStruct()->name[0] - '0';
+				}
+				else
+				{
+					length = 0;
+				}
+
+				if (length > 1)
+				{
+					vector<int> newData;
+
+					for (int j = 12; j < 12 + length; ++j)
+					{
+						int value;
+						if (button[j].getStruct()->name.size() == 2)
+						{
+							value = (button[j].getStruct()->name[0] - '0') * 10 + button[j].getStruct()->name[1] - '0';
+						}
+						else if (button[j].getStruct()->name.size() == 1)
+						{
+							value = button[j].getStruct()->name[0] - '0';
+						}
+						else
+						{
+							value = 0;
+						}
+
+						newData.push_back(value);
+					}
+
+					delete algorithm;
+					if (windowName == "Insertion sort")
+					{
+						algorithm = new InsertionSort(newData);
+					}
+					graphic->upgradeAlgorithm(*algorithm->getStruct());
+				}
+			}
+			else if (i == 10 && button[i].action() && needAlgorithm)
+			{
+				delete algorithm;
+				if (windowName == "Insertion sort")
+				{
+					algorithm = new InsertionSort;
+				}
+				graphic->upgradeAlgorithm(*algorithm->getStruct());
+			}
+			else if (i > 10 && button[i].action() && needAlgorithm)
+			{
+				buttonIndexForText = i;
+			}
+			else if (button[i].action() && button[i].getStruct()->needCreateNewWindow)
 			{
 				string name = "Data/Data for " + button[i].getStruct()->name + ".dat";
 				newWindowName.push_back(name);

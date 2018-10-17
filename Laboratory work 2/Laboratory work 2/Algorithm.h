@@ -19,6 +19,7 @@ struct AlgorithmParameter
 	AlgorithmParameter *next;
 
 	AlgorithmParameter();
+	~AlgorithmParameter();
 };
 
 

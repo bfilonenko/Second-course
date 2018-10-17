@@ -91,4 +91,5 @@ void Graphic::upgradeAlgorithm(AlgorithmParameter &algorithmParameter)
 {
 	algorithm->setInformation(algorithmParameter);
 	algorithm->upgradeOperations(algorithmParameter);
+	animationIsPlaying = false;
 }

@@ -19,6 +19,7 @@ struct ButtonParameter
 	string pictureName;
 
 	bool needChangeColor;
+	bool needCreateNewWindow;
 
 	bool buttonIsPressed;
 	bool mouseButtonIsPressed;
@@ -33,9 +34,9 @@ class Button
 
 public:
 	Button();
-	Button(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, string &name, string &fontName, string &pictureName);
+	Button(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, bool needCreateNewWindow, string &name, string &fontName, string &pictureName);
 
-	void setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, string &name, string &fontName, string &pictureName);
+	void setInformation(int xCoordinate, int yCoordinate, int width, int height, int characterSize, bool needChangeColor, bool needCreateNewWindow, string &name, string &fontName, string &pictureName);
 
 	void work(Vector2int mousePosition, bool isPressed);
 

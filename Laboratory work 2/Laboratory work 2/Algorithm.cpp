@@ -8,6 +8,14 @@ AlgorithmParameter::AlgorithmParameter()
 	next = nullptr;
 }
 
+AlgorithmParameter::~AlgorithmParameter()
+{
+	if (next != nullptr)
+	{
+		delete next;
+	}
+}
+
 
 void Algorithm::goToBack()
 {

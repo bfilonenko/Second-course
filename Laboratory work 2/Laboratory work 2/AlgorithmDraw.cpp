@@ -32,6 +32,7 @@ AlgorithmDraw::AlgorithmDraw()
 	circle = nullptr;
 	value = nullptr;
 	index = nullptr;
+	countOperation = nullptr;
 }
 
 AlgorithmDraw::AlgorithmDraw(AlgorithmParameter &algorithm)
@@ -43,22 +44,18 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 {
 	count = algorithm.length;
 
-	if (circle == nullptr)
-	{
-		circle = new CircleShape[count];
-		value = new Text[count];
-		index = new Text[count];
-	}
-	else
+	if (circle != nullptr)
 	{
 		delete[] circle;
 		delete[] value;
 		delete[] index;
-
-		circle = new CircleShape[count];
-		value = new Text[count];
-		index = new Text[count];
+		delete countOperation;
 	}
+
+	circle = new CircleShape[count];
+	value = new Text[count];
+	index = new Text[count];
+	countOperation = new Text;
 
 	font.loadFromFile("Data/Fonts/Azonix.otf");
 
@@ -98,10 +95,10 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 	pointerSprite.setTexture(pointerTexture);
 	pointerSprite.setOrigin(6.f, 11.f);
 
-	countOperation.setFont(font);
-	countOperation.setCharacterSize(20);
-	countOperation.setFillColor(Color::White);
-	countOperation.setPosition(637.f, 400.f);
+	countOperation->setFont(font);
+	countOperation->setCharacterSize(20);
+	countOperation->setFillColor(Color::White);
+	countOperation->setPosition(637.f, 400.f);
 }
 
 void AlgorithmDraw::upgradeOperations(AlgorithmParameter &algorithmParameter)
@@ -392,7 +389,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 		}
 	}
 
-	countOperation.setString(to_string(oldOperations));
-	countOperation.setOrigin(countOperation.getLocalBounds().width * 0.5f, countOperation.getLocalBounds().height * 0.5f);
-	window.draw(countOperation);
+	countOperation->setString(to_string(oldOperations));
+	countOperation->setOrigin(countOperation->getLocalBounds().width * 0.5f, countOperation->getLocalBounds().height * 0.5f);
+	window.draw(*countOperation);
 }

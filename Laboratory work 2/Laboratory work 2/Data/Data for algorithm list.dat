@@ -3,19 +3,19 @@ Algorithm list
 20 40
 400 200
 4
-390 10 20 20 0 1
+390 10 20 20 0 1 0
 
 
 Data/Pictures/Cross.png
-370 10 20 20 0 1
+370 10 20 20 0 1 0
 
 
 Data/Pictures/Minimize.png
-180 10 360 20 20 0
+180 10 360 20 20 0 0
 Algorithm list
 Data/Fonts/Azonix.otf
 
-200 30 400 20 20 1
+200 30 400 20 20 1 1
 Insertion sort
 Data/Fonts/Dewberry regular.ttf
 

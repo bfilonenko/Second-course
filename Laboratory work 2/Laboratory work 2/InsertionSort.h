@@ -8,10 +8,10 @@ class InsertionSort : public Algorithm
 {
 	using Algorithm::story;
 
-	void forConstructor(int number);
-
 public:
 	InsertionSort();
+	InsertionSort(vector<int> &values);
+	~InsertionSort();
 
 	void goToNext();
 };

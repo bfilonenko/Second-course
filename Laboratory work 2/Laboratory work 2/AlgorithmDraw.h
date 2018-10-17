@@ -30,7 +30,7 @@ class AlgorithmDraw
 	Texture pointerTexture;
 	Sprite pointerSprite;
 
-	Text countOperation;
+	Text *countOperation;
 		
 	template<typename T>
 	void specialSwap(T &left, T &right)

@@ -3,10 +3,47 @@
 
 InsertionSort::InsertionSort()
 {
-	forConstructor(10);
+	AlgorithmParameter algorithm;
+
+	//mainIndexes 0 this i
+	//mainIndexes 1 this j
+	//indexes 0 this k
+
+	algorithm.mainIndexes.push_back(1);
+	algorithm.mainIndexes.push_back(0);
+
+	algorithm.indexes.push_back(1);
+
+	algorithm.length = 10;
+
+	vector<int> temp;
+
+	for (int i = 0; i < 10; ++i)
+	{
+		temp.push_back(rand() % 50);
+	}
+
+	vector<int> temp2(temp);
+	sort(temp2.begin(), temp2.end());
+
+	for (int i = 0; i < 10; ++i)
+	{
+		int index = -1;
+		for (int j = 0; j < 10 && index == -1; ++j)
+		{
+			if (temp[i] == temp2[j])
+			{
+				index = j;
+			}
+		}
+
+		algorithm.arrayOfValues.push_back({ temp[i], index });
+	}
+
+	story.push_back(algorithm);
 }
 
-void InsertionSort::forConstructor(int number)
+InsertionSort::InsertionSort(vector<int> &values)
 {
 	AlgorithmParameter algorithm;
 
@@ -19,33 +56,31 @@ void InsertionSort::forConstructor(int number)
 
 	algorithm.indexes.push_back(1);
 
-	algorithm.length = number;
+	algorithm.length = int(values.size());
 
-	vector<int> temp;
-
-	for (int i = 0; i < number; ++i)
-	{
-		temp.push_back(rand() % 50);
-	}
-
-	vector<int> temp2(temp);
+	vector<int> temp2(values);
 	sort(temp2.begin(), temp2.end());
 
-	for (int i = 0; i < number; ++i)
+	for (int i = 0; i < values.size(); ++i)
 	{
 		int index = -1;
-		for (int j = 0; j < number && index == -1; ++j)
+		for (int j = 0; j < values.size() && index == -1; ++j)
 		{
-			if (temp[i] == temp2[j])
+			if (values[i] == temp2[j])
 			{
 				index = j;
 			}
 		}
 
-		algorithm.arrayOfValues.push_back({ temp[i], index });
+		algorithm.arrayOfValues.push_back({ values[i], index });
 	}
 
 	story.push_back(algorithm);
+}
+
+InsertionSort::~InsertionSort()
+{
+	story.clear();
 }
 
 void InsertionSort::goToNext()
