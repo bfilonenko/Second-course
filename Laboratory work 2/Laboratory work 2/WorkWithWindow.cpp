@@ -86,6 +86,10 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 		{
 			algorithm = new SelectionSort;
 		}
+		else if (windowName == "Quick sort")
+		{
+			algorithm = new QuickSort;
+		}
 	}
 
 	fileIn >> timeForWork;
@@ -288,6 +292,10 @@ void WorkWithWindow::work()
 					{
 						algorithm = new SelectionSort(newData);
 					}
+					else if (windowName == "Quick sort")
+					{
+						algorithm = new QuickSort(newData);
+					}
 					graphic->upgradeAlgorithm(*algorithm->getStruct());
 				}
 			}
@@ -305,6 +313,10 @@ void WorkWithWindow::work()
 				else if (windowName == "Selection sort")
 				{
 					algorithm = new SelectionSort;
+				}
+				else if (windowName == "Quick sort")
+				{
+					algorithm = new QuickSort;
 				}
 				graphic->upgradeAlgorithm(*algorithm->getStruct());
 			}

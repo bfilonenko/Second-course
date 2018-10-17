@@ -6,6 +6,7 @@
 #include "InsertionSort.h"
 #include "SelectionSort.h"
 #include "BubbleSort.h"
+#include "QuickSort.h"
 
 
 class WorkWithWindow
