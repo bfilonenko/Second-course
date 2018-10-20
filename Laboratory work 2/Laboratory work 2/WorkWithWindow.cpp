@@ -27,43 +27,37 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 	
 	if (numberOfButton != 0)
 	{
-		if (numberOfButton == 16)
-		{
-			button = new Button[numberOfButton + 19];
-		}
-		else
-		{
-			button = new Button[numberOfButton];
-		}
+		button = new Button[numberOfButton];
 
-
+		int countOfSimilarButton;
 		int firstParameters[7];
 		string secondParameters[3];
  
-		for (int i = 0; i < numberOfButton; ++i)
+		for (int i = 0; i < numberOfButton;)
 		{
-			for (int j = 0; j < 7; ++j)
+			fileIn >> countOfSimilarButton;
+
+			for (int j = 2; j < 7; ++j)
 			{
 				fileIn >> firstParameters[j];
 			}
 			getline(fileIn, secondParameters[0]);
-			for (int j = 0; j < 3; ++j)
+			for (int j = 1; j < 3; ++j)
 			{
 				getline(fileIn, secondParameters[j]);
 			}
-			button[i].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
-		}
-		if (numberOfButton == 16)
-		{
-			for (int i = 1; i < 10; ++i)
+
+			for (int j = i; j < i + countOfSimilarButton; ++j)
 			{
-				button[numberOfButton - 1 + i].setInformation(firstParameters[0] + 49 * i, firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
+				fileIn >> firstParameters[0] >> firstParameters[1];
+				getline(fileIn, secondParameters[0]);
+				if (secondParameters[0] != " ")
+				{
+					secondParameters[0].erase(secondParameters[0].begin());
+				}
+				button[j].setInformation(firstParameters[0], firstParameters[1], firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
 			}
-			for (int i = 0; i < 10; ++i)
-			{
-				button[numberOfButton + 9 + i].setInformation(firstParameters[0] + 49 * i, firstParameters[1] + 25, firstParameters[2], firstParameters[3], firstParameters[4], firstParameters[5], firstParameters[6], secondParameters[0], secondParameters[1], secondParameters[2]);
-			}
-			numberOfButton += 19;
+			i += countOfSimilarButton;
 		}
 	}
 
