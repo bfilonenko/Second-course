@@ -101,7 +101,7 @@ void Button::addSymbol(char symbol)
 	{
 		button.name = symbol;
 	}
-	else if (button.name.size() < 25)
+	else if (button.name.size() < 24)
 	{
 		button.name += symbol;
 	}

@@ -2,7 +2,7 @@ Quick sort
 1
 33 24
 1280 720
-35
+56
 1
 20 20 0 1 0
 
@@ -34,20 +34,20 @@ Data/Pictures/Back.png
 Data/Pictures/Next.png
 680 450
 1
-502 22 20 0 0
+488 22 20 0 0
 Data/Fonts/Azonix.otf
 Data/Pictures/Input field.png
-950 510 
+246 640 
 1
 20 20 0 1 0
 
 Data/Pictures/Open.png
-930 540
+216 670
 1
 20 20 0 1 0
 
 Data/Pictures/Save.png
-970 540
+256 670
 2
 100 20 20 1 0
 Data/Fonts/Dewberry regular.ttf
@@ -86,5 +86,30 @@ Data/Pictures/Input field (small).png
 368 595 0
 417 595 0
 466 595 0
+21
+500 30 15 0 0
+Data/Fonts/calibri.ttf
+
+1000 400 vector<piar<int, int> > stack(1, { 0, n - 1 });
+1000 415 while (stack.size() != 0)
+1000 430 {
+1000 445     int begin = stack.back().first, end = stack.back().second;
+1000 460     stack.pop_back()
+1000 475     int left = begin, right = end;
+1000 490     int mid = (left + right) / 2;
+1000 505     while (left <= right)
+1000 520     {
+1000 535         while (a[left] < a[mid])
+1000 550             ++left;
+1000 565         while (a[right] > a[mid])
+1000 580             --right;
+1000 595         if (left <= right)
+1000 610             swap(a[right++], a[left--]);
+1000 625     }
+1000 640     if (begin < right)
+1000 655         stack.push_back({ begin, right });
+1000 670     if (end > left)
+1000 685         stack.push_back({ left, end });
+1000 700 }
 1
 16
