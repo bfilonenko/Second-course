@@ -22,6 +22,8 @@ public:
 	ButtonDraw();
 	ButtonDraw(ButtonParameter &button);
 
+	~ButtonDraw();
+
 	void setInformation(ButtonParameter &button);
 
 	void draw(RenderWindow &window, ButtonParameter &button);

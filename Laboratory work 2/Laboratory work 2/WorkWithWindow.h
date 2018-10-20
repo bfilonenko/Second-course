@@ -41,6 +41,8 @@ class WorkWithWindow
 public:
 	WorkWithWindow(string &fileName);		//Parameter for window in "name.dat"
 
+	~WorkWithWindow();
+
 	bool isOpen();
 
 	void work();

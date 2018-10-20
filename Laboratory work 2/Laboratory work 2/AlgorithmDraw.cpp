@@ -44,6 +44,21 @@ AlgorithmDraw::AlgorithmDraw(AlgorithmParameter &algorithm)
 	setInformation(algorithm);
 }
 
+AlgorithmDraw::~AlgorithmDraw()
+{
+	delete[] circle;
+
+	delete[] value;
+
+	delete[] index;
+
+	delete countOperation;
+
+	selectedCircle.clear();
+	selectedValue.clear();
+	selectedIndex.clear();
+}
+
 void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 {
 	count = algorithm.length;

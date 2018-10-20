@@ -11,6 +11,24 @@ ButtonDraw::ButtonDraw(ButtonParameter &button)
 	setInformation(button);
 }
 
+ButtonDraw::~ButtonDraw()
+{
+	if (needPicture)
+	{
+		delete pictureSprite;
+
+		delete pictureTexture;
+	}
+
+	if (needText)
+	{
+		delete text;
+
+		delete font;
+	}
+}
+
+
 void ButtonDraw::setInformation(ButtonParameter &button)
 {
 	if (button.pictureName == "")

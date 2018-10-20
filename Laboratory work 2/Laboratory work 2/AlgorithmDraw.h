@@ -59,6 +59,8 @@ public:
 	AlgorithmDraw();
 	AlgorithmDraw(AlgorithmParameter &algorithm);
 
+	~AlgorithmDraw();
+
 	void setInformation(AlgorithmParameter &algorithm);
 
 	void upgradeOperations(AlgorithmParameter &algorithmParameter);

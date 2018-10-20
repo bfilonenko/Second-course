@@ -144,6 +144,8 @@ void SelectionSort::goToNext()
 		{
 			delete algorithm.next;
 			algorithm.next = nullptr;
+
+			story.back().next = nullptr;
 		}
 
 		if (algorithm.mainIndexes[2] == algorithm.length - 1)

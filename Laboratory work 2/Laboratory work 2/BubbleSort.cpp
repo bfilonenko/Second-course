@@ -154,6 +154,8 @@ void BubbleSort::goToNext()
 		{
 			delete algorithm.next;
 			algorithm.next = nullptr;
+			
+			story.back().next = nullptr;
 		}
 
 		if (algorithm.indexes[0] == 1)

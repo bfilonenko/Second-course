@@ -1,6 +1,21 @@
 #include "Graphic.h"
 
 
+Graphic::~Graphic()
+{
+	delete window;
+
+	if (numberOfButton != 0)
+	{
+		delete[] button;
+	}
+	
+	if (needAlgorithm)
+	{
+		delete algorithm;
+	}
+}
+
 void Graphic::createNewWindow(int width, int height, string &name)
 {
 	window = new RenderWindow(VideoMode(width, height), name, Style::None);

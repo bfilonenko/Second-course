@@ -68,11 +68,13 @@ public:
 			button[i].setInformation(*buttonParameter[i].getStruct());
 		}
 
+		needAlgorithm = true;
 		algorithm = new AlgorithmDraw(algorithmParameter);
 
 		animationIsPlaying = false;
 	}
 
+	~Graphic();
 
 	void setCoordinate(int xCoordinate, int yCoordinate);
 

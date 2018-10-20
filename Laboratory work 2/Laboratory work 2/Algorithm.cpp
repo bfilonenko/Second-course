@@ -21,7 +21,13 @@ void Algorithm::goToBack()
 {
 	if (story.size() > 1)
 	{
-		story[story.size() - 2].next = new AlgorithmParameter(story[story.size() - 1]);
+		if (story.back().next != nullptr)
+		{
+			delete story.back().next;
+			story.back().next = nullptr;
+		}
+
+		story[story.size() - 2].next = new AlgorithmParameter(story.back());
 		story.pop_back();
 	}
 }
@@ -107,6 +113,10 @@ void Algorithm::save(string &name)
 			fileOut << story.back().next->arrayOfValues[j].first << ' ' << story.back().next->arrayOfValues[j].second << ' ';
 		}
 		fileOut << '\n';
+	}
+	else
+	{
+		fileOut << 0;
 	}
 
 	fileOut.close();
@@ -211,7 +221,7 @@ void Algorithm::download(string &name)
 				temp.arrayOfValues.push_back({ tempValue, tempValue2 });
 			}
 
-			story[story.size() - 2].next = new AlgorithmParameter(temp);
+			story.back().next = new AlgorithmParameter(temp);
 		}
 
 		fileIn.close();

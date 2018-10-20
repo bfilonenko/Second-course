@@ -110,6 +110,23 @@ WorkWithWindow::WorkWithWindow(string &fileName)
 	}
 }
 
+WorkWithWindow::~WorkWithWindow()
+{
+	delete graphic;
+
+	if (numberOfButton != 0)
+	{
+		delete[] button;
+	}
+	
+	if (needAlgorithm)
+	{
+		delete algorithm;
+	}
+
+	newWindowName.clear();
+}
+
 bool WorkWithWindow::isOpen()
 {
 	return graphic->isOpen();
@@ -243,13 +260,13 @@ void WorkWithWindow::work()
 			else if (i == 9 && button[i].action() && needAlgorithm)
 			{
 				int length;
-				if (button[11].getStruct()->name.size() == 2)
+				if (button[14].getStruct()->name.size() == 2)
 				{
-					length = (button[11].getStruct()->name[0] - '0') * 10 + button[11].getStruct()->name[1] - '0';
+					length = (button[14].getStruct()->name[0] - '0') * 10 + button[14].getStruct()->name[1] - '0';
 				}
-				else if (button[11].getStruct()->name.size() == 1)
+				else if (button[14].getStruct()->name.size() == 1)
 				{
-					length = button[11].getStruct()->name[0] - '0';
+					length = button[14].getStruct()->name[0] - '0';
 				}
 				else
 				{
@@ -260,7 +277,7 @@ void WorkWithWindow::work()
 				{
 					vector<int> newData;
 
-					for (int j = 12; j < 12 + length; ++j)
+					for (int j = 15; j < 15 + length; ++j)
 					{
 						int value;
 						if (button[j].getStruct()->name.size() == 2)
@@ -320,7 +337,7 @@ void WorkWithWindow::work()
 				}
 				graphic->upgradeAlgorithm(*algorithm->getStruct());
 			}
-			else if (i > 10 && button[i].action() && needAlgorithm)
+			else if (i > 13 && button[i].action() && needAlgorithm)
 			{
 				buttonIndexForText = i;
 			}

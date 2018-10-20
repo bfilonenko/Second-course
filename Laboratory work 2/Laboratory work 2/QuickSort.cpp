@@ -187,6 +187,8 @@ void QuickSort::goToNext()
 		{
 			delete algorithm.next;
 			algorithm.next = nullptr;
+
+			story.back().next = nullptr;
 		}
 
 		story.push_back(algorithm);

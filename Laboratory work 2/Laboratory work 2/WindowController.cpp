@@ -3,7 +3,7 @@
 
 void demonstration()
 {
-	vector<WorkWithWindow> windows;
+	vector<WorkWithWindow *> windows;
 	
 	ifstream fileIn("Data/Data for window controller.dat");
 	string mainWindowName;
@@ -11,7 +11,7 @@ void demonstration()
 
 	fileIn.close();
 
-	WorkWithWindow mainWindow(mainWindowName);
+	WorkWithWindow *mainWindow = new WorkWithWindow(mainWindowName);
 	windows.push_back(mainWindow);
 
 	while (windows.size() != 0)
@@ -19,16 +19,23 @@ void demonstration()
 		size_t length = windows.size();
 		for (int i = 0; i < length; ++i)
 		{
-			windows[i].work();
+			windows[i]->work();
 			
-			for (int j = 0; j < windows[i].getNewWindowName().size(); ++j)
+			for (int j = 0; j < windows[i]->getNewWindowName().size(); ++j)
 			{
-				WorkWithWindow window(windows[i].getNewWindowName()[j]);
+				WorkWithWindow *window = new WorkWithWindow(windows[i]->getNewWindowName()[j]);
 				windows.push_back(window);
 			}
-			windows[i].cleanNewWindowName();
+			windows[i]->cleanNewWindowName();
 		}
-
-		windows.erase(remove_if(windows.begin(), windows.end(), [](WorkWithWindow window) { return !window.isOpen(); }), windows.end());
+		for (int i = 0; i < windows.size(); ++i)
+		{
+			if (!windows[i]->isOpen())
+			{
+				delete windows[i];
+				windows[i] = nullptr;
+			}
+		}
+		windows.erase(remove_if(windows.begin(), windows.end(), [](WorkWithWindow *window) { return window == nullptr; }), windows.end());
 	}
 }
