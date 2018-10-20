@@ -101,18 +101,18 @@ void AlgorithmDraw::setInformation(AlgorithmParameter &algorithm)
 		circle[i].setPosition(xFromI(i), 230.f);
 
 		value[i].setCharacterSize(20);
-		value[i].setFillColor(Color::White);
+		value[i].setFillColor(Color::Black);
 		value[i].setFont(font);
 		value[i].setString(to_string(algorithm.arrayOfValues[i].first));
-		value[i].setOrigin(value[i].getLocalBounds().width * 0.5f, value[i].getLocalBounds().height * 0.5f);
-		value[i].setPosition(xFromI(i), 180.f);
+		value[i].setOrigin(value[i].getLocalBounds().width * 0.5f, 13.f);
+		value[i].setPosition(xFromI(i), 230.f);
 
 		firstIndex[i].setCharacterSize(20);
-		firstIndex[i].setFillColor(Color::Black);
+		firstIndex[i].setFillColor(Color::White);
 		firstIndex[i].setFont(font);
 		firstIndex[i].setString(to_string(i));
-		firstIndex[i].setOrigin(firstIndex[i].getLocalBounds().width * 0.5f, 13.f);
-		firstIndex[i].setPosition(xFromI(i), 230.f);
+		firstIndex[i].setOrigin(firstIndex[i].getLocalBounds().width * 0.5f, firstIndex[i].getLocalBounds().height * 0.5f);
+		firstIndex[i].setPosition(xFromI(i), 180.f);
 
 		index[i].setCharacterSize(20);
 		index[i].setFillColor(Color::White);
@@ -201,11 +201,11 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			window.draw(selectedCircle[0]);
 
 			selectedValue.push_back(value[algorithm.indexForHighlight[0]]);
-			selectedValue[0].setPosition(xFromI(algorithm.indexForHighlight[1]), 180.f);
+			selectedValue[0].setPosition(xFromI(algorithm.indexForHighlight[1]), 230.f);
 			window.draw(selectedValue[0]);
 
 			selectedFirstIndex.push_back(firstIndex[algorithm.indexForHighlight[0]]);
-			selectedFirstIndex[0].setPosition(xFromI(algorithm.indexForHighlight[1]), 230.f);
+			selectedFirstIndex[0].setPosition(xFromI(algorithm.indexForHighlight[1]), 180.f);
 			window.draw(selectedFirstIndex[0]);
 
 			selectedIndex.push_back(index[algorithm.indexForHighlight[0]]);
@@ -220,7 +220,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			window.draw(selectedCircle[1]);
 
 			selectedValue.push_back(value[algorithm.indexForHighlight[1]]);
-			selectedValue[1].setPosition(xFromI(algorithm.indexForHighlight[0]), 180.f);
+			selectedValue[1].setPosition(xFromI(algorithm.indexForHighlight[0]), 230.f);
 			window.draw(selectedValue[1]);
 
 			selectedFirstIndex.push_back(firstIndex[algorithm.indexForHighlight[1]]);
@@ -260,10 +260,10 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				selectedCircle[0].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer)), yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer))));
 				window.draw(selectedCircle[0]);
 
-				selectedValue[0].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer)), -50 + yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer))));
+				selectedValue[0].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer)), yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer))));
 				window.draw(selectedValue[0]);
 
-				selectedFirstIndex[0].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer)), yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer))));
+				selectedFirstIndex[0].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer)), -50 + yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer))));
 				window.draw(selectedFirstIndex[0]);
 
 				selectedIndex[0].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer)), 40 + yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[1], algorithm.indexForHighlight[0], timer))));
@@ -273,10 +273,10 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				selectedCircle[1].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer)), 460 - yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer))));
 				window.draw(selectedCircle[1]);
 
-				selectedValue[1].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer)), -50 + 460 - yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer))));
+				selectedValue[1].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer)), 460 - yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer))));
 				window.draw(selectedValue[1]);
 
-				selectedFirstIndex[1].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer)), 460 - yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer))));
+				selectedFirstIndex[1].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer)), -50 + 460 - yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer))));
 				window.draw(selectedFirstIndex[1]);
 
 				selectedIndex[1].setPosition(xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer)), 40 + 460 - yFromX(xFromI(algorithm.indexForHighlight[1]), xFromI(algorithm.indexForHighlight[0]), xFromI(iFromTime(algorithm.indexForHighlight[0], algorithm.indexForHighlight[1], timer))));
@@ -324,10 +324,10 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				selectedCircle[0].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer)), 460 - yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer))));
 				window.draw(selectedCircle[0]);
 
-				selectedValue[0].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer)), -50 + 460 - yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer))));
+				selectedValue[0].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer)), 460 - yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer))));
 				window.draw(selectedValue[0]);
 
-				selectedFirstIndex[0].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer)), 460 - yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer))));
+				selectedFirstIndex[0].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer)), -50 + 460 - yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer))));
 				window.draw(selectedFirstIndex[0]);
 
 				selectedIndex[0].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer)), 40 + 460 - yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[1], algorithm.next->indexForHighlight[0], timer))));
@@ -337,10 +337,10 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 				selectedCircle[1].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer)), yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer))));
 				window.draw(selectedCircle[1]);
 
-				selectedValue[1].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer)), -50 + yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer))));
+				selectedValue[1].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer)), yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer))));
 				window.draw(selectedValue[1]);
 
-				selectedFirstIndex[1].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer)), yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer))));
+				selectedFirstIndex[1].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer)), -50 + yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer))));
 				window.draw(selectedFirstIndex[1]);
 
 				selectedIndex[1].setPosition(xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer)), 40 + yFromX(xFromI(algorithm.next->indexForHighlight[1]), xFromI(algorithm.next->indexForHighlight[0]), xFromI(iFromTime(algorithm.next->indexForHighlight[0], algorithm.next->indexForHighlight[1], timer))));
@@ -414,7 +414,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			window.draw(selectedCircle[0]);
 			
 			selectedValue.push_back(value[algorithm.next->indexForHighlight[0]]);
-			selectedValue[0].setPosition(xFromI(algorithm.next->indexForHighlight[1]), 180.f);
+			selectedValue[0].setPosition(xFromI(algorithm.next->indexForHighlight[1]), 230.f);
 			window.draw(selectedValue[0]);
 
 			selectedFirstIndex.push_back(firstIndex[algorithm.next->indexForHighlight[0]]);
@@ -433,7 +433,7 @@ void AlgorithmDraw::draw(RenderWindow &window, AlgorithmParameter &algorithm, bo
 			window.draw(selectedCircle[1]);
 
 			selectedValue.push_back(value[algorithm.next->indexForHighlight[1]]);
-			selectedValue[1].setPosition(xFromI(algorithm.next->indexForHighlight[0]), 180.f);
+			selectedValue[1].setPosition(xFromI(algorithm.next->indexForHighlight[0]), 230.f);
 			window.draw(selectedValue[1]);
 
 			selectedFirstIndex.push_back(firstIndex[algorithm.next->indexForHighlight[1]]);
