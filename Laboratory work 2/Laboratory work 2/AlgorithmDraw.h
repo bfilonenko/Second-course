@@ -23,10 +23,12 @@ class AlgorithmDraw
 
 	Font font;
 	Text *value;
+	Text *firstIndex;
 	Text *index;
 
 	vector<CircleShape> selectedCircle;
 	vector<Text> selectedValue;
+	vector<Text> selectedFirstIndex;
 	vector<Text> selectedIndex;
 
 
