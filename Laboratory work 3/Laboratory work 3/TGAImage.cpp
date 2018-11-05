@@ -32,6 +32,256 @@ TGAImage::~TGAImage()
 }
 
 
+TGAColor TGAImage::get(int x, int y)
+{
+	if (data == nullptr || x < 0 || y < 0 || x >= width || y >= height)
+	{
+		return TGAColor();
+	}
+	return TGAColor(data + (x + y * width) * bytesPerPixel, bytesPerPixel);
+}
+
+bool TGAImage::set(int x, int y, TGAColor color)
+{
+	if (data == nullptr || x < 0 || y < 0 || x >= width || y >= height)
+	{
+		return false;
+	}
+
+	memcpy(data + (x + y * width) * bytesPerPixel, color.raw, bytesPerPixel);
+	
+	return true;
+}
+
+
+bool TGAImage::flipHorizontally()
+{
+	if (data == nullptr)
+	{
+		return false;
+	}
+
+	int half = width >> 1;
+	for (int i = 0; i < half; ++i)
+	{
+		for (int j = 0; j < height; ++j)
+		{
+			TGAColor color1 = get(i, j);
+			TGAColor color2 = get(width - 1 - i, j);
+			set(i, j, color2);
+			set(width - 1 - i, j, color1);
+		}
+	}
+
+	return true;
+}
+
+bool TGAImage::flipVertically()
+{
+	if (data == nullptr)
+	{
+		return false;
+	}
+
+	unsigned long bytesPerLine = width * bytesPerPixel;
+	unsigned char *line = new unsigned char[bytesPerLine];
+
+	int half = height >> 1;
+	for (int i = 0; i < half; ++i)
+	{
+		unsigned long line1 = i * bytesPerLine;
+		unsigned long line2 = (height - 1 - i) * bytesPerLine;
+
+		memmove((void *)line, (void *)(data + line1), bytesPerLine);
+		memmove((void *)(data + line1), (void *)(data + line2), bytesPerLine);
+		memmove((void *)(data + line2), (void *)line, bytesPerLine);
+	}
+
+	delete[] line;
+
+	return true;
+}
+
+
+bool TGAImage::loadRunLengthEncodingData(ifstream &fileIn)
+{
+	unsigned long pixelCount = width * height;
+	unsigned long currentPixel = 0;
+	unsigned long currentByte = 0;
+
+	TGAColor colorbuffer;
+	do
+	{
+		unsigned char chunkHeader = 0;
+
+		chunkHeader = fileIn.get();
+		if (!fileIn.good())
+		{
+			cerr << "an error occured while reading the data\n";
+
+			return false;
+		}
+
+		if (chunkHeader < 128)
+		{
+			++chunkHeader;
+			for (int i = 0; i < chunkHeader; ++i)
+			{
+				fileIn.read((char *)colorbuffer.raw, bytesPerPixel);
+				if (!fileIn.good())
+				{
+					cerr << "an error occured while reading the header\n";
+
+					return false;
+				}
+
+				for (int j = 0; j < bytesPerPixel; ++j)
+				{
+					data[currentByte++] = colorbuffer.raw[j];
+				}
+
+				++currentPixel;
+				if (currentPixel > pixelCount)
+				{
+					cerr << "Too many pixels read\n";
+
+					return false;
+				}
+			}
+		}
+		else
+		{
+			chunkHeader -= 127;
+
+			fileIn.read((char *)colorbuffer.raw, bytesPerPixel);
+			if (!fileIn.good())
+			{
+				cerr << "an error occured while reading the header\n";
+
+				return false;
+			}
+
+			for (int i = 0; i < chunkHeader; ++i)
+			{
+				for (int j = 0; j < bytesPerPixel; ++j)
+				{
+					data[currentByte++] = colorbuffer.raw[j];
+				}
+
+				currentPixel++;
+				if (currentPixel > pixelCount)
+				{
+					cerr << "Too many pixels read\n";
+
+					return false;
+				}
+			}
+		}
+	}
+	while (currentPixel < pixelCount);
+
+	return true;
+}
+
+bool TGAImage::readTGAFile(const char *filename)
+{
+	if (data != nullptr)
+	{
+		delete[] data;
+	}
+	data = nullptr;
+
+	ifstream fileIn;
+
+	fileIn.open(filename, ios::binary);
+	if (!fileIn.is_open())
+	{
+		cerr << "can't open file " << filename << "\n";
+
+		fileIn.close();
+
+		return false;
+	}
+
+	TGAHeader header;
+
+	fileIn.read((char *)&header, sizeof(header));
+	if (!fileIn.good())
+	{
+		cerr << "an error occured while reading the header\n";
+
+		fileIn.close();
+
+		return false;
+	}
+
+	width = header.width;
+	height = header.height;
+
+	bytesPerPixel = header.bitsPerPixel >> 3;
+
+	if (width <= 0 || height <= 0 || (bytesPerPixel != GRAYSCALE && bytesPerPixel != RGB && bytesPerPixel != RGBA))
+	{
+		cerr << "bad bytesPerPixel (or width/height) value\n";
+
+		fileIn.close();
+
+		return false;
+	}
+
+	unsigned long numberOfBytes = bytesPerPixel * width * height;
+	data = new unsigned char[numberOfBytes];
+
+	if (header.dataTypeCode = 3|| header.dataTypeCode == 2)
+	{
+		fileIn.read((char *)data, numberOfBytes);
+		if (!fileIn.good())
+		{
+			cerr << "an error occured while reading the data\n";
+
+			fileIn.close();
+
+			return false;
+		}
+	}
+	else if (header.dataTypeCode == 10 || header.dataTypeCode == 11)
+	{
+		if (!loadRunLengthEncodingData(fileIn))
+		{
+			cerr << "an error occured while reading the data\n";
+			
+			fileIn.close();
+
+			return false;
+		}
+	}
+	else
+	{
+		cerr << "unknown file format " << (int)header.dataTypeCode << "\n";
+	
+		fileIn.close();
+
+		return false;
+	}
+
+	if (!(header.imageDescriptor &0x20))
+	{
+		flipVertically();
+	}
+
+	if (header.imageDescriptor &0x10)
+	{
+		flipHorizontally();
+	}
+
+	cerr << width << "x" << height << "/" << bytesPerPixel * 8 << "\n";
+	
+	fileIn.close();
+	
+	return true;
+}
+
+
 bool TGAImage::unloadRunLengthEncodingData(ofstream &fileOut)
 {
 	const unsigned char maxChunkLength = 128;
@@ -92,8 +342,7 @@ bool TGAImage::unloadRunLengthEncodingData(ofstream &fileOut)
 	return true;
 }
 
-
-bool TGAImage::writeTgaFile(const char *fileName, bool runLengthEncoding)
+bool TGAImage::writeTGAFile(const char *fileName, bool runLengthEncoding)
 {
 	unsigned char developerAreaReference[4] = { 0, 0, 0, 0 };
 	unsigned char extensionAreaReference[4] = { 0, 0, 0, 0 };

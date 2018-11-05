@@ -32,21 +32,53 @@ struct TGAHeader {
 
 struct TGAColor
 {
-	unsigned char r, g, b, a;
+	union
+	{
+		struct
+		{
+
+			unsigned char b, g, r, a;
+		};
+		unsigned char raw[4];
+		unsigned int value;
+	};
+	int bytesPerPixel;
 
 
-	TGAColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a)
+	TGAColor() : value(0), bytesPerPixel(1)
+	{
+
+	}
+
+	TGAColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a), bytesPerPixel(4)
 	{
 	
 	}
 
+	TGAColor(int value, int bytesPerPixel) : value(value), bytesPerPixel(bytesPerPixel)
+	{
+
+	}
+
+	TGAColor(const TGAColor &color) : value(color.value), bytesPerPixel(color.bytesPerPixel)
+	{
+
+	}
+
+	TGAColor(const unsigned char *p, int bytesPerPixel) : value(0), bytesPerPixel(bytesPerPixel)
+	{
+		for (int i = 0; i < bytesPerPixel; ++i)
+		{
+			raw[i] = p[i];
+		}
+	}
+
 	TGAColor &operator= (const TGAColor &right)
 	{
-		if (this != &right) {
-			r = right.r;
-			g = right.g;
-			b = right.b;
-			a = right.a;
+		if (this != &right)
+		{
+			bytesPerPixel = right.bytesPerPixel;
+			value = right.value;
 		}
 		return *this;
 	}
@@ -59,6 +91,8 @@ class TGAImage
 	int width;
 	int height;
 	int bytesPerPixel;
+
+	bool loadRunLengthEncodingData(ifstream &fileIn);
 
 	bool unloadRunLengthEncodingData(ofstream &fileOut);
 
@@ -75,6 +109,19 @@ public:
 	TGAImage(const TGAImage &image);
 
 	~TGAImage();
+	
 
-	bool writeTgaFile(const char *fileName, bool runLengthEncoding = true);
+	TGAColor get(int x, int y);
+
+	bool set(int x, int y, TGAColor color);
+
+
+	bool flipHorizontally();
+	
+	bool flipVertically();
+
+	
+	bool readTGAFile(const char *filename);
+
+	bool writeTGAFile(const char *fileName, bool runLengthEncoding = true);
 };
