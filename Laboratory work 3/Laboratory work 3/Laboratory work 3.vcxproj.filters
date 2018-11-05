@@ -18,12 +18,18 @@
     <ClInclude Include="TGAImage.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="WorkWithTGA.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TGAImage.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WorkWithTGA.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
