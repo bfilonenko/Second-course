@@ -12,6 +12,24 @@
 using namespace std;
 
 
+#pragma pack(push,1)
+struct TGAHeader {
+	char idLength;
+	char colorMapType;
+	char dataTypeCode;
+	short colorMapOrigin;
+	short colorMapLength;
+	char colorMapDepth;
+	short xOrigin;
+	short yOrigin;
+	short width;
+	short height;
+	char  bitsPerPixel;
+	char  imageDescriptor;
+};
+#pragma pack(pop)
+
+
 struct TGAColor
 {
 	unsigned char r, g, b, a;
@@ -42,6 +60,8 @@ class TGAImage
 	int height;
 	int bytesPerPixel;
 
+	bool unloadRunLengthEncodingData(ofstream &fileOut);
+
 public:
 	enum Format
 	{
@@ -55,4 +75,6 @@ public:
 	TGAImage(const TGAImage &image);
 
 	~TGAImage();
+
+	bool writeTgaFile(const char *fileName, bool runLengthEncoding = true);
 };

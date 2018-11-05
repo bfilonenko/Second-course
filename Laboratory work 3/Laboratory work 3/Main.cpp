@@ -5,5 +5,8 @@ const TGAColor red = TGAColor(255, 0, 0, 255);
 
 int main()
 {
+	TGAImage image(100, 100, TGAImage::RGB);
+	image.writeTgaFile("output.tga");
+
 	return 0;
 }
