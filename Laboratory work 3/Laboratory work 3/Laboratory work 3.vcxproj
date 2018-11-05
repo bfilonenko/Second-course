@@ -115,6 +115,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Geometry.h" />
     <ClInclude Include="TGAImage.h" />
     <ClInclude Include="WorkWithTGA.h" />
   </ItemGroup>
