@@ -104,7 +104,7 @@ void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, Vector
 
 				TGAColor color = model->getDiffuse(textureCoordinateP);
 
-				image.set(p.x, p.y, TGAColor(int(color.r * intensity), int(color.g * intensity), int(color.b * intensity), 255));
+				image.set(p.x, p.y, color * intensity);
 			}
 		}
 	}

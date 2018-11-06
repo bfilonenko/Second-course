@@ -32,55 +32,58 @@ struct TGAHeader {
 
 struct TGAColor
 {
-	union
+	unsigned char bgra[4];
+	unsigned char bytesPerPixel;
+
+
+	TGAColor() : bytesPerPixel(1)
 	{
-		struct
+		for (int i = 0; i < 4; ++i)
 		{
-
-			unsigned char b, g, r, a;
-		};
-		unsigned char raw[4];
-		unsigned int value;
-	};
-	int bytesPerPixel;
-
-
-	TGAColor() : value(0), bytesPerPixel(1)
+			bgra[i] = 0;
+		}
+	}
+		
+	TGAColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a = 255) : bytesPerPixel(4)
 	{
-
+		bgra[0] = b;
+		bgra[1] = g;
+		bgra[2] = r;
+		bgra[3] = a;
 	}
 
-	TGAColor(unsigned char r, unsigned char g, unsigned char b, unsigned char a) : r(r), g(g), b(b), a(a), bytesPerPixel(4)
+	TGAColor(unsigned char value) : bytesPerPixel(1)
 	{
-	
-	}
-
-	TGAColor(int value, int bytesPerPixel) : value(value), bytesPerPixel(bytesPerPixel)
-	{
-
-	}
-
-	TGAColor(const TGAColor &color) : value(color.value), bytesPerPixel(color.bytesPerPixel)
-	{
-
-	}
-
-	TGAColor(const unsigned char *p, int bytesPerPixel) : value(0), bytesPerPixel(bytesPerPixel)
-	{
-		for (int i = 0; i < bytesPerPixel; ++i)
+		for (int i = 1; i < 4; ++i)
 		{
-			raw[i] = p[i];
+			bgra[i] = 0;
+		}
+		bgra[0] = value;
+	}
+
+	TGAColor(const unsigned char *p, int bytesPerPixel) : bytesPerPixel(bytesPerPixel)
+	{
+		for (int i = 0; i < int(bytesPerPixel); ++i)
+		{
+			bgra[i] = p[i];
+		}
+		for (int i = int(bytesPerPixel); i < 4; ++i)
+		{
+			bgra[i] = 0;
 		}
 	}
 
-	TGAColor &operator= (const TGAColor &right)
+	TGAColor operator * (float intensity) const
 	{
-		if (this != &right)
+		TGAColor result = *this;
+
+		intensity = (intensity > 1.f ? 1.f : (intensity < 0.f ? 0.f : intensity));
+
+		for (int i = 0; i < 4; ++i)
 		{
-			bytesPerPixel = right.bytesPerPixel;
-			value = right.value;
+			result.bgra[i] = unsigned char(bgra[i] * intensity);
 		}
-		return *this;
+		return result;
 	}
 };
 

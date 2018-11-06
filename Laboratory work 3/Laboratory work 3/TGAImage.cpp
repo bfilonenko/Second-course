@@ -48,7 +48,7 @@ bool TGAImage::set(int x, int y, TGAColor color)
 		return false;
 	}
 
-	memcpy(data + (x + y * width) * bytesPerPixel, color.raw, bytesPerPixel);
+	memcpy(data + (x + y * width) * bytesPerPixel, color.bgra, bytesPerPixel);
 	
 	return true;
 }
@@ -138,7 +138,7 @@ bool TGAImage::loadRunLengthEncodingData(ifstream &fileIn)
 			++chunkHeader;
 			for (int i = 0; i < chunkHeader; ++i)
 			{
-				fileIn.read((char *)colorbuffer.raw, bytesPerPixel);
+				fileIn.read((char *)colorbuffer.bgra, bytesPerPixel);
 				if (!fileIn.good())
 				{
 					cerr << "an error occured while reading the header\n";
@@ -148,7 +148,7 @@ bool TGAImage::loadRunLengthEncodingData(ifstream &fileIn)
 
 				for (int j = 0; j < bytesPerPixel; ++j)
 				{
-					data[currentByte++] = colorbuffer.raw[j];
+					data[currentByte++] = colorbuffer.bgra[j];
 				}
 
 				++currentPixel;
@@ -164,7 +164,7 @@ bool TGAImage::loadRunLengthEncodingData(ifstream &fileIn)
 		{
 			chunkHeader -= 127;
 
-			fileIn.read((char *)colorbuffer.raw, bytesPerPixel);
+			fileIn.read((char *)colorbuffer.bgra, bytesPerPixel);
 			if (!fileIn.good())
 			{
 				cerr << "an error occured while reading the header\n";
@@ -176,7 +176,7 @@ bool TGAImage::loadRunLengthEncodingData(ifstream &fileIn)
 			{
 				for (int j = 0; j < bytesPerPixel; ++j)
 				{
-					data[currentByte++] = colorbuffer.raw[j];
+					data[currentByte++] = colorbuffer.bgra[j];
 				}
 
 				currentPixel++;

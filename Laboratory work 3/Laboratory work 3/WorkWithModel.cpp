@@ -89,7 +89,7 @@ void workWithModel(string fileName, int width, int height, int depth)
 	{
 		for (int j = 0; j < height; ++j)
 		{
-			zBufferImage.set(i, j, TGAColor(zBuffer[i + j * width] , 1));
+			zBufferImage.set(i, j, TGAColor(zBuffer[i + j * width]));
 		}
 	}
 
