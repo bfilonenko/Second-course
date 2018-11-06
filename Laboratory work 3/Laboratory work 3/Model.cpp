@@ -133,13 +133,13 @@ Vector3float Model::getVertex(int i)
 }
 
 
-Vector2int Model::textureCoordinate(int faceIndex, int numberOfVertex)
+Vector2int Model::getTextureCoordinate(int faceIndex, int numberOfVertex)
 {
 	int index = faces[faceIndex][numberOfVertex][1];
 	return Vector2int(int(textureCoordinates[index].x * float(diffuseMap.getWidth())), int(textureCoordinates[index].y * float(diffuseMap.getHeight())));
 }
 
-TGAColor Model::diffuse(Vector2int textureCoordinate)
+TGAColor Model::getDiffuse(Vector2int textureCoordinate)
 {
 	return diffuseMap.get(textureCoordinate.x, textureCoordinate.y);
 }

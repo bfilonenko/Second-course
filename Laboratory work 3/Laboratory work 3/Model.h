@@ -5,7 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include "Geometry.h"
-#include "WorkWithTGA.h"
+#include "TGAImage.h"
 
 
 class Model
@@ -32,7 +32,7 @@ public:
 	Vector3float getVertex(int i);
 	vector<int> getFace(int i);
 
-	Vector2int textureCoordinate(int faceIndex, int numberOfVertex);
+	Vector2int getTextureCoordinate(int faceIndex, int numberOfVertex);
 
-	TGAColor diffuse(Vector2int textureCoordinate);
+	TGAColor getDiffuse(Vector2int textureCoordinate);
 };

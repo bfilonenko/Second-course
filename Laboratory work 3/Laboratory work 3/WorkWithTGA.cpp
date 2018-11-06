@@ -44,7 +44,7 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color)
 	}
 }
 
-void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, TGAImage &image, TGAColor color, int *zBuffer)
+void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, Vector2int textureCoordinate0, Vector2int textureCoordinate1, Vector2int textureCoordinate2, TGAImage &image, Model *model, float intensity, int *zBuffer)
 {
 	if (vertex0.y == vertex1.y && vertex1.y == vertex2.y)
 	{
@@ -54,14 +54,17 @@ void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, TGAIma
 	if (vertex0.y > vertex1.y)
 	{
 		swap(vertex0, vertex1);
+		swap(textureCoordinate0, textureCoordinate1);
 	}
 	if (vertex0.y > vertex2.y)
 	{
 		swap(vertex0, vertex2);
+		swap(textureCoordinate0, textureCoordinate2);
 	}
 	if (vertex1.y > vertex2.y)
 	{
 		swap(vertex1, vertex2);
+		swap(textureCoordinate1, textureCoordinate2);
 	}
 
 	int height = vertex2.y - vertex0.y;
@@ -77,15 +80,21 @@ void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, TGAIma
 		Vector3int vectorA = vertex0 + Vector3float(vertex2 - vertex0) * alpha,
 			vectorB = secondHalf ? vertex1 + Vector3float(vertex2 - vertex1) * beta : vertex0 + Vector3float(vertex1 - vertex0) * beta;
 
+		Vector2int textureCoordinateA = textureCoordinate0 + (textureCoordinate2 - textureCoordinate0) * alpha,
+			textureCoordinateB = secondHalf ? textureCoordinate1 + (textureCoordinate2 - textureCoordinate1) * beta : textureCoordinate0 + (textureCoordinate1 - textureCoordinate0) * beta;
+
 		if (vectorA.x > vectorB.x)
 		{
 			swap(vectorA, vectorB);
+			swap(textureCoordinateA, textureCoordinateB);
 		}
 
 		for (int j = vectorA.x; j <= vectorB.x; ++j)
 		{
 			float phi = vectorA.x == vectorB.x ? 1.f : float(j - vectorA.x) / float(vectorB.x - vectorA.x);
+			
 			Vector3int p = Vector3float(vectorA) + Vector3float(vectorB - vectorA) * phi;
+			Vector2int textureCoordinateP = textureCoordinateA + (textureCoordinateB - textureCoordinateA) * phi;
 
 			int index = p.x + p.y * image.getWidth();
 
@@ -93,7 +102,9 @@ void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, TGAIma
 			{
 				zBuffer[index] = p.z;
 
-				image.set(p.x, p.y, color);
+				TGAColor color = model->getDiffuse(textureCoordinateP);
+
+				image.set(p.x, p.y, TGAColor(int(color.r * intensity), int(color.g * intensity), int(color.b * intensity), 255));
 			}
 		}
 	}

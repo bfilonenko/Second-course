@@ -72,7 +72,13 @@ void workWithModel(string fileName, int width, int height, int depth)
 		float intensity = normal * lightDirect;
 		if (intensity > 0)
 		{
-			triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], image, TGAColor(int(intensity * 255), int(intensity * 255), int(intensity * 255), 255), zBuffer);
+			Vector2int textureCoordinate[3];
+			for (int j = 0; j < 3; ++j)
+			{
+				textureCoordinate[j] = model->getTextureCoordinate(i, j);
+			}
+
+			triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], textureCoordinate[0], textureCoordinate[1], textureCoordinate[2], image, model, intensity, zBuffer);
 		}
 	}
 
