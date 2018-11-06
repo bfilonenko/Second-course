@@ -110,3 +110,67 @@ void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, Vector
 	}
 
 }
+
+void triangle(Vector3int vertex0, Vector3int vertex1, Vector3int vertex2, float intensity0, float intensity1, float intensity2, TGAImage &image, int *zBuffer)
+{
+	if (vertex0.y == vertex1.y && vertex1.y == vertex2.y)
+	{
+		return;
+	}
+
+	if (vertex0.y > vertex1.y)
+	{
+		swap(vertex0, vertex1);
+		swap(intensity0, intensity1);
+	}
+	if (vertex0.y > vertex2.y)
+	{
+		swap(vertex0, vertex2);
+		swap(intensity0, intensity2);
+	}
+	if (vertex1.y > vertex2.y)
+	{
+		swap(vertex1, vertex2);
+		swap(intensity1, intensity2);
+	}
+
+	int height = vertex2.y - vertex0.y;
+	for (int i = 0; i <= height; ++i)
+	{
+		bool secondHalf = vertex0.y + i > vertex1.y || vertex0.y == vertex1.y;
+
+		int segmentHeight = secondHalf ? vertex2.y - vertex1.y : vertex1.y - vertex0.y;
+
+		float alpha = float(i) / height,
+			beta = float(i - (secondHalf ? vertex1.y - vertex0.y : 0)) / segmentHeight;
+
+		Vector3int vectorA = vertex0 + Vector3float(vertex2 - vertex0) * alpha,
+			vectorB = secondHalf ? vertex1 + Vector3float(vertex2 - vertex1) * beta : vertex0 + Vector3float(vertex1 - vertex0) * beta;
+
+		float intensityA = intensity0 + (intensity2 - intensity0) * alpha,
+			intensityB = secondHalf ? intensity1 + (intensity2 - intensity1) * beta : intensity0 + (intensity1 - intensity0) * beta;
+
+		if (vectorA.x > vectorB.x)
+		{
+			swap(vectorA, vectorB);
+			swap(intensityA, intensityB);
+		}
+
+		for (int j = vectorA.x; j <= vectorB.x; ++j)
+		{
+			float phi = vectorA.x == vectorB.x ? 1.f : float(j - vectorA.x) / float(vectorB.x - vectorA.x);
+
+			Vector3int p = Vector3float(vectorA) + Vector3float(vectorB - vectorA) * phi;
+			float intensityP = intensityA + (intensityB - intensityA) * phi;
+
+			int index = p.x + p.y * image.getWidth();
+
+			if (zBuffer[index] < p.z)
+			{
+				zBuffer[index] = p.z;
+
+				image.set(p.x, p.y, TGAColor(255, 255, 255) * intensityP);
+			}
+		}
+	}
+}

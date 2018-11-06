@@ -7,40 +7,6 @@ void workWithModel(string fileName, int width, int height, int depth)
 
 	TGAImage image(width, height, TGAImage::RGB);
 
-	///Wire Render
-	//for (int i = 0; i < model->getNumberOfFaces(); ++i)
-	//{
-	//	vector<int> face = model->getFace(i);
-	//	for (int j = 0; j < 3; ++j)
-	//	{
-	//		Vector3float vertex0 = model->getVertex(face[j]);
-	//		Vector3float vertex1 = model->getVertex(face[(j + 1) % 3]);
-	//
-	//		int x0 = int((vertex0.x + 1.f) * width * 0.5f);
-	//		int y0 = int((vertex0.y + 1.f) * height * 0.5f);
-	//		int x1 = int((vertex1.x + 1.f) * width * 0.5f);
-	//		int y1 = int((vertex1.y + 1.f) * height * 0.5f);
-	//
-	//		line(x0, y0, x1, y1, image, white);
-	//	}
-	//}
-
-	///multi-colored model
-	//for (int i = 0; i < model->getNumberOfFaces(); ++i)
-	//{
-	//	vector<int> face = model->getFace(i);
-	//
-	//	Vector2int screenCoordinats[3];
-	//
-	//	for (int j = 0; j < 3; j++)
-	//	{
-	//		Vector3float worldCoordinats = model->getVertex(face[j]);
-	//
-	//		screenCoordinats[j] = Vector2int(int((worldCoordinats.x + 1.f) * width * 0.5f), int((worldCoordinats.y + 1.f) * height * 0.5f));
-	//	}
-	//	triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], image, TGAColor(rand() % 255, rand() % 255, rand() % 255, 255));
-	//}
-
 
 	int *zBuffer = new int[width * height];
 
@@ -50,7 +16,23 @@ void workWithModel(string fileName, int width, int height, int depth)
 	}
 
 
-	Vector3float lightDirect(0, 0, -1);
+	Vector3float lightDirect = Vector3float(1, -1, 1).normalize();
+	Vector3float eye(1, 1, 3);
+	Vector3float center(0, 0, 0);
+
+	Matrix modelView = lookat(eye, center, Vector3float(0, 1, 0));
+	Matrix projection = Matrix::identity(4);
+	Matrix viewPort = viewport(width / 8, height / 8, width * 3 / 4, height * 3 / 4, depth);
+
+	projection[3][2] = -1.f / (eye - center).norm();
+
+	cerr << modelView << '\n';
+	cerr << projection << '\n';
+	cerr << viewPort << '\n';
+
+	Matrix temp = (viewPort * projection * modelView);
+
+	cerr << temp << '\n';
 
 	for (int i = 0; i < model->getNumberOfFaces(); ++i)
 	{
@@ -59,27 +41,17 @@ void workWithModel(string fileName, int width, int height, int depth)
 		Vector3int screenCoordinats[3];
 		Vector3float worldCoordinats[3];
 
+		float intensity[3];
+
 		for (int j = 0; j < 3; ++j)
 		{
 			Vector3float vertex = model->getVertex(face[j]);
-			screenCoordinats[j] = Vector3int(int((vertex.x + 1.f) * width * 0.5f), int((vertex.y + 1.f) * height * 0.5f), int((vertex.z + 1.f) * depth * 0.5f));
+			screenCoordinats[j] = Vector3int(Vector3float(viewPort * projection * modelView * Matrix(vertex)));
 			worldCoordinats[j] = vertex;
+			intensity[j] = model->getNorm(i, j) * lightDirect;
 		}
 
-		Vector3float normal = (worldCoordinats[2] - worldCoordinats[0]) ^ (worldCoordinats[1] - worldCoordinats[0]);
-		normal.normalize();
-
-		float intensity = normal * lightDirect;
-		if (intensity > 0)
-		{
-			Vector2int textureCoordinate[3];
-			for (int j = 0; j < 3; ++j)
-			{
-				textureCoordinate[j] = model->getTextureCoordinate(i, j);
-			}
-
-			triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], textureCoordinate[0], textureCoordinate[1], textureCoordinate[2], image, model, intensity, zBuffer);
-		}
+		triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], intensity[0], intensity[1], intensity[2], image, zBuffer);
 	}
 
 

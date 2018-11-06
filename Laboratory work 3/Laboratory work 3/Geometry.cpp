@@ -16,6 +16,13 @@ Vector3<float>::Vector3(const Vector3<int> &vector) : x(float(vector.x)), y(floa
 }
 
 
+template<>
+Vector3<float>::Vector3(Matrix matrix) : x(matrix[0][0] / matrix[3][0]), y(matrix[1][0] / matrix[3][0]), z(matrix[2][0] / matrix[3][0])
+{
+
+}
+
+
 Matrix::Matrix(int r, int c) : matrix(vector<vector<float> >(r, vector<float>(c, 0.f))), rows(r), cols(c)
 {
 
@@ -180,21 +187,11 @@ ostream &operator << (ostream &os, Matrix &m)
 }
 
 
-Vector3float matrixToVector(Matrix matrix)
+Matrix::Matrix(Vector3float vect) : matrix(vector<vector<float> >(4, vector<float>(1, 1.f))), rows(4), cols(1)
 {
-	return Vector3float(matrix[0][0] / matrix[3][0], matrix[1][0] / matrix[3][0], matrix[2][0] / matrix[3][0]);
-}
-
-Matrix vectorToMatrix(Vector3float vector)
-{
-	Matrix matrix(4, 1);
-
-	matrix[0][0] = vector.x;
-	matrix[1][0] = vector.y;
-	matrix[2][0] = vector.z;
-	matrix[3][0] = 1.f;
-
-	return matrix;
+	matrix[0][0] = vect.x;
+	matrix[1][0] = vect.y;
+	matrix[2][0] = vect.z;
 }
 
 Matrix viewport(int x, int y, int width, int height, int depth)
@@ -210,4 +207,25 @@ Matrix viewport(int x, int y, int width, int height, int depth)
 	matrix[2][2] = depth * 0.5f;
 
 	return matrix;
+}
+
+Matrix lookat(Vector3float eye, Vector3float center, Vector3float up)
+{
+	Vector3float z = (eye - center).normalize();
+	Vector3float x = (up^z).normalize();
+	Vector3float y = (z^x).normalize();
+
+	Matrix Minv = Matrix::identity(4);
+	Matrix Tr = Matrix::identity(4);
+
+	for (int i = 0; i < 3; i++)
+	{
+		Minv[0][i] = x[i];
+		Minv[1][i] = y[i];
+		Minv[2][i] = z[i];
+
+		Tr[i][3] = -center[i];
+	}
+
+	return Minv * Tr;
 }

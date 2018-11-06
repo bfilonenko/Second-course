@@ -31,6 +31,7 @@ public:
 
 	Vector3float getVertex(int i);
 	vector<int> getFace(int i);
+	Vector3float getNorm(int faceIndex, int numberOfVertex);
 
 	Vector2int getTextureCoordinate(int faceIndex, int numberOfVertex);
 

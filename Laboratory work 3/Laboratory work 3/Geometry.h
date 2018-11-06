@@ -73,6 +73,9 @@ ostream &operator << (ostream &os, Vector2<T> &vector)
 }
 
 
+class Matrix;
+
+
 template<typename T>
 struct Vector3
 {
@@ -81,6 +84,8 @@ struct Vector3
 	Vector3<T>() : x(T()), y(T()), z(T()) {}
 
 	Vector3<T>(T x, T y, T z) : x(x), y(y), z(z) {}
+
+	Vector3<T>(Matrix matrix);
 
 	template<typename U>
 	Vector3<T>(const Vector3<U> &right);
@@ -189,6 +194,8 @@ class Matrix
 public:
 	Matrix(int r = 4, int c = 4);
 
+	Matrix(Vector3float vector);
+
 	inline int getNumberOfRow();
 	inline int getNumberOfCol();
 
@@ -206,8 +213,6 @@ public:
 };
 
 
-Vector3float matrixToVector(Matrix matrix);
-
-Matrix vectorToMatrix(Vector3float vector);
-
 Matrix viewport(int x, int y, int width, int height, int depth);
+
+Matrix lookat(Vector3float eye, Vector3float center, Vector3float up);

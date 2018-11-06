@@ -132,6 +132,11 @@ Vector3float Model::getVertex(int i)
 	return vertex[i];
 }
 
+Vector3float Model::getNorm(int faceIndex, int numberOfVertex)
+{
+	int index = faces[faceIndex][numberOfVertex][2];
+	return norms[index].normalize();
+}
 
 Vector2int Model::getTextureCoordinate(int faceIndex, int numberOfVertex)
 {
