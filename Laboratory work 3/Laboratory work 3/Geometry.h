@@ -2,7 +2,9 @@
 
 
 #include <cmath>
+#include <vector>
 #include <iostream>
+#include <assert.h>
 
 
 using namespace std;
@@ -176,3 +178,30 @@ Vector3<int>::Vector3(const Vector3<float> &vector);
 template<>
 template<>
 Vector3<float>::Vector3(const Vector3<int> &vector);
+
+
+class Matrix
+{
+	vector<vector<float> > matrix;
+
+	int rows, cols;
+
+public:
+	Matrix(int r = 4, int c = 4);
+
+	inline int getNumberOfRow();
+	inline int getNumberOfCol();
+
+	static Matrix identity(int dimensions);
+
+	vector<float> &operator [] (const int i);
+
+	Matrix operator*(const Matrix& right);
+
+	Matrix transpose();
+
+	Matrix inverse();
+
+	friend ostream &operator << (ostream &os, Matrix &m);
+};
+
