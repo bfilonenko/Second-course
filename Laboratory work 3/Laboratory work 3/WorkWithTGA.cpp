@@ -43,3 +43,49 @@ void line(int x0, int y0, int x1, int y1, TGAImage &image, TGAColor color)
 		}
 	}
 }
+
+void triangle(Vector2int vertex0, Vector2int vertex1, Vector2int vertex2, TGAImage &image, TGAColor color)
+{
+	if (vertex0.y == vertex1.y && vertex1.y == vertex2.y)
+	{
+		return;
+	}
+
+	if (vertex0.y > vertex1.y)
+	{
+		swap(vertex0, vertex1);
+	}
+	if (vertex0.y > vertex2.y)
+	{
+		swap(vertex0, vertex2);
+	}
+	if (vertex1.y > vertex2.y)
+	{
+		swap(vertex1, vertex2);
+	}
+
+	int height = vertex2.y - vertex0.y;
+	for (int i = 0; i < height; ++i)
+	{
+		bool secondHalf = vertex0.y + i > vertex1.y || vertex0.y == vertex1.y;
+
+		int segmentHeight = secondHalf ? vertex2.y - vertex1.y : vertex1.y - vertex0.y;
+
+		float alpha = float(i) / height,
+			beta = float(i - segmentHeight ? vertex1.y - vertex0.y : 0) / segmentHeight;
+
+		Vector2int vectorA = vertex0 + (vertex2 - vertex0) * alpha,
+			vectorB = secondHalf ? vertex1 + (vertex2 - vertex1) * beta : vertex0 + (vertex1 - vertex0);
+
+		if (vectorA.x > vectorB.x)
+		{
+			swap(vectorA, vectorB);
+		}
+
+		for (int j = vectorA.x; j <= vectorB.x; ++j)
+		{
+			image.set(j, vertex0.y + i, color);
+		}
+	}
+
+}

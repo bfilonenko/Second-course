@@ -37,11 +37,10 @@ struct Vector2
 
 	inline Vector2<T> operator * (float value) const
 	{
-		return Vector2<T>(x * value, y * value);
+		return Vector2<T>(T (x * value), T (y * value));
 	}
 
 	friend ostream &operator << (ostream &os, Vector2<T> &vector);
-
 };
 
 
