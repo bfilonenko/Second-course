@@ -122,6 +122,7 @@
     <ClInclude Include="WorkWithTGA.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Geometry.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="TGAImage.cpp" />

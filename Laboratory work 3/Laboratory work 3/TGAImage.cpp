@@ -54,6 +54,17 @@ bool TGAImage::set(int x, int y, TGAColor color)
 }
 
 
+int TGAImage::getWidth()
+{
+	return width;
+}
+
+int TGAImage::getHeight()
+{
+	return height;
+}
+
+
 bool TGAImage::flipHorizontally()
 {
 	if (data == nullptr)

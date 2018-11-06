@@ -116,6 +116,11 @@ public:
 	bool set(int x, int y, TGAColor color);
 
 
+	int getWidth();
+
+	int getHeight();
+
+
 	bool flipHorizontally();
 	
 	bool flipVertically();

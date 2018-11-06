@@ -11,19 +11,26 @@ using namespace std;
 template<typename T>
 struct Vector2
 {
-	union
+	T x, y;
+
+	Vector2<T>() : x(T()), y(T()) {}
+
+	Vector2<T>(T x, T y) : x(x), y(y) {}
+
+	Vector2<T>(const Vector2<T> &vector) : x(T()), y(T())
 	{
-		struct
+		*this = vector;
+	}
+
+	Vector2<T> & operator = (const Vector2 &right)
+	{
+		if (this != &right)
 		{
-			T x, y;
-		};
-
-		T raw[2];
-	};
-
-	Vector2() : x(0), y(0) {}
-
-	Vector2(T x, T y) : x(x), y(y) {}
+			x = right.x;
+			y = right.y;
+		}
+		return *this;
+	}
 
 	inline Vector2<T> operator + (const Vector2<T> &right) const
 	{
@@ -55,19 +62,30 @@ ostream &operator << (ostream &os, Vector2<T> &vector)
 template<typename T>
 struct Vector3
 {
-	union
+	T x, y, z;
+
+	Vector3<T>() : x(T()), y(T()), z(T()) {}
+
+	Vector3<T>(T x, T y, T z) : x(x), y(y), z(z) {}
+
+	template<typename U>
+	Vector3<T>(const Vector3<U> &right);
+
+	Vector3<T>(const Vector3 &vector) : x(T()), y(T()), z(T())
 	{
-		struct
+		*this = vector;
+	}
+
+	Vector3<T> & operator = (const Vector3<T> &right)
+	{
+		if (this != &right)
 		{
-			T x, y, z;
-		};
-
-		T raw[3];
-	};
-
-	Vector3() : x(0), y(0), z(0) {}
-
-	Vector3(T x, T y, T z) : x(x), y(y), z(z) {}
+			x = right.x;
+			y = right.y;
+			z = right.z;
+		}
+		return *this;
+	}
 
 	inline Vector3<T> operator ^ (const Vector3<T> &right) const
 	{
@@ -106,6 +124,22 @@ struct Vector3
 	}
 
 	friend ostream &operator << (ostream &os, Vector3<T> &vector);
+
+	T &operator [] (const int i)
+	{
+		if (i <= 0)
+		{
+			return x;
+		}
+		else if (i == 1)
+		{
+			return y;
+		}
+		else
+		{
+			return z;
+		}
+	}
 };
 
 
@@ -121,3 +155,12 @@ typedef Vector2<float> Vector2float;
 typedef Vector2<int>   Vector2int;
 typedef Vector3<float> Vector3float;
 typedef Vector3<int>   Vector3int;
+
+
+template<>
+template<>
+Vector3<int>::Vector3(const Vector3<float> &vector);
+
+template<>
+template<>
+Vector3<float>::Vector3(const Vector3<int> &vector);

@@ -26,7 +26,7 @@ Model::Model(string fileName)
 			
 			for (int i = 0; i < 3; i++)
 			{
-				iss >> v.raw[i];
+				iss >> v[i];
 			}
 			vertex.push_back(v);
 		}
