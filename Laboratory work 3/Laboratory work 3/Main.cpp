@@ -1,17 +1,9 @@
-#include "WorkWithTGA.h"
-#include "Model.h"
-
-
-const TGAColor white = TGAColor(255, 255, 255, 255);
-const TGAColor red = TGAColor(255, 0, 0, 255);
+#include "WorkWithModel.h"
 
 
 int main()
 {
-	TGAImage image(100, 100, TGAImage::RGB);
-	image.set(52, 41, red);
-	line(30, 20, 70, 40, image, white);
-	image.flipVertically();
-	image.writeTGAFile("output.tga");
+	workWithModel("Data/Obj/african_head.obj", 800, 800);
+
 	return 0;
 }

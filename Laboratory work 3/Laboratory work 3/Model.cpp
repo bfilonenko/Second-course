@@ -1,11 +1,11 @@
 #include "Model.h"
 
 
-Model::Model(const char *fileName)
+Model::Model(string fileName)
 {
 	ifstream fileIn;
 
-	fileIn.open(fileName, ifstream::in);
+	fileIn.open(fileName);
 	if (fileIn.fail())
 	{
 		return;

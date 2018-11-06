@@ -13,7 +13,7 @@ class Model
 	vector<vector<int> > faces;
 	
 public:
-	Model(const char *fileName);
+	Model(string fileName);
 
 	~Model();
 
