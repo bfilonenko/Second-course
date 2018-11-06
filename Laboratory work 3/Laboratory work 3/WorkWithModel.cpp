@@ -7,7 +7,7 @@ void workWithModel(string fileName, int width, int height)
 
 	TGAImage image(width, height, TGAImage::RGB);
 
-	//Wire Render
+	///Wire Render
 	//for (int i = 0; i < model->getNumberOfFaces(); ++i)
 	//{
 	//	vector<int> face = model->getFace(i);
@@ -25,19 +25,45 @@ void workWithModel(string fileName, int width, int height)
 	//	}
 	//}
 
+	///multi-colored model
+	//for (int i = 0; i < model->getNumberOfFaces(); ++i)
+	//{
+	//	vector<int> face = model->getFace(i);
+
+	//	Vector2int screenCoordinats[3];
+
+	//	for (int j = 0; j < 3; j++)
+	//	{
+	//		Vector3float worldCoordinats = model->getVertex(face[j]);
+
+	//		screenCoordinats[j] = Vector2int(int((worldCoordinats.x + 1.f) * width * 0.5f), int((worldCoordinats.y + 1.f) * height * 0.5f));
+	//	}
+	//	triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], image, TGAColor(rand() % 255, rand() % 255, rand() % 255, 255));
+	//}
+
+	Vector3float lightDirect(0, 0, -1);
 	for (int i = 0; i < model->getNumberOfFaces(); ++i)
 	{
 		vector<int> face = model->getFace(i);
 
 		Vector2int screenCoordinats[3];
+		Vector3float worldCoordinats[3];
 
-		for (int j = 0; j < 3; j++)
+		for (int j = 0; j < 3; ++j)
 		{
-			Vector3float worldCoordinats = model->getVertex(face[j]);
-
-			screenCoordinats[j] = Vector2int(int((worldCoordinats.x + 1.f) * width * 0.5f), int((worldCoordinats.y + 1.f) * height * 0.5f));
+			Vector3float vertex = model->getVertex(face[j]);
+			screenCoordinats[j] = Vector2int(int((vertex.x + 1.f) * width * 0.5f), int((vertex.y + 1.f) * height * 0.5f));
+			worldCoordinats[j] = vertex;
 		}
-		triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], image, TGAColor(rand() % 255, rand() % 255, rand() % 255, 255));
+
+		Vector3float normal = (worldCoordinats[2] - worldCoordinats[0]) ^ (worldCoordinats[1] - worldCoordinats[0]);
+		normal.normalize();
+
+		float intensity = normal * lightDirect;
+		if (intensity > 0)
+		{
+			triangle(screenCoordinats[0], screenCoordinats[1], screenCoordinats[2], image, TGAColor(int(intensity * 255), int(intensity * 255), int(intensity * 255), 255));
+		}
 	}
 
 
