@@ -78,6 +78,10 @@ Model::Model(string fileName)
 	cerr << "# v# " << vertex.size() << " f# " << faces.size() << " vt# " << textureCoordinates.size() << " vn# " << norms.size() << '\n';
 
 	loadTexture(fileName, "_diffuse.tga", diffuseMap);
+
+	loadTexture(fileName, "_nm.tga", normalMap);
+
+	loadTexture(fileName, "_spec.tga", specularMap);
 }
 
 
@@ -127,10 +131,17 @@ vector<int> Model::getFace(int i)
 	return face;
 }
 
+
 Vector3float Model::getVertex(int i)
 {
 	return vertex[i];
 }
+
+Vector3float Model::getVertex(int faceIndex, int numberOfVertex)
+{
+	return vertex[faces[faceIndex][numberOfVertex][0]];
+}
+
 
 Vector3float Model::getNorm(int faceIndex, int numberOfVertex)
 {
@@ -138,13 +149,39 @@ Vector3float Model::getNorm(int faceIndex, int numberOfVertex)
 	return norms[index].normalize();
 }
 
+Vector3float Model::getNorm(Vector2float textureCoordinate)
+{
+	Vector2int temp(int(textureCoordinate[0] * normalMap.getWidth()), int(textureCoordinate[1] * normalMap.getHeight()));
+
+	TGAColor color = normalMap.get(temp[0], temp[1]);
+
+	Vector3float result;
+
+	for (int i = 0; i < 3; i++)
+	{
+		result[2 - i] = (float)color[i] / 255.f * 2.f - 1.f;
+	}
+
+	return result;
+}
+
+
 Vector2int Model::getTextureCoordinate(int faceIndex, int numberOfVertex)
 {
 	int index = faces[faceIndex][numberOfVertex][1];
 	return Vector2int(int(textureCoordinates[index].x * float(diffuseMap.getWidth())), int(textureCoordinates[index].y * float(diffuseMap.getHeight())));
 }
 
-TGAColor Model::getDiffuse(Vector2int textureCoordinate)
+TGAColor Model::getDiffuse(Vector2float textureCoordinate)
 {
-	return diffuseMap.get(textureCoordinate.x, textureCoordinate.y);
+	Vector2int temp(int(textureCoordinate[0] * diffuseMap.getWidth()), int(textureCoordinate[1] * diffuseMap.getHeight()));
+
+	return diffuseMap.get(temp[0], temp[1]);
+}
+
+float Model::getSpecular(Vector2float textureCoordinate)
+{
+	Vector2int temp(int(textureCoordinate[0] * specularMap.getWidth()), int(textureCoordinate[1] * specularMap.getHeight()));
+	
+	return specularMap.get(temp[0], temp[1])[0] / 1.f;
 }

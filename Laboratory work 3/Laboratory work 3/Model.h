@@ -17,7 +17,8 @@ class Model
 	vector<Vector2float> textureCoordinates;
 
 	TGAImage diffuseMap;
-
+	TGAImage normalMap;
+	TGAImage specularMap;
 
 	void loadTexture(string fileName, string suffix, TGAImage &image);
 
@@ -30,10 +31,16 @@ public:
 	int getNumberOfFaces();
 
 	Vector3float getVertex(int i);
+	Vector3float getVertex(int faceIndex, int numberOfVertex);
+
 	vector<int> getFace(int i);
+	
 	Vector3float getNorm(int faceIndex, int numberOfVertex);
+	Vector3float getNorm(Vector2float textureCoordinate);
 
 	Vector2int getTextureCoordinate(int faceIndex, int numberOfVertex);
 
-	TGAColor getDiffuse(Vector2int textureCoordinate);
+	TGAColor getDiffuse(Vector2float textureCoordinate);
+
+	float getSpecular(Vector2float textureCoordinate);
 };

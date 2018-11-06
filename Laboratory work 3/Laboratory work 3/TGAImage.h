@@ -85,6 +85,11 @@ struct TGAColor
 		}
 		return result;
 	}
+
+	unsigned char &operator [] (const int i)
+	{
+		return bgra[i];
+	}
 };
 
 
