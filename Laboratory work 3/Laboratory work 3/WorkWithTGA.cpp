@@ -72,10 +72,10 @@ void triangle(Vector2int vertex0, Vector2int vertex1, Vector2int vertex2, TGAIma
 		int segmentHeight = secondHalf ? vertex2.y - vertex1.y : vertex1.y - vertex0.y;
 
 		float alpha = float(i) / height,
-			beta = float(i - segmentHeight ? vertex1.y - vertex0.y : 0) / segmentHeight;
+			beta = float(i - (secondHalf ? vertex1.y - vertex0.y : 0)) / segmentHeight;
 
 		Vector2int vectorA = vertex0 + (vertex2 - vertex0) * alpha,
-			vectorB = secondHalf ? vertex1 + (vertex2 - vertex1) * beta : vertex0 + (vertex1 - vertex0);
+			vectorB = secondHalf ? vertex1 + (vertex2 - vertex1) * beta : vertex0 + (vertex1 - vertex0) * beta;
 
 		if (vectorA.x > vectorB.x)
 		{
