@@ -243,7 +243,7 @@ bool TGAImage::readTGAFile(const char *filename)
 	unsigned long numberOfBytes = bytesPerPixel * width * height;
 	data = new unsigned char[numberOfBytes];
 
-	if (header.dataTypeCode = 3|| header.dataTypeCode == 2)
+	if (header.dataTypeCode == 3 || header.dataTypeCode == 2)
 	{
 		fileIn.read((char *)data, numberOfBytes);
 		if (!fileIn.good())

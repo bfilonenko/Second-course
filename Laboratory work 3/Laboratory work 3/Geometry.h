@@ -48,6 +48,18 @@ struct Vector2
 	}
 
 	friend ostream &operator << (ostream &os, Vector2<T> &vector);
+
+	T &operator [] (const int i)
+	{
+		if (i <= 0)
+		{
+			return x;
+		}
+		else
+		{
+			return y;
+		}
+	}
 };
 
 
