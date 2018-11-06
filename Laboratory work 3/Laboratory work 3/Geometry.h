@@ -205,3 +205,9 @@ public:
 	friend ostream &operator << (ostream &os, Matrix &m);
 };
 
+
+Vector3float matrixToVector(Matrix matrix);
+
+Matrix vectorToMatrix(Vector3float vector);
+
+Matrix viewport(int x, int y, int width, int height, int depth);

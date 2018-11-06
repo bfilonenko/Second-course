@@ -178,3 +178,36 @@ ostream &operator << (ostream &os, Matrix &m)
 	}
 	return os;
 }
+
+
+Vector3float matrixToVector(Matrix matrix)
+{
+	return Vector3float(matrix[0][0] / matrix[3][0], matrix[1][0] / matrix[3][0], matrix[2][0] / matrix[3][0]);
+}
+
+Matrix vectorToMatrix(Vector3float vector)
+{
+	Matrix matrix(4, 1);
+
+	matrix[0][0] = vector.x;
+	matrix[1][0] = vector.y;
+	matrix[2][0] = vector.z;
+	matrix[3][0] = 1.f;
+
+	return matrix;
+}
+
+Matrix viewport(int x, int y, int width, int height, int depth)
+{
+	Matrix matrix = Matrix::identity(4);
+
+	matrix[0][3] = x + width * 0.5f;
+	matrix[1][3] = y + width * 0.5f;
+	matrix[2][3] = depth * 0.5f;
+
+	matrix[0][0] = width * 0.5f;
+	matrix[1][1] = width * 0.5f;
+	matrix[2][2] = depth * 0.5f;
+
+	return matrix;
+}
