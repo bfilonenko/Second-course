@@ -25,7 +25,7 @@ struct IShader
 
 	virtual Vector4float vertex(int faceIndex, int numberOfVertex, Model *model, Vector3float &lightDirect) = 0;
 
-	virtual bool fragment(Vector3float bar, TGAColor &color) = 0;
+	virtual bool fragment(Vector3float bar, TGAColor &color, Model *model) = 0;
 };
 
 
@@ -47,19 +47,70 @@ struct GouraudShader : public IShader
 		return viewPort * projection * modelView * glVertex;
 	}
 
-	virtual bool fragment(Vector3float bar, TGAColor &color)
+	virtual bool fragment(Vector3float bar, TGAColor &color, Model *model)
 	{
-		//Interpolate intensity for the current pixel
-		float intensity = Vector3float(varyingIntensity) * bar;   
-		
-		color = TGAColor(255, 255, 255) * intensity;
+		float intensity = Vector3float(varyingIntensity) * bar;
 
+		if (intensity > 0.85f)
+		{
+			intensity = 1.f;
+		}
+		else if (intensity > 0.60f)
+		{
+			intensity = 0.80f;
+		}
+		else if (intensity > 0.45f)
+		{
+			intensity = 0.60f;
+		}
+		else if (intensity > 0.30f)
+		{
+			intensity = 0.45f;
+		}
+		else if (intensity > 0.15f)
+		{
+			intensity = 0.30f;
+		}
+		else
+		{
+			intensity = 0.f;
+		}
+
+		color = TGAColor(255, 155, 0) * intensity;
 		return false;
 	}
 };
 
 
-void triangle(Vector4float *pts, IShader &shader, TGAImage &image, TGAImage &zbuffer);
+struct Shader : public IShader
+{
+	Vector3float varyingIntensity;
+	Matrix<2, 3, float> varyingUV;        // same as above
+
+	virtual Vector4float vertex(int faceIndex, int numberOfVertex, Model *model, Vector3float &lightDirect)
+	{
+		varyingUV.setCol(numberOfVertex, model->getTextureCoordinate(faceIndex, numberOfVertex));
+
+		varyingIntensity[numberOfVertex] = max(0.f, model->getNorm(faceIndex, numberOfVertex) * lightDirect);
+
+		Vector4float glVertex = embed<4>(model->getVertex(faceIndex, numberOfVertex));
+
+		return viewPort * projection * modelView * glVertex;
+	}
+
+	virtual bool fragment(Vector3float bar, TGAColor &color, Model *model)
+	{
+		float intensity = Vector3float(varyingIntensity) * bar;
+
+		Vector2float uv = varyingUV * bar;       
+
+		color = model->getDiffuse(uv) * intensity;   
+
+		return false;                          
+	}
+};
+
+void triangle(Vector4float *pts, IShader &shader, TGAImage &image, TGAImage &zbuffer, Model *model);
 
 
 void workWithModel(string fileName, int width, int height);

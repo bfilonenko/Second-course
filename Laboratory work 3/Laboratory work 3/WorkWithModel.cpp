@@ -68,7 +68,7 @@ Vector3float barycentric(Vector2float A, Vector2float B, Vector2float C, Vector2
 }
 
 
-void triangle(Vector4float *pts, IShader &shader, TGAImage &image, TGAImage &zbuffer)
+void triangle(Vector4float *pts, IShader &shader, TGAImage &image, TGAImage &zbuffer, Model *model)
 {
 	Vector2float boundingBoxMin(numeric_limits<float>::max(), numeric_limits<float>::max());
 	Vector2float boundingBoxMax(-numeric_limits<float>::max(), -numeric_limits<float>::max());
@@ -102,7 +102,7 @@ void triangle(Vector4float *pts, IShader &shader, TGAImage &image, TGAImage &zbu
 				continue;
 			}
 
-			bool discard = shader.fragment(c, color);
+			bool discard = shader.fragment(c, color, model);
 			if (!discard)
 			{
 				zbuffer.set(p.x, p.y, TGAColor(fragDepth));
@@ -124,7 +124,7 @@ void workWithModel(string fileName, int width, int height)
 
 
 	Vector3float lightDirect(1, 1, 1);
-	Vector3float eye(0, -1, 3);
+	Vector3float eye(0, 1, 3);
 	Vector3float center(0, 0, 0);
 	Vector3float up(0, 1, 0);
 
@@ -145,7 +145,7 @@ void workWithModel(string fileName, int width, int height)
 		{
 			screenCoordinats[j] = shader.vertex(i, j, model, lightDirect);
 		}
-		triangle(screenCoordinats, shader, image, zBuffer);
+		triangle(screenCoordinats, shader, image, zBuffer, model);
 	}
 
 	image.flipVertically(); // to place the origin in the bottom left corner of the image
