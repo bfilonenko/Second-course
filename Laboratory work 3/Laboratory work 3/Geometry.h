@@ -134,7 +134,7 @@ T operator * (const Vector<Dim, T> &left, const Vector<Dim, T> &right)
 }
 
 template<size_t Dim, typename T>
-Vector<Dim, T> operator + (Vector<Dim, T> &left, const Vector<Dim, T> &right)
+Vector<Dim, T> operator + (Vector<Dim, T> left, const Vector<Dim, T> &right)
 {
 	for (size_t i = Dim; i--; left[i] += right[i]);
 
@@ -142,7 +142,7 @@ Vector<Dim, T> operator + (Vector<Dim, T> &left, const Vector<Dim, T> &right)
 }
 
 template<size_t Dim, typename T>
-Vector<Dim, T> operator - (Vector<Dim, T> &left, const Vector<Dim, T> &right)
+Vector<Dim, T> operator - (Vector<Dim, T> left, const Vector<Dim, T> &right)
 {
 	for (size_t i = Dim; i--; left[i] -= right[i]);
 
@@ -150,7 +150,7 @@ Vector<Dim, T> operator - (Vector<Dim, T> &left, const Vector<Dim, T> &right)
 }
 
 template<size_t Dim, typename T, typename U>
-Vector<Dim, T> operator * (Vector<Dim, T> &left, const U &right)
+Vector<Dim, T> operator * (Vector<Dim, T> left, const U &right)
 {
 	for (size_t i = Dim; i--; left[i] *= right);
 
@@ -158,7 +158,7 @@ Vector<Dim, T> operator * (Vector<Dim, T> &left, const U &right)
 }
 
 template<size_t Dim, typename T, typename U>
-Vector<Dim, T> operator / (Vector<Dim, T> &left, const U &right)
+Vector<Dim, T> operator / (Vector<Dim, T> left, const U &right)
 {
 	for (size_t i = Dim; i--; left[i] /= right);
 

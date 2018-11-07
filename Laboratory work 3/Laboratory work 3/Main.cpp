@@ -3,7 +3,7 @@
 
 int main()
 {
-	workWithModel("Data/.obj and .tga/african_head.obj", 800, 800, 255);
+	workWithModel("Data/.obj and .tga/african_head.obj", 800, 800);
 
 	return 0;
 }

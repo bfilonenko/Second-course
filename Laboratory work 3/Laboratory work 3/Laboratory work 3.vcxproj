@@ -119,7 +119,6 @@
     <ClInclude Include="Model.h" />
     <ClInclude Include="TGAImage.h" />
     <ClInclude Include="WorkWithModel.h" />
-    <ClInclude Include="WorkWithTGA.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Geometry.cpp" />
@@ -127,7 +126,6 @@
     <ClCompile Include="Model.cpp" />
     <ClCompile Include="TGAImage.cpp" />
     <ClCompile Include="WorkWithModel.cpp" />
-    <ClCompile Include="WorkWithTGA.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
