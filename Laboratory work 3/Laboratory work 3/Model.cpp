@@ -166,10 +166,9 @@ Vector3float Model::getNorm(Vector2float textureCoordinate)
 }
 
 
-Vector2int Model::getTextureCoordinate(int faceIndex, int numberOfVertex)
+Vector2float Model::getTextureCoordinate(int faceIndex, int numberOfVertex)
 {
-	int index = faces[faceIndex][numberOfVertex][1];
-	return Vector2int(int(textureCoordinates[index].x * float(diffuseMap.getWidth())), int(textureCoordinates[index].y * float(diffuseMap.getHeight())));
+	return textureCoordinates[faces[faceIndex][numberOfVertex][1]];
 }
 
 TGAColor Model::getDiffuse(Vector2float textureCoordinate)

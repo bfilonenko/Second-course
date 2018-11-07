@@ -321,6 +321,20 @@ public:
 
 		return result / temp;
 	}
+
+	Matrix<DimCols, DimRows, T> invert()
+	{
+		return invertTranspose().transpose();
+	}
+
+	Matrix<DimCols, DimRows, T> transpose()
+	{
+		Matrix<DimCols, DimRows, T> result;
+
+		for (size_t i = DimRows; i--; result[i] = this->col(i));
+
+		return result;
+	}
 };
 
 
@@ -375,7 +389,3 @@ typedef Vector<3, float> Vector3float;
 typedef Vector<3, int>   Vector3int;
 typedef Vector<4, float> Vector4float;
 typedef Matrix<4, 4, float> Matrix4float;
-
-//Matrix viewport(int x, int y, int width, int height, int depth);
-//
-//Matrix lookat(Vector3float eye, Vector3float center, Vector3float up);

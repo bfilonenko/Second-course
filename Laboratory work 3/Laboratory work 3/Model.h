@@ -38,7 +38,7 @@ public:
 	Vector3float getNorm(int faceIndex, int numberOfVertex);
 	Vector3float getNorm(Vector2float textureCoordinate);
 
-	Vector2int getTextureCoordinate(int faceIndex, int numberOfVertex);
+	Vector2float getTextureCoordinate(int faceIndex, int numberOfVertex);
 
 	TGAColor getDiffuse(Vector2float textureCoordinate);
 
