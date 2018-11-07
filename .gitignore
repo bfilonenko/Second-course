@@ -370,3 +370,4 @@ ASALocalRun/
 
 
 # End of https://www.gitignore.io/api/c++,visualstudio
+!*african_head.obj
